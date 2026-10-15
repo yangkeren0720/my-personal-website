@@ -126,6 +126,11 @@ const aiUses: { area: string; title: string; body: string; team?: boolean }[] = 
     body: "AI organizes research and lays out options and cost assumptions side by side, as in the four-way ERP comparison, so management gets a clear choice.",
   },
   {
+    area: "Operations",
+    title: "A faster ERP build",
+    body: "AI helps the software developers move faster on the ERP integration and on gathering the migration documents.",
+  },
+  {
     area: "Administration",
     title: "Legal documents and applications",
     body: "I handle the company's legal paperwork. AI helps me organize the documents and track the paperwork for each application.",
@@ -153,7 +158,7 @@ function BelongAI() {
       </ol>
       <div className="bai-uses">
         {aiUses.map((u, n) => (
-          <Reveal key={u.title} delay={n * 0.08} className="bai-use card">
+          <Reveal key={u.title} delay={n * 0.08} className={`bai-use card ${u.team ? "wide" : ""}`}>
             <span className="bai-tag">{u.area}</span>
             <strong>{u.title}</strong>
             <p>{u.body}</p>

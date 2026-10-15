@@ -1214,6 +1214,7 @@ section[id] { scroll-margin-top: 0; }
 .bai-flow li.ai .bai-n, .bai-flow li.me .bai-n { background: var(--co); color: #1a1030; }
 .bai-uses { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .bai-use { height: 100%; padding: 18px 20px; border-top: 3px solid var(--co); }
+.bai-use.wide { grid-column: 1 / -1; }
 .bai-tag { display: inline-block; margin-bottom: 8px; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, var(--co) 14%, transparent); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-dim); }
 .bai-use strong { display: block; margin-bottom: 6px; font-size: 16px; }
 .bai-use p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--text-dim); }
