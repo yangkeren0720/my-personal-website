@@ -7,6 +7,7 @@ import SkyWaterStories from "@/components/SkyWaterStories";
 import MinoSection from "@/components/MinoSection";
 import Showcase from "@/components/Showcase";
 import Examples from "@/components/Examples";
+import Multitask from "@/components/Multitask";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
@@ -24,6 +25,7 @@ export default function Home() {
         <Hero />
         <Experience />
         <About />
+        <Multitask />
         <SkyWaterStories />
         <PlanningLab />
         <MinoSection />

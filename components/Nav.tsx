@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { id: "experience", label: "Resume" },
+  { id: "multitask", label: "Multitask" },
   { id: "skywater", label: "SkyWater" },
   { id: "mino", label: "Mino" },
   { id: "examples", label: "Stories" },
