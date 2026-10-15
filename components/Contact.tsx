@@ -34,8 +34,16 @@ export default function Contact() {
             I&apos;m always happy to talk about supply chain and S&amp;OP planning roles, putting AI to work in operations, or how I automated a business from the ground up.
           </p>
         </Reveal>
+        <Reveal delay={0.25} className="contact-direct">
+          <a href={`mailto:${profile.email}`}>
+            <span aria-hidden>✉</span> {profile.email}
+          </a>
+          <a href={`tel:${profile.phoneHref}`}>
+            <span aria-hidden>☎</span> {profile.phone}
+          </a>
+        </Reveal>
         <Reveal delay={0.3} className="contact-links">
-          {primary && <Magnetic href={primary.href} label={primary.label === "Email" ? "Say hello" : primary.label} />}
+          {primary && <Magnetic href={primary.href} label={primary.label === "Email" ? "Email me" : primary.label} />}
           {links.slice(1).map((l) => (
             <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="btn">
               {l.label} <span aria-hidden>↗</span>

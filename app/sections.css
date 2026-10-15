@@ -594,3 +594,7 @@ section[id] { scroll-margin-top: 0; }
 .lab-anchor:has(.anchor-offset:target) { animation: target-flash 2.2s ease-out 0.4s; }
 @keyframes target-flash { 0%, 40% { box-shadow: 0 0 0 3px var(--accent); } 100% { box-shadow: 0 0 0 3px transparent; } }
 .back-link { color: var(--accent); font-weight: 500; }
+.contact-direct { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; margin: 4px 0 28px; font-size: 18px; font-weight: 500; }
+.contact-direct a { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+.contact-direct a span { color: var(--accent); }
+.contact-direct a:hover { border-bottom-color: var(--accent); }
