@@ -34,7 +34,7 @@ export const about = {
     { label: "Strengths", value: "Supply & demand planning, AI integration, dashboards, data visualization" },
     { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
     { label: "Currently", value: "Material Planner (semiconductor) and co-owner of RBR Property Management" },
-    { label: "Education", value: "M.S. & B.S. Mathematics, Illinois State University" },
+    { label: "Education", value: "M.S. & B.S. Mathematics, Illinois State University · ASCM planning certificate" },
     { label: "Languages", value: "English, 中文 (native)" },
   ] as Array<{ label: string; value: string } & Placeholder>,
 };
@@ -117,14 +117,13 @@ export const experience: Experience[] = [
     ],
   },
   {
-    period: "2015 — 2021",
+    period: "2015 — Dec 2021",
     title: "Mathematics",
     org: "Illinois State University · Illinois Wesleyan University",
     place: "Illinois",
-    summary: "M.S. and B.S. Mathematics (Illinois State); B.A. Mathematics & Music (Illinois Wesleyan); minor in Computer Science.",
+    summary: "M.S. and B.S. Mathematics (Illinois State, Dec 2021); B.A. Mathematics & Music (Illinois Wesleyan); minor in Computer Science. ASCM planning certificate.",
     highlights: [],
     kind: "education",
-    placeholder: true, // M.S. dates and ASCM certificate to confirm
   },
 ];
 
