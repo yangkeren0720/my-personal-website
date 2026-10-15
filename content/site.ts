@@ -21,7 +21,7 @@ export const profile = {
   locationPlaceholder: false,
   github: "https://github.com/yangkeren0720",
   linkedin: "https://www.linkedin.com/in/eva-yang-637993116/",
-  email: "eva_iwu@hotmail.com",
+  email: "eva@evayangscm.com",
   phone: "(309) 684-8387",
   phoneHref: "+13096848387",
   resumeUrl: "", // e.g. "/resume.pdf" after adding the file to /public
