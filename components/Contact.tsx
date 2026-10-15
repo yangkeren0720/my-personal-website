@@ -24,9 +24,9 @@ export default function Contact() {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="contact-title">
-            Let&apos;s make operations
+            Hiring for supply chain
             <br />
-            <span className="grad-text">run smoother.</span>
+            <span className="grad-text">or S&amp;OP planning?</span>
           </h2>
         </Reveal>
         <Reveal delay={0.2}>

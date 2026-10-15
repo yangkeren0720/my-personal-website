@@ -13,7 +13,7 @@ export default function About() {
         <Reveal>
           <span className="eyebrow">About</span>
           <h2 className="section-title">
-            Builder at heart, <em>owner</em> by habit.
+            Supply chain thinking, <em>applied</em> to a real business.
           </h2>
         </Reveal>
 

@@ -10,12 +10,13 @@ export type Placeholder = { placeholder?: boolean };
 export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
-  status: "Open to supply chain specialist & S&OP planning roles", // small badge above your name; "" hides it
-  headline: "Supply Chain, AI Integration & Dashboards", // used in the browser tab title
-  rolePrefix: "I work on",
-  roles: ["AI integration", "dashboards & data visualization", "supply chain & S&OP planning", "data you can trust"],
+  status: "Seeking Supply Chain Specialist & S&OP Planner roles", // small badge above your name; "" hides it
+  headline: "Supply Chain & S&OP Planning",
+  title: "Supply Chain & S&OP Planner", // big line under your name // used in the browser tab title
+  rolePrefix: "Planning powered by",
+  roles: ["AI integration", "live dashboards", "data visualization", "clean, reconciled data"],
   tagline:
-    "I integrate AI into real operations and build the dashboards that run them. I took a student-housing business from spreadsheets and email to one platform with 18 AI workflows in production and live dashboards for occupancy, leasing and cost.",
+    "I plan supply against demand. At the student-housing company I co-own, I manage inventory (rooms), demand (applications), capacity and vendors, and I built the AI tools and live dashboards that keep the plan accurate.",
   location: "United States", // placeholder: add your city
   locationPlaceholder: true,
   github: "https://github.com/yangkeren0720",
@@ -31,7 +32,7 @@ export const about = {
   ],
   // Short facts shown as chips next to the bio.
   facts: [
-    { label: "Strengths", value: "AI integration, dashboards, data visualization" },
+    { label: "Strengths", value: "Supply & demand planning, AI integration, dashboards, data visualization" },
     { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
     { label: "Currently", value: "Co-owner of RBR Property Management, running its operations, systems and AI" },
     { label: "Education", value: "Add your school and degree", placeholder: true },
@@ -100,7 +101,7 @@ export const experience: Experience[] = [
 // made-up numbers in content/dashboard.ts.
 export const dashboards = {
   intro:
-    "I build dashboards that turn operational data into decisions: live KPIs, charts you can drill into, and an AI assistant that answers questions from the same numbers. Try the demo below; it runs on sample data shaped like the dashboards I built at RBR.",
+    "I build supply and demand dashboards that turn operational data into planning decisions: live KPIs, charts you can drill into, and an AI assistant that answers questions from the same numbers. Try the demo below; it runs on sample data shaped like the dashboards I built at RBR.",
   points: [
     {
       title: "One source of truth",
@@ -119,7 +120,7 @@ export const dashboards = {
 
 // "AI in operations" section: how AI is used at RBR, all in production.
 export const ai = {
-  title: "I put AI to work where operations lose time.",
+  title: "I use AI to run supply chain work faster and with fewer errors.",
   intro:
     "Each AI feature at RBR replaces a step the team used to do by hand. All of them run in production today, with guardrails so people stay in control of anything that matters.",
   uses: [

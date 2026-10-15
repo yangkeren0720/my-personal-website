@@ -41,12 +41,12 @@ export default function Dashboard() {
   const questions = useMemo(
     () => [
       {
-        q: `Which house has the most open rooms for ${term}?`,
-        a: `${houses[topHouse]} has ${d.openRooms[topHouse]} open room${d.openRooms[topHouse] === 1 ? "" : "s"}, the most of any house.`,
+        q: `Which site has the most available inventory for ${term}?`,
+        a: `${houses[topHouse]} has ${d.openRooms[topHouse]} room${d.openRooms[topHouse] === 1 ? "" : "s"} available, the most of any site.`,
         focus: "houses" as Focus,
       },
       {
-        q: `How full are we for ${term}?`,
+        q: `What is our capacity utilization for ${term}?`,
         a: `${occupancy}% occupied, up ${occupancy - d.occupancyByWeek[0]} points over the last 12 weeks.`,
         focus: "occupancy" as Focus,
       },
@@ -92,7 +92,7 @@ export default function Dashboard() {
         <Reveal>
           <span className="eyebrow">Dashboards & data visualization</span>
           <h2 className="section-title">
-            Data people can <em>act on</em>.
+            Dashboards for <em>supply & demand</em> planning.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -103,7 +103,7 @@ export default function Dashboard() {
           <div className="viz-root dash" ref={rootRef}>
             <div className="dash-top">
               <div className="dash-title">
-                <span className="dash-dot" /> Operations overview
+                <span className="dash-dot" /> Supply & demand overview
                 <span className="dash-sample">Sample data</span>
               </div>
               <div className="dash-filter" role="tablist" aria-label="Term">
@@ -143,23 +143,23 @@ export default function Dashboard() {
             </div>
 
             <div className="dash-kpis">
-              <Kpi label="Occupancy" value={occupancy} suffix="%" focus={focus === "occupancy"} />
-              <Kpi label="Open rooms" value={openTotal} />
-              <Kpi label="Leases signed" value={signed} />
-              <Kpi label="Avg. days to sign" value={d.daysToSign} decimals={1} />
+              <Kpi label="Capacity utilization" value={occupancy} suffix="%" focus={focus === "occupancy"} />
+              <Kpi label="Available inventory" value={openTotal} />
+              <Kpi label="Orders fulfilled" value={signed} />
+              <Kpi label="Avg. lead time (days)" value={d.daysToSign} decimals={1} />
             </div>
 
             <div className="dash-grid">
-              <Panel title="Occupancy by week" sub="% of rooms leased" focus={focus === "occupancy"} wide>
+              <Panel title="Capacity utilization by week" sub="% of rooms leased" focus={focus === "occupancy"} wide>
                 <AreaChart values={d.occupancyByWeek} />
               </Panel>
-              <Panel title="Open rooms by house" sub={term} focus={focus === "houses"}>
+              <Panel title="Available inventory by site" sub={term} focus={focus === "houses"}>
                 <HouseBars values={d.openRooms} highlight={focus === "houses" ? topHouse : -1} />
               </Panel>
               <Panel title="AI cost per day" sub="last 30 days, all workflows" focus={focus === "cost"} wide>
                 <CostBars values={d.aiCostByDay} />
               </Panel>
-              <Panel title="Application funnel" sub="this term">
+              <Panel title="Demand pipeline" sub="this term">
                 <Funnel stages={d.pipeline} />
               </Panel>
             </div>

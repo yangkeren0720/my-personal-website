@@ -60,6 +60,14 @@ export default function Hero() {
             </span>
           ))}
         </h1>
+        <motion.p
+          className="hero-title"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.95, duration: 0.7, ease }}
+        >
+          {profile.title}
+        </motion.p>
         {profile.nativeName && (
           <motion.p className="hero-native" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
             {profile.nativeName}
