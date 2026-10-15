@@ -186,7 +186,7 @@ function Screen({ kind }: { kind: string }) {
           <motion.div key={s} className="mock-flow" variants={item}>
             <motion.span
               className="mock-flow-dot"
-              initial={{ scale: 0.4, background: "rgba(255,255,255,0.15)" }}
+              initial={{ scale: 0.4, background: "rgba(var(--fg-rgb),0.15)" }}
               animate={{ scale: 1, background: "#ff9a62" }}
               transition={{ delay: 0.4 + i * 0.35, duration: 0.3 }}
             />

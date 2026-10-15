@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { profile } from "@/content/site";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { id: "supply-chain", label: "Supply Chain" },
@@ -68,9 +69,12 @@ export default function Nav() {
           ))}
         </nav>
 
-        <button className="nav-burger" onClick={() => setOpen((o) => !o)} aria-label="Menu" aria-expanded={open}>
+        <div className="nav-right">
+          <ThemeToggle />
+          <button className="nav-burger" onClick={() => setOpen((o) => !o)} aria-label="Menu" aria-expanded={open}>
           <span className={open ? "x" : ""} />
-        </button>
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

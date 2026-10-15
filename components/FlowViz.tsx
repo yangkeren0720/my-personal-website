@@ -88,8 +88,8 @@ export default function FlowViz() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 + i * 0.18, duration: 0.5 }}
             >
-              <line x1={i * step} x2={i * step} y1={MID - h(s.value) / 2 - 8} y2={MID + h(s.value) / 2 + 8} stroke="rgba(255,255,255,0.35)" strokeDasharray="3 4" />
-              <circle cx={i * step} cy={MID} r={7} fill="#0b0b10" stroke="#fff" strokeWidth={2} />
+              <line x1={i * step} x2={i * step} y1={MID - h(s.value) / 2 - 8} y2={MID + h(s.value) / 2 + 8} strokeDasharray="3 4" style={{ stroke: "rgba(var(--fg-rgb),0.35)" }} />
+              <circle cx={i * step} cy={MID} r={7} strokeWidth={2} style={{ fill: "var(--bg)", stroke: "var(--text)" }} />
               <text x={i * step} y={H + 6} textAnchor="middle" className="flow-value">
                 {s.value}
               </text>

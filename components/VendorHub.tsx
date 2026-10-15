@@ -42,7 +42,7 @@ export default function VendorHub() {
                 y1={CY}
                 x2={x}
                 y2={y}
-                stroke="rgba(255,255,255,0.18)"
+                style={{ stroke: "rgba(var(--fg-rgb),0.2)" }}
                 strokeWidth={1.5}
                 initial={{ pathLength: 0 }}
                 animate={inView ? { pathLength: 1 } : {}}
@@ -58,7 +58,7 @@ export default function VendorHub() {
                 />
               )}
               <motion.g initial={{ opacity: 0, scale: 0.6 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.5 + i * 0.1, type: "spring", stiffness: 260, damping: 18 }} style={{ transformOrigin: `${x}px ${y}px` }}>
-                <rect x={x - 70} y={y - 18} width={140} height={36} rx={18} fill="#16161f" stroke="rgba(255,255,255,0.2)" />
+                <rect x={x - 70} y={y - 18} width={140} height={36} rx={18} style={{ fill: "var(--surface)", stroke: "rgba(var(--fg-rgb),0.2)" }} />
                 <text x={x} y={y + 5} textAnchor="middle" className="hub-label">
                   {n.label}
                 </text>
@@ -67,7 +67,7 @@ export default function VendorHub() {
           );
         })}
         <motion.g initial={{ scale: 0.5, opacity: 0 }} animate={inView ? { scale: 1, opacity: 1 } : {}} transition={{ type: "spring", stiffness: 200, damping: 14 }} style={{ transformOrigin: `${CX}px ${CY}px` }}>
-          <circle cx={CX} cy={CY} r={54} fill="#0b0b10" stroke="rgba(255,255,255,0.15)" strokeWidth={2} />
+          <circle cx={CX} cy={CY} r={54} strokeWidth={2} style={{ fill: "var(--bg)", stroke: "rgba(var(--fg-rgb),0.15)" }} />
           <circle cx={CX} cy={CY} r={54} fill="none" stroke="#f472b6" strokeOpacity={0.6} strokeWidth={2} className="hub-ring" />
           <text x={CX} y={CY - 4} textAnchor="middle" className="hub-core-title">
             Operations
