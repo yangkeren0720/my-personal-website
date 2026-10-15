@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import AISection from "@/components/AISection";
 import SupplyChain from "@/components/SupplyChain";
+import PlanningLab from "@/components/PlanningLab";
 import Management from "@/components/Management";
 import Dashboard from "@/components/Dashboard";
 import Showcase from "@/components/Showcase";
@@ -24,6 +25,7 @@ export default function Home() {
         <Hero />
         <About />
         <SupplyChain />
+        <PlanningLab />
         <Dashboard />
         <AISection />
         <Management />

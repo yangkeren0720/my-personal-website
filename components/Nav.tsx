@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { id: "supply-chain", label: "Supply Chain" },
+  { id: "planning", label: "Planning" },
   { id: "ai", label: "AI Integration" },
   { id: "management", label: "Management" },
   { id: "work", label: "Work" },
