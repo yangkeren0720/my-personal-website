@@ -75,7 +75,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    period: "2025 — Present",
+    period: "2023 — Present",
     title: "Co-Owner",
     org: "RBR Property Management",
     place: "Student housing",
@@ -85,7 +85,6 @@ export const experience: Experience[] = [
       "Put 18 AI workflows into production, each with a human check.",
       "Unified 182 leases from 4 sources; caught 127 pricing errors.",
     ],
-    placeholder: true, // confirm the start year
   },
   {
     period: "Feb 2026 — Present",
