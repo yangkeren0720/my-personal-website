@@ -10,12 +10,12 @@ export type Placeholder = { placeholder?: boolean };
 export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
-  status: "Open to new opportunities", // small badge above your name; "" hides it
-  headline: "Operations & Supply Chain", // used in the browser tab title
+  status: "Open to senior operations & supply chain roles", // small badge above your name; "" hides it
+  headline: "Operations, Supply Chain & AI Automation", // used in the browser tab title
   rolePrefix: "I work on",
-  roles: ["operations & supply chain", "process automation", "data you can trust", "vendor & systems integration"],
+  roles: ["operations strategy", "AI-powered automation", "supply chain systems", "data you can trust"],
   tagline:
-    "I make operations run smoothly. At a student-housing company I mapped how a room goes from listing to signed lease, automated the handoffs, reconciled data across vendors, and built the dashboards the team runs on.",
+    "I lead operations transformation with AI. I took a student-housing business from spreadsheets and email to one platform with 18 AI-powered workflows in production, from contract reading to vendor data entry to customer replies.",
   location: "United States", // placeholder: add your city
   locationPlaceholder: true,
   github: "https://github.com/yangkeren0720",
@@ -26,14 +26,14 @@ export const profile = {
 
 export const about = {
   paragraphs: [
-    "I like owning a process end to end. RBR Property Management ran on spreadsheets, email and several separate vendor tools. I mapped the whole flow, from available rooms to applications, contracts and move-in, and replaced the manual handoffs with one system: live availability, an occupancy calendar, automated lease contracts and move-in emails that go out on their own.",
-    "The work I'm proudest of is the unglamorous part: reconciling records across systems until there is one source of truth, catching pricing errors before they reach a contract, and adding checks so the same mistake can't happen twice. That is the kind of operations and supply chain work I want to keep doing.",
+    "I own operations outcomes end to end. RBR Property Management ran on spreadsheets, email and several separate vendor tools. I mapped the whole flow, from available rooms to applications, contracts and move-in, and replaced the manual handoffs with one system: live availability, an occupancy calendar, automated lease contracts and move-in emails that go out on their own. Then I put AI to work on the steps that still took people hours.",
+    "The work I'm proudest of is the unglamorous part: reconciling records across systems until there is one source of truth, catching pricing errors before they reach a contract, and adding checks so the same mistake can't happen twice. That is the operations and supply chain work I want to keep scaling.",
   ],
   // Short facts shown as chips next to the bio.
   facts: [
-    { label: "Focus", value: "Operations, process automation, data" },
-    { label: "Looking for", value: "Supply chain and operations roles" },
-    { label: "Currently", value: "Running operations systems at RBR Property Management" },
+    { label: "Focus", value: "Operations strategy, AI automation, data" },
+    { label: "Looking for", value: "Senior supply chain and operations roles" },
+    { label: "Currently", value: "Leading operations systems and AI at RBR Property Management" },
     { label: "Education", value: "Add your school and degree", placeholder: true },
     { label: "Languages", value: "English, 中文" },
   ] as Array<{ label: string; value: string } & Placeholder>,
@@ -42,8 +42,8 @@ export const about = {
 // Results from the RBR work (October 2026).
 export const statsNote = "Results from operations work at RBR Property Management.";
 export const stats = [
+  { value: 18, suffix: "", label: "AI-powered workflows running in production" },
   { value: 182, suffix: "", label: "lease records unified into one source of truth" },
-  { value: 4, suffix: "", label: "data sources reconciled into one" },
   { value: 127, suffix: "", label: "pricing errors caught before reaching a contract" },
   { value: 65, suffix: "", label: "lost applications recovered" },
 ];
@@ -59,16 +59,17 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     period: "2025 — Present",
-    title: "Operations & Systems Lead",
+    title: "Operations & AI Automation Lead",
     org: "RBR Property Management",
     summary:
-      "Own the operations systems for a student-housing company: room inventory, applications, leasing, move-ins and the vendor tools around them.",
+      "Own operations systems and AI strategy for a student-housing company: room inventory, applications, leasing, move-ins and the vendor tools around them.",
     highlights: [
+      "Put 18 AI-powered workflows into production, each with a human check where mistakes are costly, per-feature cost tracking, and the choice of a cheaper model where it does the job.",
       "Consolidated 182 leases from four vendor and legacy sources into one table with clear source-of-truth rules, driving an occupancy calendar the team plans from.",
       "Automated the order-to-contract flow: approved applications become DocuSign-ready leases from a clause-level template, and signed leases write back to the records automatically.",
       "Found a systematic rent and fee mix-up in imported vendor data and corrected it on 127 leases before any contract went out.",
       "Recovered 65 lost rental applications from notification emails, then added backups and a recycle bin so it can't recur.",
-      "Automated a manual vendor workflow that had no API using an AI browser agent, with a practice mode and human sign-off before going live.",
+      "Replaced manual data entry in a vendor system with no API by AI agents that learn the office's own written rules, run in practice mode first, and email a report of every success and failure.",
       "Moved room availability from flat files to a database with an audit trail on every change, and set up monitoring and alerts so problems surface early.",
     ],
     placeholder: true, // confirm the title and dates
@@ -93,6 +94,55 @@ export const experience: Experience[] = [
     placeholder: true,
   },
 ];
+
+// "AI in operations" section: how AI is used at RBR, all in production.
+export const ai = {
+  title: "I put AI to work where operations lose time.",
+  intro:
+    "Each AI feature at RBR replaces a step the team used to do by hand. All of them run in production today, with guardrails so people stay in control of anything that matters.",
+  uses: [
+    {
+      icon: "chat",
+      title: "Customer replies",
+      body: "A WhatsApp inbox where AI learns from past conversations and live room availability, then drafts replies for the team to approve. Nothing is sent without a person.",
+    },
+    {
+      icon: "robot",
+      title: "Vendor data-entry agents",
+      body: "AI agents enter signed leases, request move-in inspections and post last-month rent in a vendor system that has no API, following the office's own written rules.",
+    },
+    {
+      icon: "doc",
+      title: "Contract reading",
+      body: "Signed lease PDFs, including scanned paper, are read into structured records: tenant, room, dates, rent and sign dates, with no retyping.",
+    },
+    {
+      icon: "pen",
+      title: "Contract drafting",
+      body: "An assistant on each lease drafts changes and addenda in plain language. The draft goes to a preview and is only saved when someone approves it.",
+    },
+    {
+      icon: "chart",
+      title: "Ask the business anything",
+      body: "Managers type a question like \"how many rooms are open for spring?\" and get the answer from live data through read-only, checked queries.",
+    },
+    {
+      icon: "spark",
+      title: "Customer self-service",
+      body: "Website visitors who finish the Room Match quiz can ask questions; AI answers from public facts only and suggests up to three rooms.",
+    },
+  ],
+  guardrails: [
+    "Human approval before anything is sent",
+    "Practice mode before agents go live",
+    "Sensitive data redacted before it reaches AI",
+    "Read-only access for questions",
+    "Cost tracked per feature",
+    "Right-sized model for each task",
+  ],
+  builtWith:
+    "I also build with AI: I direct AI coding agents to turn operational needs into shipped software, which is how one person delivered this platform.",
+};
 
 export type Project = {
   name: string;

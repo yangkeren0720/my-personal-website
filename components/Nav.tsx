@@ -6,6 +6,7 @@ import { profile } from "@/content/site";
 
 const links = [
   { id: "about", label: "About" },
+  { id: "ai", label: "AI" },
   { id: "work", label: "Work" },
   { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
