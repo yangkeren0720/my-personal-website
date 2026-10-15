@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import Reveal from "./Reveal";
 
 // Material-planning stories from Infineon / SkyWater, in order, each with a
 // small animated visual. Material and supplier names are left out on purpose.
@@ -71,29 +70,32 @@ const stories: Story[] = [
 
 const CYCLE = 6500;
 
-export default function SkyWaterStories() {
+// The six-step story timeline, shown inside the SkyWater section.
+export default function SkyWaterTimeline() {
   const [i, setI] = useState(0);
   const [auto, setAuto] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-120px" });
+  const inView = useInView(ref, { margin: "-120px 0px -120px 0px" });
+
+  // Auto-advance only on wide screens. On phones the stacked panels differ in
+  // height, so they change only when tapped and the page never jumps mid-scroll.
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 901px)");
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
 
   useEffect(() => {
-    if (!auto || !inView) return;
+    if (!auto || !inView || !wide) return;
     const t = setTimeout(() => setI((n) => (n + 1) % stories.length), CYCLE);
     return () => clearTimeout(t);
-  }, [i, auto, inView]);
+  }, [i, auto, inView, wide]);
 
   const s = stories[i];
   return (
-    <section id="skywater" className="story-section">
-      <div className="container">
-        <Reveal>
-          <span className="eyebrow">Infineon → SkyWater · Material Planner</span>
-          <h2 className="section-title">
-            Keeping a wafer fab <em>running</em>.
-          </h2>
-        </Reveal>
-
         <div className="story" ref={ref}>
           <div className="story-track" role="tablist">
             <div className="story-rail" aria-hidden>
@@ -116,8 +118,10 @@ export default function SkyWaterStories() {
             ))}
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div key={s.key} className="story-panel card" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.4, ease }}>
+          {/* Panels overlap while swapping, so the page below never jumps. */}
+          <div className="story-stage">
+          <AnimatePresence initial={false}>
+            <motion.div key={s.key} className="story-panel card" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12, transition: { duration: 0.25 } }} transition={{ duration: 0.4, delay: 0.1, ease }}>
               <div className="story-text">
                 <span className="story-tag">{s.tag}</span>
                 <h3>{s.title}</h3>
@@ -133,9 +137,8 @@ export default function SkyWaterStories() {
               <div className="story-visual">{inView && <Visual kind={s.visual} />}</div>
             </motion.div>
           </AnimatePresence>
+          </div>
         </div>
-      </div>
-    </section>
   );
 }
 

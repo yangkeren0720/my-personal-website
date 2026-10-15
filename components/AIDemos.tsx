@@ -20,7 +20,7 @@ export default function AIDemos() {
   const [active, setActive] = useState<Key>("chat");
   const [auto, setAuto] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-100px" });
+  const inView = useInView(ref, { margin: "-100px 0px -100px 0px" });
   const tabsRef = useRef<HTMLDivElement>(null);
 
   // On phones the tabs scroll sideways; keep the active one visible.

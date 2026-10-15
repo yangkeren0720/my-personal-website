@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { experience } from "@/content/site";
+import { experience, skills } from "@/content/site";
 import Reveal from "./Reveal";
 import PlaceholderBadge from "./PlaceholderBadge";
 import ProgramPanel from "./ProgramPanel";
@@ -34,14 +34,14 @@ export default function Experience() {
               className="timeline-item"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.span
                 className="timeline-dot"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
                 transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.2 }}
               />
               <div className={`timeline-card card ${job.placeholder ? "placeholder" : ""} ${job.kind === "education" ? "edu" : ""}`}>
@@ -123,6 +123,15 @@ export default function Experience() {
             </motion.article>
           ))}
         </div>
+
+        <Reveal className="skills-row">
+          <span className="skills-label">Skills</span>
+          {skills.map((sk) => (
+            <span key={sk} className="skill-chip">
+              {sk}
+            </span>
+          ))}
+        </Reveal>
       </div>
     </section>
   );

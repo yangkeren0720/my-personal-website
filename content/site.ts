@@ -27,42 +27,6 @@ export const profile = {
   resumeUrl: "", // e.g. "/resume.pdf" after adding the file to /public
 };
 
-export const about = {
-  paragraphs: [
-    "I plan under constraints: wafer-fab materials at SkyWater, labor and equipment capacity for EV factory builds at Mino, and planning systems at Belong. One method throughout: reconcile the signals, expose the constraint, make the trade-off explicit.",
-  ],
-  // Short facts shown as chips next to the bio.
-  facts: [
-    { label: "Strengths", value: "Supply & demand planning, AI integration, dashboards, data visualization" },
-    { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
-    { label: "Currently", value: "Material Planner at SkyWater · Manager at Belong · co-owner of RBR" },
-    { label: "Education", value: "M.S. & B.S. Mathematics, Illinois State University · ASCM planning certificate" },
-    { label: "Languages", value: "English, 中文 (native)" },
-  ] as Array<{ label: string; value: string } & Placeholder>,
-};
-
-// Headline numbers, kept separate per employer so the two jobs never blur.
-export const statGroups = [
-  {
-    company: "SkyWater",
-    role: "Material Planner · wafer fab",
-    items: [
-      { value: 250, suffix: "", label: "materials in the shortage-risk report I rebuilt (from ~100)" },
-      { value: 4, suffix: "", label: "recovery paths run at once; production never stopped" },
-      { value: 2, suffix: "", label: "acquisitions with supply kept running" },
-    ],
-  },
-  {
-    company: "Mino Automation",
-    role: "Purchasing Analyst · EV line build-outs",
-    items: [
-      { value: 3400, suffix: "+", label: "PO lines placed for the Rivian build" },
-      { value: 179, suffix: "", label: "skilled trades staffed for the Cybertruck build" },
-      { value: 50, suffix: "%", label: "fewer missed invoices after my approval workflow" },
-    ],
-  },
-];
-
 export type Program = {
   name: string;
   place: string;
@@ -173,7 +137,7 @@ export const experience: Experience[] = [
       { label: "Safety stock demo", href: "#safety-stock" },
       { label: "Stockout early warning", href: "#early-warning" },
       { label: "Weeks-of-inventory view", href: "#woi" },
-      { label: "More SkyWater stories", href: "#stories-skywater" },
+      { label: "More SkyWater stories", href: "#skywater-stories" },
     ],
   },
   {
@@ -190,7 +154,7 @@ export const experience: Experience[] = [
     links: [
       { label: "ERP story", href: "#ex-odoo" },
       { label: "Licensing story", href: "#ex-cad" },
-      { label: "All Belong stories", href: "#stories-belong" },
+      { label: "Departments & ERP", href: "#belong" },
     ],
   },
   {
@@ -279,7 +243,7 @@ export const experience: Experience[] = [
       { label: "Capacity story", href: "#capacity" },
       { label: "Invoice workflow", href: "#invoice-flow" },
       { label: "EV program spend", href: "#ev-programs" },
-      { label: "More Mino stories", href: "#stories-mino" },
+      { label: "More Mino stories", href: "#mino-stories" },
     ],
   },
   {
@@ -290,8 +254,8 @@ export const experience: Experience[] = [
     summary: "Co-own a student-housing business; built its systems, dashboards and AI tools by directing AI.",
     highlights: [],
     links: [
-      { label: "AI demos", href: "#ai" },
       { label: "RBR platform", href: "#work" },
+      { label: "AI demos", href: "#ai" },
     ],
   },
   {
@@ -304,27 +268,6 @@ export const experience: Experience[] = [
     kind: "education",
   },
 ];
-
-// "Dashboards & data visualization" section. The demo itself uses the
-// made-up numbers in content/dashboard.ts.
-export const dashboards = {
-  intro:
-    "Click around. It runs on sample data shaped like the dashboards I built at RBR.",
-  points: [
-    {
-      title: "One source of truth",
-      body: "The dashboard, the reports and the AI assistant read the same numbers, so nobody argues about whose spreadsheet is right.",
-    },
-    {
-      title: "From chart to record",
-      body: "Tap a day or a house to see the records behind it. A dashboard should answer the next question, not just the first one.",
-    },
-    {
-      title: "AI that can read the data",
-      body: "Managers ask in plain English and get answers from live data through read-only, checked queries, with the chart that backs it up.",
-    },
-  ],
-};
 
 // "AI in operations" section: how AI is used at RBR, all in production.
 export const ai = {
@@ -375,74 +318,6 @@ export const ai = {
     "I'm not a programmer. I built this whole platform by directing AI, for about $300 a month, and I cross-check everything it builds against real records.",
 };
 
-// Section 01: Supply chain. The dashboard demo follows it on the page.
-export const supplyChain = {
-  title: "Supply chain planning, end to end.",
-  intro:
-    "Rooms are inventory, applications are demand, leases are orders, move-ins are fulfillment. I run the whole chain.",
-  capabilities: [
-    {
-      title: "Supply & demand planning",
-      body: "A rolling view of open rooms for this term and the next two, matched against incoming applications, so we fill capacity before it goes empty.",
-    },
-    {
-      title: "Inventory & capacity",
-      body: "Live availability for every room across every house, with an occupancy calendar that shows gaps and overlaps at a glance.",
-    },
-    {
-      title: "Order to fulfillment",
-      body: "Approved applications become leases, leases become move-ins, and move-in emails and inspections go out on schedule without anyone chasing them.",
-    },
-    {
-      title: "Vendor management",
-      body: "Data flows between our property, signing and messaging vendors, including a vendor with no API, which AI agents now handle.",
-    },
-    {
-      title: "Data accuracy",
-      body: "I cross-reference records across systems and flag anything that needs updating: 182 leases reconciled into one source of truth and 127 pricing errors caught before a contract went out.",
-    },
-    {
-      title: "KPIs & reporting",
-      body: "Summary dashboards for rooms, leases, applicants and semesters, plus scheduled report emails, so decisions use the same numbers everywhere.",
-    },
-  ],
-};
-
-// Section 03: Management.
-export const management = {
-  title: "I run the business, not just the project.",
-  intro:
-    "Every vendor, system and teammate, connected through one operation I run.",
-  areas: [
-    {
-      title: "Business ownership",
-      body: "Co-own and operate a student-housing company: leasing strategy, pricing, tenant experience and the systems behind them.",
-    },
-    {
-      title: "Process & standards",
-      body: "Written rules for every repeatable job, which both the team and the AI agents follow, plus checklists, audit trails and a change history on every record.",
-    },
-    {
-      title: "Risk & compliance",
-      body: "A weekly report flags deposits that haven't been refunded within the 30-day window, and sensitive data like door codes never leaves the system.",
-    },
-    {
-      title: "Team enablement",
-      body: "Admin tools with step-by-step guides built in, and an assistant that tells the team which page to use for any task.",
-    },
-  ],
-};
-
-export type Project = {
-  name: string;
-  tagline: string;
-  description: string;
-  tags: string[];
-  link?: string;
-  repo?: string;
-  accent: string;
-} & Placeholder;
-
 export const featured = {
   name: "RBR Property Management",
   tagline: "The operations system a student-housing company runs on",
@@ -472,73 +347,12 @@ export const featured = {
       body: "One calendar for every room, lease and move-in.",
       screen: "admin",
     },
-    {
-      title: "AI Assistants",
-      body: "AI drafts replies and handles vendor data entry, with a person in control.",
-      screen: "ai",
-    },
   ],
 };
-
-export const projects: Project[] = [
-  {
-    name: "Vendor Robot",
-    tagline: "Automating a vendor with no API",
-    description:
-      "An AI agent files move-in inspections in a vendor tool with no API.",
-    tags: ["Process automation", "AI agents", "Vendor management"],
-    accent: "#86efac",
-  },
-  {
-    name: "RBR Admin for iOS",
-    tagline: "Operations on the go",
-    description:
-      "The team checks rooms, applications and leases from their phones.",
-    tags: ["SwiftUI", "iOS", "OpenAPI"],
-    accent: "#7dd3fc",
-  },
-  {
-    name: "This website",
-    tagline: "Animated personal site",
-    description:
-      "Built by directing AI, deployed automatically on every change.",
-    tags: ["Next.js", "TypeScript", "Framer Motion"],
-    repo: "https://github.com/yangkeren0720/my-personal-website",
-    accent: "#c4b5fd",
-  },
-  {
-    name: "Your next project",
-    tagline: "Add a supply chain or operations project",
-    description: "A process you improved, and one number that shows it worked.",
-    tags: ["Skill", "Tool"],
-    accent: "#fca5a5",
-    placeholder: true,
-  },
-];
 
 export const skills = [
   "Material Planning", "S&OP / SIOP", "MRP & ERP", "Safety Stock & Min/Max", "Demand Forecasting",
   "Supplier Management", "Strategic Sourcing", "Capacity Planning", "Purchasing & POs",
   "Shortage Risk Dashboards", "Data Visualization", "Power Automate & SharePoint",
   "SQL", "Advanced Excel", "AI Integration", "Lean / Six Sigma", "English & 中文",
-];
-
-// Short "how I work" principles. Phrase them in your own words.
-export const principles = [
-  {
-    title: "Start from the customer",
-    body: "Every change began with a student, parent or teammate who was stuck. I watch where the process breaks before I change it.",
-  },
-  {
-    title: "Own it end to end",
-    body: "I map the process, fix the data, automate the handoffs, and get the alert when something breaks.",
-  },
-  {
-    title: "Dive into the data",
-    body: "Real leases and real money depend on these records, so I check them against the source documents, audit every change, and make duplicates impossible.",
-  },
-  {
-    title: "Simplify, then automate",
-    body: "Cut the steps that don't need to exist first, then automate what's left, with a human check where mistakes would be costly.",
-  },
 ];

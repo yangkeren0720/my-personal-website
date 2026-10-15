@@ -5,21 +5,10 @@ import { ai } from "@/content/site";
 import Reveal from "./Reveal";
 import AIDemos from "./AIDemos";
 
+// AI demos and guardrails, shown inside the RBR section.
 export default function AISection() {
   return (
-    <section id="ai" className="ai-section">
-      <div className="ai-orbit" aria-hidden>
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="container">
-        <Reveal>
-          <span className="eyebrow">AI integration</span>
-          <h2 className="section-title ai-title">{ai.title}</h2>
-          <p className="ai-intro">{ai.intro}</p>
-        </Reveal>
-
+    <div className="rbr-ai">
         <Reveal delay={0.1}>
           <AIDemos />
         </Reveal>
@@ -42,10 +31,6 @@ export default function AISection() {
           </div>
         </Reveal>
 
-        <Reveal className="ai-built">
-          <p>{ai.builtWith}</p>
-        </Reveal>
-      </div>
-    </section>
+    </div>
   );
 }

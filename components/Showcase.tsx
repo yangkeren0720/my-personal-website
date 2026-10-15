@@ -9,29 +9,32 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const AUTO_ADVANCE_MS = 6000;
 
 // Featured project: tabs on the left, an animated mock of each screen on the right.
+// The RBR platform tour, shown inside the RBR section.
 export default function Showcase() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  // Auto-advance only on wide screens; on phones the tab text wraps to
+  // different heights, so tabs change only when tapped.
+  const [wide, setWide] = useState(false);
   useEffect(() => {
-    if (paused) return;
+    const mq = window.matchMedia("(min-width: 901px)");
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+
+  useEffect(() => {
+    if (paused || !wide) return;
     const t = setTimeout(() => setActive((a) => (a + 1) % featured.features.length), AUTO_ADVANCE_MS);
     return () => clearTimeout(t);
-  }, [active, paused]);
+  }, [active, paused, wide]);
 
   const current = featured.features[active];
 
   return (
-    <section id="work">
-      <div className="container">
-        <Reveal>
-          <span className="eyebrow">Side business · RBR Property Management</span>
-          <h2 className="section-title">
-            {featured.name.split(" ").slice(0, 1).join(" ")}{" "}
-            <em>{featured.name.split(" ").slice(1).join(" ")}</em>
-          </h2>
-        </Reveal>
-
+    <div className="rbr-platform">
         <Reveal delay={0.1}>
           <p className="showcase-lead">
             <strong>{featured.tagline}.</strong> {featured.description}
@@ -76,8 +79,8 @@ export default function Showcase() {
                     key={`bar-${active}-${paused}`}
                     className="showcase-tab-bar"
                     initial={{ scaleX: 0 }}
-                    animate={{ scaleX: paused ? 0 : 1 }}
-                    transition={{ duration: paused ? 0.2 : AUTO_ADVANCE_MS / 1000, ease: "linear" }}
+                    animate={{ scaleX: paused || !wide ? 0 : 1 }}
+                    transition={{ duration: paused || !wide ? 0.2 : AUTO_ADVANCE_MS / 1000, ease: "linear" }}
                   />
                 )}
               </button>
@@ -115,8 +118,7 @@ export default function Showcase() {
             </a>
           </Reveal>
         )}
-      </div>
-    </section>
+    </div>
   );
 }
 
@@ -197,62 +199,40 @@ function Screen({ kind }: { kind: string }) {
       </motion.div>
     );
   }
-  if (kind === "admin") {
-    const rows = [
-      [10, 70],
-      [0, 55],
-      [30, 60],
-      [5, 90],
-      [45, 50],
-      [20, 65],
-    ];
-    return (
-      <motion.div className="mock mock-admin" variants={stagger} initial="initial" animate="animate">
-        <motion.div className="mock-side" variants={item}>
-          {["Leases", "Calendar", "Properties", "Move-ins", "Emails"].map((l, i) => (
-            <span key={l} className={i === 1 ? "on" : ""}>
-              {l}
-            </span>
-          ))}
-        </motion.div>
-        <div className="mock-cal">
-          {rows.map(([start, width], i) => (
-            <motion.div key={i} className="mock-cal-row" variants={item}>
-              <span className="mock-cal-room">BR{i + 1}</span>
-              <div className="mock-cal-track">
-                <motion.span
-                  className={`mock-cal-bar c${i % 3}`}
-                  style={{ left: `${start}%` }}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${width}%` }}
-                  transition={{ duration: 0.9, delay: 0.3 + i * 0.08, ease }}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    );
-  }
-  // ai
+  // admin
+  const rows = [
+    [10, 70],
+    [0, 55],
+    [30, 60],
+    [5, 90],
+    [45, 50],
+    [20, 65],
+  ];
   return (
-    <motion.div className="mock mock-ai" variants={stagger} initial="initial" animate="animate">
-      <motion.div className="bubble in" variants={item}>
-        Hi! Is there a room near campus for spring?
+    <motion.div className="mock mock-admin" variants={stagger} initial="initial" animate="animate">
+      <motion.div className="mock-side" variants={item}>
+        {["Leases", "Calendar", "Properties", "Move-ins", "Emails"].map((l, i) => (
+          <span key={l} className={i === 1 ? "on" : ""}>
+            {l}
+          </span>
+        ))}
       </motion.div>
-      <motion.div className="bubble out draft" variants={item}>
-        <span className="bubble-label">Suggested reply</span>
-        Yes! We have 2 rooms open for spring, both a short walk to campus. Want me to send the floorplans?
-      </motion.div>
-      <motion.div className="mock-ai-meta" variants={item}>
-        <span className="mock-chip">Matched 3 past chats</span>
-        <span className="mock-chip ok">Live availability</span>
-      </motion.div>
-      <motion.div className="typing" variants={item}>
-        <span />
-        <span />
-        <span />
-      </motion.div>
+      <div className="mock-cal">
+        {rows.map(([start, width], i) => (
+          <motion.div key={i} className="mock-cal-row" variants={item}>
+            <span className="mock-cal-room">BR{i + 1}</span>
+            <div className="mock-cal-track">
+              <motion.span
+                className={`mock-cal-bar c${i % 3}`}
+                style={{ left: `${start}%` }}
+                initial={{ width: 0 }}
+                animate={{ width: `${width}%` }}
+                transition={{ duration: 0.9, delay: 0.3 + i * 0.08, ease }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </motion.div>
   );
 }

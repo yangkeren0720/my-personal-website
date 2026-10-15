@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Reveal from "./Reveal";
+import CompanyHead, { SubHead } from "./CompanyHead";
+import StoryCards from "./StoryCards";
 import { CardHead, Toggle } from "./PlanningLab";
 
-// Mino Automation, Jun 2020 – Oct 2023: the program timeline, the labor
-// capacity story and the invoice workflow, each as a visual.
+// Everything from the Mino Automation Purchasing Analyst job, and nothing else:
+// the program timeline, labor capacity, the invoice workflow and program spend.
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -27,17 +29,30 @@ const years = [2021, 2022, 2023];
 
 export default function MinoSection() {
   return (
-    <section id="mino" className="mino viz-root">
+    <section id="mino" className="co-section mino viz-root">
       <div className="container">
-        <Reveal>
-          <span className="eyebrow">Mino Automation · Purchasing Analyst · 2020–2023</span>
-          <h2 className="section-title">
-            Supplying EV factory <em>build-outs</em>.
-          </h2>
-        </Reveal>
+        <CompanyHead
+          co="mino"
+          company="Mino Automation USA"
+          role="Purchasing Analyst"
+          period="Jun 2020 – Oct 2023"
+          title={
+            <>
+              Supplying EV line <em>build-outs</em>.
+            </>
+          }
+          summary="Purchasing and capacity planning for automation lines built for Tesla, Rivian and Faraday Future."
+          kpis={[
+            { value: 3400, suffix: "+", label: "PO lines placed for the Rivian build" },
+            { value: 179, label: "skilled trades staffed for the Cybertruck build" },
+            { value: 50, suffix: "%", label: "fewer missed invoices after my approval workflow" },
+          ]}
+        />
+        <SubHead>Program timeline</SubHead>
         <Reveal>
           <Gantt />
         </Reveal>
+        <SubHead>Capacity and workflow</SubHead>
         <div className="mino-grid">
           <Reveal className="card mino-card lab-anchor">
             <span id="capacity" className="anchor-offset" />
@@ -48,10 +63,13 @@ export default function MinoSection() {
             <InvoiceFlow />
           </Reveal>
         </div>
+        <SubHead>Where the spend went</SubHead>
         <Reveal className="card mino-card mino-spend lab-anchor">
           <span id="ev-programs" className="anchor-offset" />
           <ProgramSpend />
         </Reveal>
+        <SubHead id="mino-stories">More Mino stories</SubHead>
+        <StoryCards company="Mino" />
       </div>
     </section>
   );
@@ -59,7 +77,7 @@ export default function MinoSection() {
 
 function Gantt() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-80px 0px -80px 0px" });
   const [hover, setHover] = useState<number | null>(null);
   const pct = (m: number) => `${(m / TOTAL) * 100}%`;
   return (
@@ -104,7 +122,7 @@ function Gantt() {
 // 200 worker dots: 100 planned, 100 reserved as backup, then ~20 called up.
 function Capacity() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-60px 0px -60px 0px" });
   const [phase, setPhase] = useState(0);
   useEffect(() => {
     if (!inView) return;
@@ -164,7 +182,7 @@ function Capacity() {
 const steps = ["Request", "Approve", "PO", "Invoice", "Paid"];
 function InvoiceFlow() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-60px" });
+  const inView = useInView(ref, { margin: "-60px 0px -60px 0px" });
   return (
     <div ref={ref} className="mino-inner">
       <div className="lab-head">
@@ -224,7 +242,7 @@ type Program = keyof typeof spendByProgram;
 function ProgramSpend() {
   const [prog, setProg] = useState<Program>("rivian");
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-60px 0px -60px 0px" });
   const [hover, setHover] = useState<string | null>(null);
   const p = spendByProgram[prog];
   const max = Math.max(...p.split.map(([, v]) => v));

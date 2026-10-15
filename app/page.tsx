@@ -1,20 +1,18 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import AISection from "@/components/AISection";
-import PlanningLab from "@/components/PlanningLab";
-import SkyWaterStories from "@/components/SkyWaterStories";
-import MinoSection from "@/components/MinoSection";
-import Showcase from "@/components/Showcase";
-import Examples from "@/components/Examples";
-import Multitask from "@/components/Multitask";
 import Experience from "@/components/Experience";
-import Skills from "@/components/Skills";
+import SkyWaterSection from "@/components/SkyWaterSection";
+import MinoSection from "@/components/MinoSection";
+import BelongSection from "@/components/BelongSection";
+import RBRSection from "@/components/RBRSection";
+import Multitask from "@/components/Multitask";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorGlow from "@/components/CursorGlow";
 
+// One structure: who I am, the resume, then one section per employer holding
+// only that job's stories and charts, how I run the roles at once, contact.
 export default function Home() {
   return (
     <>
@@ -24,15 +22,11 @@ export default function Home() {
       <main>
         <Hero />
         <Experience />
-        <About />
-        <Multitask />
-        <SkyWaterStories />
-        <PlanningLab />
+        <SkyWaterSection />
         <MinoSection />
-        <Examples />
-        <AISection />
-        <Showcase />
-        <Skills />
+        <BelongSection />
+        <RBRSection />
+        <Multitask />
         <Contact />
       </main>
       <Footer />

@@ -10,7 +10,7 @@ export default function Reveal({ delay = 0, y = 36, children, ...rest }: Props) 
     <motion.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-80px 0px -80px 0px" }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
       {...rest}
     >

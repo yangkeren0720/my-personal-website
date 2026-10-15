@@ -22,16 +22,10 @@ function useWidth<T extends HTMLElement>() {
   return [ref, w] as const;
 }
 
-export default function PlanningLab() {
+// The SkyWater planning charts, shown inside the SkyWater section.
+export default function PlanningCharts() {
   return (
-    <section id="planning" className="lab viz-root">
-      <div className="container">
-        <Reveal>
-          <span className="eyebrow">SkyWater · the planning, as charts</span>
-          <h2 className="section-title">
-            How I keep a fab <em>supplied</em>.
-          </h2>
-        </Reveal>
+      <div id="planning" className="lab viz-root">
         <div className="lab-grid">
           <Reveal className="lab-card card lab-anchor">
             <span id="safety-stock" className="anchor-offset" />
@@ -41,21 +35,17 @@ export default function PlanningLab() {
             <span id="early-warning" className="anchor-offset" />
             <EarlyWarning />
           </Reveal>
-          <Reveal className="lab-card card lab-anchor" delay={0.08}>
+          <Reveal className="lab-card card lab-anchor lab-wide">
             <span id="woi" className="anchor-offset" />
             <WOIView />
           </Reveal>
-          <Reveal className="lab-card card lab-anchor" delay={0.16}>
+          <Reveal className="lab-card card lab-anchor lab-wide">
             <span id="eol-buy" className="anchor-offset" />
             <EndOfLife />
           </Reveal>
         </div>
-        <p className="lab-note">
-          Sample data, shaped like real planning work. No employer data is shown.{" "}
-          <a href="#experience" className="back-link">← Back to resume</a>
-        </p>
+        <p className="lab-note">Sample data, shaped like real planning work. No employer data is shown.</p>
       </div>
-    </section>
   );
 }
 
@@ -111,7 +101,7 @@ function simulate(p: Policy) {
 function SafetyStock() {
   const [policy, setPolicy] = useState<Policy>("old");
   const [wrap, W] = useWidth<HTMLDivElement>();
-  const inView = useInView(wrap, { once: true, margin: "-60px" });
+  const inView = useInView(wrap, { once: true, margin: "-60px 0px -60px 0px" });
   const [hover, setHover] = useState<number | null>(null);
   const data = useMemo(() => simulate(policy), [policy]);
   const stockouts = data.filter((d) => d.short > 0).length;
@@ -379,101 +369,107 @@ function WOIView() {
   return (
     <>
       <CardHead title="Weeks of inventory (WOI)" sub="On hand ÷ average weekly use, per material, projected 12 weeks" />
-      <div className="lab-kpis">
-        <div>
-          <strong className="bad">{count(["min"])}</strong>
-          <span>below 2-wk minimum</span>
-        </div>
-        <div>
-          <strong>{count(["low"])}</strong>
-          <span>below 4-wk target</span>
-        </div>
-        <div>
-          <strong>{count(["ok", "high"])}</strong>
-          <span>at or above target</span>
-        </div>
-      </div>
+      <div className="woi-layout">
+        <div className="woi-main">
+          <div className="lab-kpis">
+            <div>
+              <strong className="bad">{count(["min"])}</strong>
+              <span>below 2-wk minimum</span>
+            </div>
+            <div>
+              <strong>{count(["low"])}</strong>
+              <span>below 4-wk target</span>
+            </div>
+            <div>
+              <strong>{count(["ok", "high"])}</strong>
+              <span>at or above target</span>
+            </div>
+          </div>
 
-      <div className="woi-week">
-        <button
-          type="button"
-          className="lab-replay"
-          onClick={() => {
-            if (!playing && week >= WOI_WEEKS - 1) setWeek(0);
-            setPlaying((p) => !p);
-          }}
-          aria-label={playing ? "Pause" : "Play the 12 weeks"}
-        >
-          {playing ? "❚❚ Pause" : "▶ Play"}
-        </button>
-        <input
-          type="range"
-          min={0}
-          max={WOI_WEEKS - 1}
-          value={week}
-          aria-label="Week"
-          onChange={(e) => {
-            setWeek(Number(e.target.value));
-            setPlaying(false);
-          }}
-        />
-        <span className="woi-week-label">Week {week + 1}</span>
-      </div>
-
-      <div className="woi" ref={ref} onMouseLeave={() => setHover(null)}>
-        <div className="woi-row woi-axis" aria-hidden>
-          <span />
-          <span className="woi-track">
-            {[0, 2, 4, 6, 8].map((t) => (
-              <i key={t} style={{ left: pctOf(t) }}>
-                {t}
-                {t === 8 ? "+ wks" : ""}
-              </i>
-            ))}
-          </span>
-          <span />
-        </div>
-        {woiData.map((m, n) => {
-          const v = m.woi[week];
-          const st = statuses[n];
-          return (
-            <button type="button" key={m.name} className={`woi-row ${sel === n ? "sel" : ""} ${hover === n ? "on" : ""}`} onClick={() => setSel(n)} onMouseEnter={() => setHover(n)} aria-pressed={sel === n}>
-              <span className="woi-name">{m.name}</span>
-              <span className="woi-track">
-                <i className="woi-band" style={{ left: pctOf(WOI_TARGET[0]), width: `${((WOI_TARGET[1] - WOI_TARGET[0]) / WOI_SCALE) * 100}%` }} />
-                <motion.span className={`woi-bar ${st}`} initial={{ width: 0 }} animate={{ width: inView ? pctOf(v) : 0 }} transition={{ duration: 0.6, ease, delay: week === 0 ? n * 0.06 : 0 }} />
-                <i className="woi-min" style={{ left: pctOf(WOI_MIN) }} />
-              </span>
-              <span className={`woi-val ${st}`} title={woiLabel[st]}>
-                <b aria-hidden>{woiIcon[st]}</b> {v.toFixed(1)}
-                <span className="sr-only"> weeks, {woiLabel[st].toLowerCase()}</span>
-              </span>
+          <div className="woi-week">
+            <button
+              type="button"
+              className="lab-replay"
+              onClick={() => {
+                if (!playing && week >= WOI_WEEKS - 1) setWeek(0);
+                setPlaying((p) => !p);
+              }}
+              aria-label={playing ? "Pause" : "Play the 12 weeks"}
+            >
+              {playing ? "❚❚ Pause" : "▶ Play"}
             </button>
-          );
-        })}
-      </div>
+            <input
+              type="range"
+              min={0}
+              max={WOI_WEEKS - 1}
+              value={week}
+              aria-label="Week"
+              onChange={(e) => {
+                setWeek(Number(e.target.value));
+                setPlaying(false);
+              }}
+            />
+            <span className="woi-week-label">Week {week + 1}</span>
+          </div>
 
-      <WoiTrend m={hover ?? sel} week={week} />
+          <div className="woi" ref={ref} onMouseLeave={() => setHover(null)}>
+            <div className="woi-row woi-axis" aria-hidden>
+              <span />
+              <span className="woi-track">
+                {[0, 2, 4, 6, 8].map((t) => (
+                  <i key={t} style={{ left: pctOf(t) }}>
+                    {t}
+                    {t === 8 ? "+ wks" : ""}
+                  </i>
+                ))}
+              </span>
+              <span />
+            </div>
+            {woiData.map((m, n) => {
+              const v = m.woi[week];
+              const st = statuses[n];
+              return (
+                <button type="button" key={m.name} className={`woi-row ${sel === n ? "sel" : ""} ${hover === n ? "on" : ""}`} onClick={() => setSel(n)} onMouseEnter={() => setHover(n)} aria-pressed={sel === n}>
+                  <span className="woi-name">{m.name}</span>
+                  <span className="woi-track">
+                    <i className="woi-band" style={{ left: pctOf(WOI_TARGET[0]), width: `${((WOI_TARGET[1] - WOI_TARGET[0]) / WOI_SCALE) * 100}%` }} />
+                    <motion.span className={`woi-bar ${st}`} initial={{ width: 0 }} animate={{ width: inView ? pctOf(v) : 0 }} transition={{ duration: 0.6, ease, delay: week === 0 ? n * 0.06 : 0 }} />
+                    <i className="woi-min" style={{ left: pctOf(WOI_MIN) }} />
+                  </span>
+                  <span className={`woi-val ${st}`} title={woiLabel[st]}>
+                    <b aria-hidden>{woiIcon[st]}</b> {v.toFixed(1)}
+                    <span className="sr-only"> weeks, {woiLabel[st].toLowerCase()}</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-      <div className="lab-legend">
-        <span>
-          <i className="sw band" /> Target 4–6 wks
-        </span>
-        <span>
-          <i className="sw ref" /> 2-wk minimum
-        </span>
-        <span>
-          <i className="sw woi-key min" /> ⚠ Below minimum
-        </span>
-        <span>
-          <i className="sw woi-key low" /> ↓ Below target
-        </span>
-        <span>
-          <i className="sw woi-key ok" /> ✓ On target
-        </span>
-        <span>
-          <i className="sw woi-key high" /> ↑ Above target
-        </span>
+        <div className="woi-side">
+          <WoiTrend m={hover ?? sel} week={week} />
+
+          <div className="lab-legend">
+            <span>
+              <i className="sw band" /> Target 4–6 wks
+            </span>
+            <span>
+              <i className="sw ref" /> 2-wk minimum
+            </span>
+            <span>
+              <i className="sw woi-key min" /> ⚠ Below minimum
+            </span>
+            <span>
+              <i className="sw woi-key low" /> ↓ Below target
+            </span>
+            <span>
+              <i className="sw woi-key ok" /> ✓ On target
+            </span>
+            <span>
+              <i className="sw woi-key high" /> ↑ Above target
+            </span>
+          </div>
+        </div>
       </div>
     </>
   );
@@ -482,7 +478,7 @@ function WOIView() {
 // One material's WOI over the 12 weeks, against the target band and minimum.
 function WoiTrend({ m, week }: { m: number; week: number }) {
   const [wrap, W] = useWidth<HTMLDivElement>();
-  const H = 130;
+  const H = W > 440 ? 230 : 130;
   const pad = { l: 28, r: 12, t: 10, b: 20 };
   const vals = woiData[m].woi;
   const x = (i: number) => pad.l + (i / (WOI_WEEKS - 1)) * (W - pad.l - pad.r);
