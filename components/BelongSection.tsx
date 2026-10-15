@@ -72,7 +72,7 @@ function DeptMap() {
       <motion.span className="dept-stem" initial={{ scaleY: 0 }} animate={inView ? { scaleY: 1 } : {}} transition={{ delay: 0.3, duration: 0.4 }} />
       <motion.div className="dept-me" initial={{ opacity: 0, scale: 0.8 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.55, type: "spring", stiffness: 260, damping: 18 }}>
         <strong>Me</strong>
-        <span>Manager</span>
+        <span>Manager · 5 direct reports</span>
       </motion.div>
       <motion.span className="dept-stem" initial={{ scaleY: 0 }} animate={inView ? { scaleY: 1 } : {}} transition={{ delay: 0.8, duration: 0.4 }} />
       <motion.span className="dept-rail" initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ delay: 1, duration: 0.6, ease }} />
@@ -114,7 +114,7 @@ function Roadmap() {
 
 // How AI is used in Belong's operations and administration: AI drafts, Eva checks.
 const aiFlow = ["Recorded meeting", "AI drafts notes and plan updates", "I check the notes and the logic", "Shared with the team"];
-const aiUses = [
+const aiUses: { area: string; title: string; body: string; team?: boolean }[] = [
   {
     area: "Operations",
     title: "Meetings to plan updates",
@@ -134,6 +134,7 @@ const aiUses = [
     area: "Team",
     title: "Teaching my team to use AI",
     body: "I'm rolling AI out to my team and teaching each person how to use it properly, so each of them can work more as a decision maker.",
+    team: true,
   },
 ];
 
@@ -156,8 +157,32 @@ function BelongAI() {
             <span className="bai-tag">{u.area}</span>
             <strong>{u.title}</strong>
             <p>{u.body}</p>
+            {u.team && <TeamDots />}
           </Reveal>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// Who on the team uses AI today: 6 of 20, all of administration and operations.
+function TeamDots() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px 0px -40px 0px" });
+  return (
+    <div className="bai-team" ref={ref}>
+      <div className="bai-dots" role="img" aria-label="6 of 20 people on my team use AI: all of administration and operations. The other 14 are engineers on site.">
+        {Array.from({ length: 20 }, (_, i) => (
+          <motion.i key={i} className={i < 6 ? "on" : ""} initial={{ opacity: 0, scale: 0.4 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }} />
+        ))}
+      </div>
+      <div className="bai-team-key" aria-hidden>
+        <span>
+          <i className="on" /> 6 use AI now: all of administration and operations
+        </span>
+        <span>
+          <i /> 14 engineers on site
+        </span>
       </div>
     </div>
   );

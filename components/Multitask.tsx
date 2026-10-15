@@ -26,7 +26,7 @@ const tasks: { role: RoleKey; label: string; auto: boolean }[] = [
   { role: "skywater", label: "Weekly supply-risk review", auto: false },
   { role: "rbr", label: "Tenant reply draft", auto: true },
   { role: "belong", label: "Price-change alert", auto: true },
-  { role: "rbr", label: "Lease entry in vendor tool", auto: true },
+  { role: "rbr", label: "Lease entry in TenantCloud", auto: true },
   { role: "skywater", label: "Supplier escalation", auto: false },
   { role: "belong", label: "Vendor quote decision", auto: false },
   { role: "rbr", label: "Lease PDF to record", auto: true },
@@ -220,7 +220,7 @@ const automations: { key: Exclude<RoleKey, "skywater">; company: string; role: s
     role: "Co-Owner · side business",
     items: [
       { text: "AI drafts tenant replies; a person approves each one", state: "Live" },
-      { text: "AI agents enter leases in a vendor tool with no API", state: "Live" },
+      { text: "AI agents enter leases in TenantCloud, which has no API", state: "Live" },
       { text: "Signed lease PDFs read into records, no retyping", state: "Live" },
       { text: "Plain-English questions answered from live data", state: "Live" },
     ],

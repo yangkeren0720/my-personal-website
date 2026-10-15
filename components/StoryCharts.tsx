@@ -505,7 +505,7 @@ export function SeatsChart() {
 // How I build with AI: describe, Claude Code builds, Codex cross-checks, I check against real records, ship.
 export function BuildLoop() {
   const nodes = ["I describe the need", "Claude Code builds it", "Codex cross-checks it", "I check it against real records", "Ship"];
-  const modules = ["Live room inventory", "Online applications", "Lease automation", "Occupancy calendar", "AI reply drafts", "Vendor-entry agents"];
+  const modules = ["Live room inventory", "Online applications", "Lease automation", "Occupancy calendar", "AI reply drafts", "TenantCloud agents"];
   const [lit, setLit] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setLit((s) => s + 1), 700);

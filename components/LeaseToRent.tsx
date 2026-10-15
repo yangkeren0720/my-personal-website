@@ -8,7 +8,7 @@ import Reveal from "./Reveal";
 // RBR's whole lease lifecycle, from a visitor finding a room to rent
 // collection and move-out. The counts come from the RBR platform's own code
 // (Oct 2026): the automatic emails it sends, its Claude features, its three
-// Claude robots that log in to the rent collection app, and the eight lease
+// Claude robots that log in to TenantCloud (rent collection), and the eight lease
 // scenarios its Lease Flows settings page maps step by step.
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -62,7 +62,7 @@ const stages: Stage[] = [
     name: "Signed",
     line: "The signed lease is saved with its PDF, the room shows Filled, and the tenant gets everything they need.",
     emails: [
-      ["Welcome + rent app guide + signed lease", "tenant"],
+      ["Welcome + TenantCloud guide + signed lease", "tenant"],
       ["Welcome email failed", "office"],
     ],
     claude: ["Reads signed lease PDFs", "Finds the sign dates"],
@@ -70,8 +70,8 @@ const stages: Stage[] = [
     rules: ["Lease signed by everyone"],
   },
   {
-    name: "Into the rent app",
-    line: "A Claude robot logs in to the rent collection app, adds the tenant, the lease, rent from the start, the deposit invoice and the signed PDF, then double-checks every field.",
+    name: "Into TenantCloud",
+    line: "A Claude robot logs in to TenantCloud, adds the tenant, the lease, rent from the start, the deposit invoice and the signed PDF, then double-checks every field.",
     emails: [
       ["Robot report after each run", "office"],
       ["Daily or weekly robot report", "office"],
@@ -83,7 +83,7 @@ const stages: Stage[] = [
   },
   {
     name: "Move-in",
-    line: "An email with the door code, Wi-Fi, lock how-to and checklist. A robot requests the move-in inspection in the rent app.",
+    line: "An email with the door code, Wi-Fi, lock how-to and checklist. A robot requests the move-in inspection in TenantCloud.",
     emails: [["Move-in email", "tenant"]],
     claude: ["Drives the browser", "Follows our inspection rules", "Learns from earlier inspections"],
     robots: ["Move-in inspections robot"],
@@ -91,7 +91,7 @@ const stages: Stage[] = [
   },
   {
     name: "Collect rent",
-    line: "The rent app bills every month and tenants pay online. Renewals carry the deposit over, and a rent that stops mid-month is prorated before the invoice goes out.",
+    line: "TenantCloud bills every month and tenants pay online. Renewals carry the deposit over, and a rent that stops mid-month is prorated before the invoice goes out.",
     emails: [],
     claude: ["Drives the browser", "Follows our proration rules", "Learns from earlier last months"],
     robots: ["Last-month rent robot", "Signed leases robot (renewals)"],
@@ -134,7 +134,7 @@ const scenarios: Scenario[] = [
       ["me", "Press Renew, check it, send it"],
       ["site", "Deposit carries over"],
       ["site", "Second lease saved, no welcome email"],
-      ["robot", "Renews the lease in the rent app"],
+      ["robot", "Renews the lease in TenantCloud"],
       ["site", "Notes the deposit carried over"],
       ["me", "Only if the robot can't renew"],
     ],
@@ -162,7 +162,7 @@ const scenarios: Scenario[] = [
       ["me", "Pick the new room and the date"],
       ["me", "Answer overlaps and discounts"],
       ["site", "Same lease carries on in the new room"],
-      ["me", "Move the unit in the rent app"],
+      ["me", "Move the unit in TenantCloud"],
       ["robot", "Nothing to add"],
     ],
   },
@@ -211,7 +211,7 @@ const scenarios: Scenario[] = [
     ],
     extra: (
       <div className="ltr-decide">
-        <span>In the rent app, the robot checks the deposit:</span>
+        <span>In TenantCloud, the robot checks the deposit:</span>
         <span className="ltr-branch">
           <b>Not paid</b> → delete the lease
         </span>
@@ -257,7 +257,7 @@ const robots = [
 
 const guards = [
   "Claude never sees the password",
-  "Can only open the rent app",
+  "Can only open TenantCloud",
   "Saves only through one guarded step",
   "Practice mode first, then Live",
   "Double-checks every save, field by field",
@@ -302,7 +302,7 @@ export default function LeaseToRent() {
           [8, "lease scenarios, mapped step by step"],
           [12, "automatic emails along the way"],
           [18, "Claude API features at work"],
-          [3, "Claude robots that log in to the rent app"],
+          [3, "Claude robots that log in to TenantCloud"],
         ].map(([n, label], i) => (
           <Reveal key={label as string} delay={i * 0.08} className="co-kpi">
             <strong>
@@ -454,7 +454,7 @@ function Track() {
                   </motion.li>
                 ))}
               </Col>
-              <Col icon="robot" title="Claude robots in the rent app" empty="None at this step">
+              <Col icon="robot" title="Claude robots in TenantCloud" empty="None at this step">
                 {s.robots.map((r, i) => (
                   <motion.li key={r} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 + i * 0.08 }}>
                     <span>{r}</span>
@@ -539,7 +539,7 @@ function Robots() {
   return (
     <div className="ltr-robots">
       <div className="ltr-scen-head">
-        <h4>3 Claude robots in the rent collection app</h4>
+        <h4>3 Claude robots in TenantCloud, the rent collection app</h4>
         <p>The app has no API, so Claude drives a browser. They check at 9 AM and 3 PM, and right after a lease is signed.</p>
       </div>
       <div className="ltr-robot-grid">

@@ -323,33 +323,34 @@ function EarlyWarning() {
 
 /* ---------- 3. Weeks of inventory (WOI) per material ---------- */
 
-const WOI_MIN = 2;
-const WOI_TARGET = [4, 6] as const;
-const WOI_SCALE = 8;
+const WOI_MIN = 4; // 4 weeks is the floor unless storage limits it
+const WOI_SCALE = 10;
 const WOI_WEEKS = 12;
+const WOI_TICKS = [0, 2, 4, 6, 8, 10];
 // Projected WOI (on hand ÷ average weekly use) for the next 12 weeks. Sample data.
-const woiData: { name: string; woi: number[] }[] = [
-  { name: "Specialty gas A", woi: [5.2, 4.8, 4.4, 5.6, 5.2, 4.8, 4.4, 5.6, 5.2, 4.8, 4.4, 5.6] },
-  { name: "Specialty gas B", woi: [6.4, 6.0, 5.5, 5.0, 4.6, 4.1, 3.6, 3.2, 2.7, 2.3, 1.8, 1.4] },
-  { name: "CMP slurry", woi: [4.5, 4.1, 3.7, 5.2, 4.8, 4.4, 4.0, 5.5, 5.1, 4.7, 4.3, 5.8] },
-  { name: "Photoresist", woi: [3.1, 2.6, 2.1, 1.6, 1.2, 3.8, 3.4, 4.1, 3.7, 4.3, 3.9, 4.5] },
-  { name: "Developer", woi: [7.8, 7.5, 7.2, 6.9, 6.6, 6.3, 6.0, 5.7, 5.4, 5.1, 4.8, 4.5] },
-  { name: "Process acid", woi: [5.0, 4.6, 4.2, 3.8, 5.4, 5.0, 4.6, 4.2, 5.8, 5.4, 5.0, 4.6] },
-  { name: "Solvent", woi: [1.8, 1.4, 4.9, 4.5, 4.1, 3.7, 5.2, 4.8, 4.4, 4.0, 5.5, 5.1] },
-  { name: "Etch gas", woi: [4.9, 4.6, 4.3, 4.0, 3.7, 3.4, 3.1, 4.6, 4.3, 4.0, 3.7, 3.4] },
-];
-type WoiStatus = "min" | "low" | "ok" | "high";
-const woiStatus = (v: number): WoiStatus => (v < WOI_MIN ? "min" : v < WOI_TARGET[0] ? "low" : v <= WOI_TARGET[1] ? "ok" : "high");
-const woiLabel: Record<WoiStatus, string> = { min: "Below minimum", low: "Below target", ok: "On target", high: "Above target" };
-const woiIcon: Record<WoiStatus, string> = { min: "⚠", low: "↓", ok: "✓", high: "↑" };
 const pctOf = (v: number) => `${(Math.min(v, WOI_SCALE) / WOI_SCALE) * 100}%`;
+const woiData: { name: string; woi: number[]; storage?: boolean }[] = [
+  { name: "Specialty gas A", woi: [6.2, 5.8, 5.4, 6.6, 6.2, 5.8, 5.4, 6.6, 6.2, 5.8, 5.4, 6.6] },
+  { name: "Specialty gas B", woi: [8.4, 8.0, 7.5, 7.0, 6.6, 6.1, 5.6, 5.2, 4.7, 4.3, 3.8, 3.4] },
+  { name: "CMP slurry", woi: [5.5, 5.1, 4.7, 6.2, 5.8, 5.4, 5.0, 6.5, 6.1, 5.7, 5.3, 6.8] },
+  { name: "Photoresist", woi: [3.1, 2.8, 2.5, 3.4, 3.1, 2.8, 2.5, 3.4, 3.1, 2.8, 2.5, 3.4], storage: true },
+  { name: "Developer", woi: [9.2, 8.9, 8.6, 8.3, 8.0, 7.7, 7.4, 7.1, 6.8, 6.5, 6.2, 5.9] },
+  { name: "Process acid", woi: [6.0, 5.6, 5.2, 4.8, 6.4, 6.0, 5.6, 5.2, 6.8, 6.4, 6.0, 5.6] },
+  { name: "Solvent", woi: [4.6, 3.8, 3.2, 6.1, 5.7, 5.3, 4.9, 6.4, 6.0, 5.6, 5.2, 6.7] },
+  { name: "Etch gas", woi: [5.9, 5.6, 5.3, 5.0, 4.7, 4.4, 4.1, 5.6, 5.3, 5.0, 4.7, 4.4] },
+];
+
+type WoiStatus = "min" | "lim" | "ok";
+const woiStatus = (v: number, m: number): WoiStatus => (v >= WOI_MIN ? "ok" : woiData[m].storage ? "lim" : "min");
+const woiLabel: Record<WoiStatus, string> = { min: "Below minimum", lim: "Storage-limited", ok: "At or above minimum" };
+const woiIcon: Record<WoiStatus, string> = { min: "⚠", lim: "▣", ok: "✓" };
 
 function WOIView() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px 0px -60px 0px" });
   const [week, setWeek] = useState(0);
   const [playing, setPlaying] = useState(true);
-  const [sel, setSel] = useState(3);
+  const [sel, setSel] = useState(1);
   const [hover, setHover] = useState<number | null>(null);
 
   // Step through the projection once, then stop on the last week.
@@ -363,7 +364,7 @@ function WOIView() {
     return () => clearTimeout(t);
   }, [inView, playing, week]);
 
-  const statuses = woiData.map((m) => woiStatus(m.woi[week]));
+  const statuses = woiData.map((m, n) => woiStatus(m.woi[week], n));
   const count = (st: WoiStatus[]) => statuses.filter((x) => st.includes(x)).length;
 
   return (
@@ -374,15 +375,15 @@ function WOIView() {
           <div className="lab-kpis">
             <div>
               <strong className="bad">{count(["min"])}</strong>
-              <span>below 2-wk minimum</span>
+              <span>below 4-wk minimum</span>
             </div>
             <div>
-              <strong>{count(["low"])}</strong>
-              <span>below 4-wk target</span>
+              <strong>{count(["lim"])}</strong>
+              <span>storage-limited</span>
             </div>
             <div>
-              <strong>{count(["ok", "high"])}</strong>
-              <span>at or above target</span>
+              <strong>{count(["ok"])}</strong>
+              <span>at or above minimum</span>
             </div>
           </div>
 
@@ -416,10 +417,14 @@ function WOIView() {
             <div className="woi-row woi-axis" aria-hidden>
               <span />
               <span className="woi-track">
-                {[0, 2, 4, 6, 8].map((t) => (
+                {WOI_TICKS.map((t) => (
                   <i key={t} style={{ left: pctOf(t) }}>
                     {t}
-                    {t === 8 ? "+ wks" : ""}
+                    {t === WOI_SCALE && (
+                      <>
+                        +<span className="woi-unit"> wks</span>
+                      </>
+                    )}
                   </i>
                 ))}
               </span>
@@ -432,7 +437,6 @@ function WOIView() {
                 <button type="button" key={m.name} className={`woi-row ${sel === n ? "sel" : ""} ${hover === n ? "on" : ""}`} onClick={() => setSel(n)} onMouseEnter={() => setHover(n)} aria-pressed={sel === n}>
                   <span className="woi-name">{m.name}</span>
                   <span className="woi-track">
-                    <i className="woi-band" style={{ left: pctOf(WOI_TARGET[0]), width: `${((WOI_TARGET[1] - WOI_TARGET[0]) / WOI_SCALE) * 100}%` }} />
                     <motion.span className={`woi-bar ${st}`} initial={{ width: "0%" }} animate={{ width: inView ? pctOf(v) : "0%" }} transition={{ duration: 0.6, ease, delay: week === 0 ? n * 0.06 : 0 }} />
                     <i className="woi-min" style={{ left: pctOf(WOI_MIN) }} />
                   </span>
@@ -451,31 +455,26 @@ function WOIView() {
 
           <div className="lab-legend">
             <span>
-              <i className="sw band" /> Target 4–6 wks
-            </span>
-            <span>
-              <i className="sw ref" /> 2-wk minimum
+              <i className="sw ref" /> 4-wk minimum
             </span>
             <span>
               <i className="sw woi-key min" /> ⚠ Below minimum
             </span>
             <span>
-              <i className="sw woi-key low" /> ↓ Below target
+              <i className="sw woi-key lim" /> ▣ Storage-limited
             </span>
             <span>
-              <i className="sw woi-key ok" /> ✓ On target
-            </span>
-            <span>
-              <i className="sw woi-key high" /> ↑ Above target
+              <i className="sw woi-key ok" /> ✓ At or above minimum
             </span>
           </div>
+          <p className="woi-note">4 weeks is the floor. Where on-site storage is limited, stock can sit below it on site, and extra is kept at a nearby third-party warehouse.</p>
         </div>
       </div>
     </>
   );
 }
 
-// One material's WOI over the 12 weeks, against the target band and minimum.
+// One material's WOI over the 12 weeks, against the 4-week minimum.
 function WoiTrend({ m, week }: { m: number; week: number }) {
   const [wrap, W] = useWidth<HTMLDivElement>();
   const H = W > 440 ? 230 : 130;
@@ -488,12 +487,12 @@ function WoiTrend({ m, week }: { m: number; week: number }) {
   return (
     <div className="woi-trend" ref={wrap}>
       <div className="woi-trend-head">
-        <b>{woiData[m].name}</b> · week {week + 1}: {vals[week].toFixed(1)} wks, {woiLabel[woiStatus(vals[week])].toLowerCase()} · lowest {vals[low].toFixed(1)} in week {low + 1}
+        <b>{woiData[m].name}</b> · week {week + 1}: {vals[week].toFixed(1)} wks, {woiLabel[woiStatus(vals[week], m)].toLowerCase()} · lowest {vals[low].toFixed(1)} in week {low + 1}
       </div>
       <svg width={W} height={H} role="img" aria-label={`${woiData[m].name} weeks of inventory over 12 weeks, lowest ${vals[low].toFixed(1)} in week ${low + 1}. Sample data.`}>
-        <rect x={pad.l} width={W - pad.l - pad.r} y={y(WOI_TARGET[1])} height={y(WOI_TARGET[0]) - y(WOI_TARGET[1])} className="lab-band" />
+        <rect x={pad.l} width={W - pad.l - pad.r} y={y(WOI_MIN)} height={y(0) - y(WOI_MIN)} className="lab-band" />
         <line x1={pad.l} x2={W - pad.r} y1={y(WOI_MIN)} y2={y(WOI_MIN)} className="lab-ref" />
-        {[0, 2, 4, 6, 8].map((t) => (
+        {WOI_TICKS.map((t) => (
           <text key={t} x={pad.l - 6} y={y(t) + 4} textAnchor="end" className="lab-axis">
             {t}
           </text>
@@ -501,7 +500,7 @@ function WoiTrend({ m, week }: { m: number; week: number }) {
         <motion.path key={m} d={d} className="lab-line s1" initial={{ pathLength: 0, d }} animate={{ pathLength: 1, d }} transition={{ duration: 0.9, ease }} />
         <line x1={x(week)} x2={x(week)} y1={pad.t} y2={H - pad.b} className="lab-cross" />
         {vals.map((v, i) => (
-          <circle key={i} cx={x(i)} cy={y(v)} r={i === week ? 5 : 3} className={`woi-dot ${woiStatus(v)}`} />
+          <circle key={i} cx={x(i)} cy={y(v)} r={i === week ? 5 : 3} className={`woi-dot ${woiStatus(v, m)}`} />
         ))}
         {[0, 3, 6, 9].map((i) => (
           <text key={i} x={x(i)} y={H - 4} textAnchor="middle" className="lab-axis">

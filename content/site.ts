@@ -282,8 +282,8 @@ export const ai = {
     },
     {
       icon: "robot",
-      title: "Vendor data-entry agents",
-      body: "AI agents enter signed leases, request move-in inspections and post last-month rent in a vendor system that has no API, following the office's own written rules.",
+      title: "TenantCloud data-entry agents",
+      body: "AI agents enter signed leases, request move-in inspections and post last-month rent in TenantCloud, which has no API, following the office's own written rules.",
     },
     {
       icon: "doc",
