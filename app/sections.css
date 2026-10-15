@@ -202,7 +202,7 @@ main, .footer { position: relative; z-index: 1; }
 
 /* ---------- Projects ---------- */
 .projects-section { padding-top: 40px; }
-.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .project { position: relative; height: 100%; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; transform-style: preserve-3d; will-change: transform; }
 .project::before { content: ""; position: absolute; top: 0; left: 26px; right: 26px; height: 2px; background: var(--accent-local); opacity: 0.8; border-radius: 0 0 2px 2px; }
 .project-glow { position: absolute; inset: 0; pointer-events: none; }

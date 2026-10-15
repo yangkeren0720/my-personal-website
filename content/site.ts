@@ -60,10 +60,13 @@ export const experience: Experience[] = [
     summary:
       "Designed and built the company's web platform and internal tools on Next.js, PostgreSQL and Azure.",
     highlights: [
-      "Moved the availability system from JSON files to a normalized PostgreSQL schema with Prisma, with audit history on every change.",
-      "Built the lease pipeline end to end: applications link to rooms, the generator drafts a lease, DocuSign sends it, and signed envelopes write the lease record automatically.",
-      "Imported 182 historical leases from DoorLoop and TenantCloud with de-duplication rules, so the admin calendar and lease tabs show one source of truth.",
-      "Set up deploys through GitHub Actions to Azure App Service, with health checks and alert emails from Application Insights.",
+      "Migrated the platform from flat files to a normalized PostgreSQL schema with audit history and a rollback path.",
+      "Built a lease generator that turns approved applications into DocuSign-ready contracts from a clause-level template, and writes signed leases back to the database.",
+      "Consolidated 182 leases from four sources into one table with de-duplication rules, driving an occupancy calendar.",
+      "Found and fixed a systematic rent and fee mix-up in imported lease data before it reached any contract.",
+      "Recovered lost rental applications from notification emails, then added backups and a recycle bin so it can't recur.",
+      "Built an AI browser agent, run from CI, that automates a vendor workflow with no API, with a practice mode and human sign-off before going live.",
+      "Set up CI/CD with automated migrations, uptime monitoring and alerting for the production app on Azure.",
     ],
     placeholder: true, // confirm the title and dates
   },
@@ -129,7 +132,7 @@ export const featured = {
     },
     {
       title: "AI Assistants",
-      body: "A WhatsApp reply assistant that learns from past conversations and live housing data, built on the Claude API with usage and cost tracking.",
+      body: "A WhatsApp reply assistant that drafts answers from past conversations and live availability for a human to approve, plus a browser robot that handles a vendor workflow with no API.",
       screen: "ai",
     },
   ],
@@ -140,9 +143,17 @@ export const projects: Project[] = [
     name: "RBR Admin for iOS",
     tagline: "SwiftUI companion app",
     description:
-      "A native SwiftUI app for the RBR admin team to check availability, applications and leases on the go, backed by the same API as the web dashboard.",
-    tags: ["SwiftUI", "iOS", "REST API"],
+      "A native SwiftUI app for the RBR admin team, built on a versioned admin API with an OpenAPI spec. Swift types are generated from the spec so the app and server can't drift, and sign-in tokens live in the Keychain.",
+    tags: ["SwiftUI", "iOS", "OpenAPI"],
     accent: "#7dd3fc",
+  },
+  {
+    name: "Vendor Robot",
+    tagline: "AI browser agent",
+    description:
+      "A GitHub Actions job that runs a headless browser where Claude fills in move-in inspection requests in a vendor tool with no API. It starts in practice mode and only sends after a person approves.",
+    tags: ["Claude API", "Headless Chromium", "GitHub Actions"],
+    accent: "#86efac",
   },
   {
     name: "This website",
