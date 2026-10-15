@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { experience, skills } from "@/content/site";
+import Collapse from "./Collapse";
 import Reveal from "./Reveal";
 import PlaceholderBadge from "./PlaceholderBadge";
 import ProgramPanel from "./ProgramPanel";
@@ -88,16 +89,9 @@ export default function Experience() {
                     <AnimatePresence initial={false} mode="wait">
                       {job.programs.map((p) =>
                         openKey === `${i}:${p.name}` ? (
-                          <motion.div
-                            key={p.name}
-                            className="prog-wrap"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                          >
+                          <Collapse key={p.name} className="prog-wrap" duration={0.35}>
                             <ProgramPanel p={p} onClose={() => setOpenKey(null)} />
-                          </motion.div>
+                          </Collapse>
                         ) : null
                       )}
                     </AnimatePresence>

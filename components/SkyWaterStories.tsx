@@ -286,7 +286,7 @@ function ParallelVisual() {
         <div key={p.name} className="v-par-row">
           <span className="v-par-name">{p.name}</span>
           <span className="v-par-track">
-            <motion.span className="v-par-bar" initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ delay: 0.3, duration: 1 + n * 0.45, ease: "easeInOut" }} />
+            <motion.span className="v-par-bar" initial={{ width: "0%" }} animate={{ width: "100%" }} transition={{ delay: 0.3, duration: 1 + n * 0.45, ease: "easeInOut" }} />
           </span>
           <motion.span className="v-par-got" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 + n * 0.45 }}>
             ✓ {p.got}

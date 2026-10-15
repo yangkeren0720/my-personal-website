@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Collapse from "./Collapse";
 import { profile } from "@/content/site";
 import ThemeToggle from "./ThemeToggle";
 
@@ -80,12 +81,8 @@ export default function Nav() {
 
       <AnimatePresence>
         {open && (
-          <motion.nav
-            className="nav-mobile"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-          >
+          <Collapse as="nav" className="nav-mobile-wrap" duration={0.3}>
+            <div className="nav-mobile">
             {links.map((l, i) => (
               <motion.a
                 key={l.id}
@@ -98,7 +95,8 @@ export default function Nav() {
                 {l.label}
               </motion.a>
             ))}
-          </motion.nav>
+            </div>
+          </Collapse>
         )}
       </AnimatePresence>
     </motion.header>

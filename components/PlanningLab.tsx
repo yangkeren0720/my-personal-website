@@ -9,7 +9,7 @@ import Reveal from "./Reveal";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-function useWidth<T extends HTMLElement>() {
+export function useWidth<T extends HTMLElement>() {
   const ref = useRef<T>(null);
   const [w, setW] = useState(520);
   useEffect(() => {

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { featured } from "@/content/site";
+import Collapse from "./Collapse";
 import Reveal from "./Reveal";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -64,14 +65,9 @@ export default function Showcase() {
                 </span>
                 <AnimatePresence initial={false}>
                   {i === active && (
-                    <motion.p
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease }}
-                    >
-                      {f.body}
-                    </motion.p>
+                    <Collapse>
+                      <p>{f.body}</p>
+                    </Collapse>
                   )}
                 </AnimatePresence>
                 {i === active && (
