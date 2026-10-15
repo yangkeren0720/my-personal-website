@@ -5,6 +5,7 @@ import CompanyHead, { SubHead } from "./CompanyHead";
 import Showcase from "./Showcase";
 import AISection from "./AISection";
 import StoryCards from "./StoryCards";
+import LeaseToRent from "./LeaseToRent";
 
 // Everything from RBR Property Management, the side business Eva co-owns.
 export default function RBRSection() {
@@ -23,6 +24,8 @@ export default function RBRSection() {
           }
           summary={ai.builtWith}
         />
+        <SubHead id="lease-to-rent">From lease to rent</SubHead>
+        <LeaseToRent />
         <SubHead id="work">The platform</SubHead>
         <Showcase />
         <SubHead id="ai">AI at work</SubHead>
