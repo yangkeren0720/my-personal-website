@@ -496,3 +496,9 @@ main, .footer { position: relative; z-index: 1; }
   .flow-svg { min-width: 820px; }
   .flow-swipe { display: inline; color: var(--accent); }
 }
+.timeline-place { color: var(--text-faint); }
+.timeline-programs { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin-top: 14px; }
+.timeline-program { display: flex; flex-direction: column; padding: 9px 12px; border-radius: 12px; border: 1px solid var(--border); background: rgba(var(--fg-rgb), 0.03); font-size: 13px; }
+.timeline-program strong { font-weight: 600; }
+.timeline-program span { color: var(--text-faint); font-size: 12px; }
+.timeline-card.edu h3::before { content: "🎓 "; }

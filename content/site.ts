@@ -16,26 +16,26 @@ export const profile = {
   rolePrefix: "Planning powered by",
   roles: ["AI integration", "live dashboards", "data visualization", "clean, reconciled data"],
   tagline:
-    "I plan supply against demand. At the student-housing company I co-own, I manage inventory (rooms), demand (applications), capacity and vendors, and I built the AI tools and live dashboards that keep the plan accurate.",
-  location: "United States", // placeholder: add your city
-  locationPlaceholder: true,
+    "Material Planner in semiconductor manufacturing, with 5+ years in supply chain across Tesla, Rivian and wafer-fab programs. I keep critical materials flowing, and I build the AI tools and live dashboards that keep the plan accurate.",
+  location: "Austin, TX",
+  locationPlaceholder: false,
   github: "https://github.com/yangkeren0720",
-  linkedin: "", // add your LinkedIn URL to show the button
+  linkedin: "https://www.linkedin.com/in/eva-yang-637993116/",
   email: "", // add a public contact email to show the button
   resumeUrl: "", // e.g. "/resume.pdf" after adding the file to /public
 };
 
 export const about = {
   paragraphs: [
-    "I took a business running on spreadsheets and email and, with no coding background, directed AI to build one system for the whole chain: inventory, demand, orders and fulfillment.",
+    "I plan materials for a semiconductor fab, I bought for automotive factory build-outs, and I co-own a business where I directed AI to build one system for the whole chain.",
   ],
   // Short facts shown as chips next to the bio.
   facts: [
     { label: "Strengths", value: "Supply & demand planning, AI integration, dashboards, data visualization" },
     { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
-    { label: "Currently", value: "Co-owner of RBR Property Management, running its operations, systems and AI" },
-    { label: "Education", value: "Add your school and degree", placeholder: true },
-    { label: "Languages", value: "English, 中文" },
+    { label: "Currently", value: "Material Planner (semiconductor) and co-owner of RBR Property Management" },
+    { label: "Education", value: "M.S. & B.S. Mathematics, Illinois State University" },
+    { label: "Languages", value: "English, 中文 (native)" },
   ] as Array<{ label: string; value: string } & Placeholder>,
 };
 
@@ -52,43 +52,79 @@ export type Experience = {
   period: string;
   title: string;
   org: string;
+  place?: string;
   summary: string;
   highlights: string[];
+  // Sub-assignments shown as small chips, e.g. customer programs.
+  programs?: { name: string; place: string; period: string }[];
+  kind?: "work" | "education";
 } & Placeholder;
 
 export const experience: Experience[] = [
   {
+    period: "Dec 2023 — Present",
+    title: "Material Planner",
+    org: "SkyWater Technology (began under Infineon Technologies)",
+    place: "Austin, TX",
+    summary: "Plan demand and supply for critical wafer-fab materials: specialty gases, CMP slurry, photoresist and process chemicals.",
+    highlights: [
+      "Built a weekly weeks-of-supply risk dashboard that feeds S&OP and MPS decisions.",
+      "Rebuilt reorder points, min/max and safety stock from 12 months of usage, then moved materials to MRP auto-release.",
+      "Spotted a single-source chemical stockout weeks ahead with a depletion model; production never stopped.",
+      "Grew the shortage-risk report from ~100 to ~250 material lines, and kept supply running through two acquisitions.",
+    ],
+  },
+  {
     period: "2025 — Present",
     title: "Co-Owner",
     org: "RBR Property Management",
-    summary:
-      "Run operations, systems and AI for a student-housing company I co-own.",
+    place: "Student housing",
+    summary: "Run operations, systems and AI for a business I co-own with my husband.",
     highlights: [
       "Built live supply & demand dashboards with drill-down and an AI ask box.",
       "Put 18 AI workflows into production, each with a human check.",
       "Unified 182 leases from 4 sources; caught 127 pricing errors.",
-      "Recovered 65 lost applications and added backups so it can't recur.",
     ],
     placeholder: true, // confirm the start year
   },
   {
-    period: "20XX — 20XX",
-    title: "Your previous role",
-    org: "Company or internship",
-    summary: "One line on what the team did and what you owned.",
+    period: "Feb 2026 — Present",
+    title: "Office Manager (part-time)",
+    org: "Automotive technology company",
+    place: "Austin, TX",
+    summary: "Run day-to-day operations, procurement, import/export logistics and HR.",
     highlights: [
-      "A result with a number, e.g. cut page load time by 40%.",
-      "Something you built or led.",
+      "Direct procurement, supplier coordination, customs and freight forwarding.",
+      "Led the company's Odoo ERP rollout: 114 tasks across 4 phases.",
     ],
-    placeholder: true,
   },
   {
-    period: "20XX — 20XX",
-    title: "Degree",
-    org: "University",
-    summary: "Major, minor, relevant coursework or honors.",
+    period: "Jun 2020 — Oct 2023",
+    title: "Purchasing Analyst",
+    org: "Mino Automation USA",
+    place: "Supplier partner to Tesla, Rivian and Faraday Future",
+    summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
+    highlights: [
+      "Rivian: 3,400+ PO lines ($10M) for 372 robots across 7 lines.",
+      "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
+      "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
+    ],
+    programs: [
+      { name: "Tesla Cybertruck", place: "Austin, TX", period: "2022–23" },
+      { name: "Faraday Future FF91", place: "Hanford, CA", period: "2022–23" },
+      { name: "Tesla Megapack", place: "Lathrop, CA", period: "2022" },
+      { name: "Rivian", place: "Normal, IL", period: "2021–22" },
+    ],
+  },
+  {
+    period: "2015 — 2021",
+    title: "Mathematics",
+    org: "Illinois State University · Illinois Wesleyan University",
+    place: "Illinois",
+    summary: "M.S. and B.S. Mathematics (Illinois State); B.A. Mathematics & Music (Illinois Wesleyan); minor in Computer Science.",
     highlights: [],
-    placeholder: true,
+    kind: "education",
+    placeholder: true, // M.S. dates and ASCM certificate to confirm
   },
 ];
 

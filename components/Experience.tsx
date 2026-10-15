@@ -16,7 +16,7 @@ export default function Experience() {
         <Reveal>
           <span className="eyebrow">Experience</span>
           <h2 className="section-title">
-            Where I&apos;ve <em>been</em> building.
+            Where I&apos;ve <em>worked</em>.
           </h2>
         </Reveal>
 
@@ -29,8 +29,8 @@ export default function Experience() {
             <motion.article
               key={i}
               className="timeline-item"
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -41,14 +41,36 @@ export default function Experience() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.2 }}
               />
-              <div className={`timeline-card card ${job.placeholder ? "placeholder" : ""}`}>
+              <div className={`timeline-card card ${job.placeholder ? "placeholder" : ""} ${job.kind === "education" ? "edu" : ""}`}>
                 <div className="timeline-head">
                   <span className="timeline-period">{job.period}</span>
                   <PlaceholderBadge show={job.placeholder} />
                 </div>
                 <h3>{job.title}</h3>
-                <p className="timeline-org">{job.org}</p>
+                <p className="timeline-org">
+                  {job.org}
+                  {job.place && <span className="timeline-place"> · {job.place}</span>}
+                </p>
                 <p className="timeline-summary">{job.summary}</p>
+                {job.programs && (
+                  <div className="timeline-programs">
+                    {job.programs.map((p, pi) => (
+                      <motion.span
+                        key={p.name}
+                        className="timeline-program"
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + pi * 0.08 }}
+                      >
+                        <strong>{p.name}</strong>
+                        <span>
+                          {p.place} · {p.period}
+                        </span>
+                      </motion.span>
+                    ))}
+                  </div>
+                )}
                 {job.highlights.length > 0 && (
                   <ul>
                     {job.highlights.map((h, hi) => (
