@@ -2,6 +2,8 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import AISection from "@/components/AISection";
+import SupplyChain from "@/components/SupplyChain";
+import Management from "@/components/Management";
 import Dashboard from "@/components/Dashboard";
 import Showcase from "@/components/Showcase";
 import Projects from "@/components/Projects";
@@ -21,8 +23,10 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <AISection />
+        <SupplyChain />
         <Dashboard />
+        <AISection />
+        <Management />
         <Showcase />
         <Projects />
         <Experience />

@@ -30,7 +30,7 @@ export default function AISection() {
       </div>
       <div className="container">
         <Reveal>
-          <span className="eyebrow">AI in operations</span>
+          <span className="eyebrow">02 · AI integration</span>
           <h2 className="section-title ai-title">{ai.title}</h2>
         </Reveal>
         <Reveal delay={0.1}>

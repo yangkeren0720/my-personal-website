@@ -90,7 +90,7 @@ export default function Dashboard() {
     <section id="dashboards">
       <div className="container">
         <Reveal>
-          <span className="eyebrow">Dashboards & data visualization</span>
+          <span className="eyebrow">01 · Supply chain dashboards</span>
           <h2 className="section-title">
             Dashboards for <em>supply & demand</em> planning.
           </h2>

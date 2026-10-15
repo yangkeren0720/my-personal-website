@@ -5,9 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { profile } from "@/content/site";
 
 const links = [
-  { id: "about", label: "About" },
-  { id: "ai", label: "AI" },
-  { id: "dashboards", label: "Dashboards" },
+  { id: "supply-chain", label: "Supply Chain" },
+  { id: "ai", label: "AI Integration" },
+  { id: "management", label: "Management" },
   { id: "work", label: "Work" },
   { id: "experience", label: "Experience" },
   { id: "contact", label: "Contact" },

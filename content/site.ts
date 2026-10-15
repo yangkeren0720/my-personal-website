@@ -167,6 +167,64 @@ export const ai = {
     "I'm not a programmer. I built this whole platform by directing AI, for about $300 a month: I describe what the business needs, review what it builds, cross-check the results against real records, and flag anything that needs fixing.",
 };
 
+// Section 01: Supply chain. The dashboard demo follows it on the page.
+export const supplyChain = {
+  title: "Supply chain planning, end to end.",
+  intro:
+    "Student housing is a supply chain: rooms are inventory, applications are demand, leases are orders, and moving tenants in on time is fulfillment. I run that whole chain and plan it a semester ahead.",
+  capabilities: [
+    {
+      title: "Supply & demand planning",
+      body: "A rolling view of open rooms for this term and the next two, matched against incoming applications, so we fill capacity before it goes empty.",
+    },
+    {
+      title: "Inventory & capacity",
+      body: "Live availability for every room across every house, with an occupancy calendar that shows gaps and overlaps at a glance.",
+    },
+    {
+      title: "Order to fulfillment",
+      body: "Approved applications become leases, leases become move-ins, and move-in emails and inspections go out on schedule without anyone chasing them.",
+    },
+    {
+      title: "Vendor management",
+      body: "Data flows between our property, signing and messaging vendors, including a vendor with no API, which AI agents now handle.",
+    },
+    {
+      title: "Data accuracy",
+      body: "I cross-reference records across systems and flag anything that needs updating: 182 leases reconciled into one source of truth and 127 pricing errors caught before a contract went out.",
+    },
+    {
+      title: "KPIs & reporting",
+      body: "Summary dashboards for rooms, leases, applicants and semesters, plus scheduled report emails, so decisions use the same numbers everywhere.",
+    },
+  ],
+};
+
+// Section 03: Management.
+export const management = {
+  title: "I run the business, not just the project.",
+  intro:
+    "As co-owner of RBR Property Management, I'm responsible for how the business runs day to day: the vendors, the process, the standards and the tools the team works with.",
+  areas: [
+    {
+      title: "Business ownership",
+      body: "Co-own and operate a student-housing company: leasing strategy, pricing, tenant experience and the systems behind them.",
+    },
+    {
+      title: "Process & standards",
+      body: "Written rules for every repeatable job, which both the team and the AI agents follow, plus checklists, audit trails and a change history on every record.",
+    },
+    {
+      title: "Risk & compliance",
+      body: "A weekly report flags deposits that haven't been refunded within the 30-day window, and sensitive data like door codes never leaves the system.",
+    },
+    {
+      title: "Team enablement",
+      body: "Admin tools with step-by-step guides built in, and an assistant that tells the team which page to use for any task.",
+    },
+  ],
+};
+
 export type Project = {
   name: string;
   tagline: string;

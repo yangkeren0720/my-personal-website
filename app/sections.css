@@ -377,3 +377,21 @@ main, .footer { position: relative; z-index: 1; }
 .dash-point p { margin: 0; color: var(--text-dim); font-size: 15px; }
 .dash-filter button .dash-filter-pill { position: absolute; inset: 0; z-index: 0; }
 .hero-title { margin: 14px 0 0; font-size: clamp(22px, 3.2vw, 34px); font-weight: 600; letter-spacing: -0.01em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- Supply chain & management ---------- */
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 960px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .cap-grid { grid-template-columns: 1fr; } }
+.cap { padding: 28px 26px; transition: border-color 0.3s; }
+.cap:hover { border-color: var(--border-strong); }
+.cap-num { font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--accent); }
+.cap h3 { margin: 10px 0 8px; font-size: 19px; font-weight: 600; }
+.cap p { margin: 0; color: var(--text-dim); font-size: 15px; }
+#dashboards { padding-top: 0; }
+.mgmt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 700px) { .mgmt-grid { grid-template-columns: 1fr; } }
+.mgmt { padding: 28px 26px; border-left: 3px solid var(--accent-3); }
+.mgmt h3 { margin: 0 0 8px; font-size: 19px; font-weight: 600; }
+.mgmt p { margin: 0; color: var(--text-dim); font-size: 15px; }
+.mgmt-sub { margin: 64px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 32px; }
+.mgmt-sub + .principles, .principles { margin-top: 24px; }
