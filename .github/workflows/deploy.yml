@@ -24,11 +24,14 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Reports the path Pages serves the site from: empty once the custom
+      # domain (evayangscm.com) is set, /<repo> on the default github.io URL.
+      - id: pages
+        uses: actions/configure-pages@v5
       - name: Build static site
         run: npm run build
         env:
-          # Pages serves the site at https://<user>.github.io/<repo>/
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

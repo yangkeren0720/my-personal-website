@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-// GitHub Pages serves the site from /<repo-name>. The deploy workflow sets
+// Without a custom domain, GitHub Pages serves the site from /<repo-name>. The deploy workflow sets
 // NEXT_PUBLIC_BASE_PATH; locally it is empty so the site runs at /.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
