@@ -33,7 +33,7 @@ export const about = {
   facts: [
     { label: "Strengths", value: "AI integration, dashboards, data visualization" },
     { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
-    { label: "Currently", value: "Leading operations systems and AI at RBR Property Management" },
+    { label: "Currently", value: "Co-owner of RBR Property Management, running its operations, systems and AI" },
     { label: "Education", value: "Add your school and degree", placeholder: true },
     { label: "Languages", value: "English, 中文" },
   ] as Array<{ label: string; value: string } & Placeholder>,
@@ -59,10 +59,10 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     period: "2025 — Present",
-    title: "Add your title at RBR", // replace with your real title
+    title: "Co-Owner",
     org: "RBR Property Management",
     summary:
-      "Own operations systems and AI strategy for a student-housing company: room inventory, applications, leasing, move-ins and the vendor tools around them.",
+      "Co-own a student-housing company and run its operations, systems and AI strategy: room inventory, applications, leasing, move-ins and the vendor tools around them.",
     highlights: [
       "Built live dashboards for occupancy, open rooms per house, leasing and AI cost per feature, with drill-down from a chart to the records behind it, plus an AI box that answers questions from the same numbers.",
       "Put 18 AI-powered workflows into production, each with a human check where mistakes are costly, per-feature cost tracking, and the choice of a cheaper model where it does the job.",
@@ -73,7 +73,7 @@ export const experience: Experience[] = [
       "Replaced manual data entry in a vendor system with no API by AI agents that learn the office's own written rules, run in practice mode first, and email a report of every success and failure.",
       "Moved room availability from flat files to a database with an audit trail on every change, and set up monitoring and alerts so problems surface early.",
     ],
-    placeholder: true, // confirm the title and dates
+    placeholder: true, // confirm the start year
   },
   {
     period: "20XX — 20XX",
