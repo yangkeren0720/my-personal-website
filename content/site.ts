@@ -27,8 +27,7 @@ export const profile = {
 
 export const about = {
   paragraphs: [
-    "I own operations outcomes end to end. RBR Property Management ran on spreadsheets, email and several separate vendor tools. I mapped the whole flow, from available rooms to applications, contracts and move-in, and, with no coding background, built one system by directing AI to replace the manual handoffs: live availability, an occupancy calendar, automated lease contracts and move-in emails that go out on their own. Then I put AI to work on the steps that still took people hours.",
-    "The work I'm proudest of is the unglamorous part: reconciling records across systems until there is one source of truth, catching pricing errors before they reach a contract, and adding checks so the same mistake can't happen twice. That is the operations and supply chain work I want to keep scaling.",
+    "I took a business running on spreadsheets and email and, with no coding background, directed AI to build one system for the whole chain: inventory, demand, orders and fulfillment.",
   ],
   // Short facts shown as chips next to the bio.
   facts: [
@@ -63,16 +62,12 @@ export const experience: Experience[] = [
     title: "Co-Owner",
     org: "RBR Property Management",
     summary:
-      "Co-own a student-housing company and run its operations, systems and AI strategy: room inventory, applications, leasing, move-ins and the vendor tools around them.",
+      "Run operations, systems and AI for a student-housing company I co-own.",
     highlights: [
-      "Built live dashboards for occupancy, open rooms per house, leasing and AI cost per feature, with drill-down from a chart to the records behind it, plus an AI box that answers questions from the same numbers.",
-      "Put 18 AI-powered workflows into production, each with a human check where mistakes are costly, per-feature cost tracking, and the choice of a cheaper model where it does the job.",
-      "Consolidated 182 leases from four vendor and legacy sources into one table with clear source-of-truth rules, driving an occupancy calendar the team plans from.",
-      "Automated the order-to-contract flow: approved applications become DocuSign-ready leases from a clause-level template, and signed leases write back to the records automatically.",
-      "Found a systematic rent and fee mix-up in imported vendor data and corrected it on 127 leases before any contract went out.",
-      "Recovered 65 lost rental applications from notification emails, then added backups and a recycle bin so it can't recur.",
-      "Replaced manual data entry in a vendor system with no API by AI agents that learn the office's own written rules, run in practice mode first, and email a report of every success and failure.",
-      "Moved room availability from flat files to a database with an audit trail on every change, and set up monitoring and alerts so problems surface early.",
+      "Built live supply & demand dashboards with drill-down and an AI ask box.",
+      "Put 18 AI workflows into production, each with a human check.",
+      "Unified 182 leases from 4 sources; caught 127 pricing errors.",
+      "Recovered 65 lost applications and added backups so it can't recur.",
     ],
     placeholder: true, // confirm the start year
   },
@@ -101,7 +96,7 @@ export const experience: Experience[] = [
 // made-up numbers in content/dashboard.ts.
 export const dashboards = {
   intro:
-    "I build supply and demand dashboards that turn operational data into planning decisions: live KPIs, charts you can drill into, and an AI assistant that answers questions from the same numbers. Try the demo below; it runs on sample data shaped like the dashboards I built at RBR.",
+    "Click around. It runs on sample data shaped like the dashboards I built at RBR.",
   points: [
     {
       title: "One source of truth",
@@ -122,7 +117,7 @@ export const dashboards = {
 export const ai = {
   title: "I use AI to run supply chain work faster and with fewer errors.",
   intro:
-    "Each AI feature at RBR replaces a step the team used to do by hand. All of them run in production today, with guardrails so people stay in control of anything that matters.",
+    "All of these run in production at RBR. Watch them work:",
   uses: [
     {
       icon: "chat",
@@ -164,14 +159,14 @@ export const ai = {
     "Right-sized model for each task",
   ],
   builtWith:
-    "I'm not a programmer. I built this whole platform by directing AI, for about $300 a month: I describe what the business needs, review what it builds, cross-check the results against real records, and flag anything that needs fixing.",
+    "I'm not a programmer. I built this whole platform by directing AI, for about $300 a month, and I cross-check everything it builds against real records.",
 };
 
 // Section 01: Supply chain. The dashboard demo follows it on the page.
 export const supplyChain = {
   title: "Supply chain planning, end to end.",
   intro:
-    "Student housing is a supply chain: rooms are inventory, applications are demand, leases are orders, and moving tenants in on time is fulfillment. I run that whole chain and plan it a semester ahead.",
+    "Rooms are inventory, applications are demand, leases are orders, move-ins are fulfillment. I run the whole chain.",
   capabilities: [
     {
       title: "Supply & demand planning",
@@ -204,7 +199,7 @@ export const supplyChain = {
 export const management = {
   title: "I run the business, not just the project.",
   intro:
-    "As co-owner of RBR Property Management, I'm responsible for how the business runs day to day: the vendors, the process, the standards and the tools the team works with.",
+    "Every vendor, system and teammate, connected through one operation I run.",
   areas: [
     {
       title: "Business ownership",
@@ -239,34 +234,34 @@ export const featured = {
   name: "RBR Property Management",
   tagline: "The operations system a student-housing company runs on",
   description:
-    "Room inventory, applications, leasing, move-ins and tenant communication in one place, replacing spreadsheets, email and several separate vendor tools.",
+    "Inventory, demand, orders and fulfillment in one system, replacing spreadsheets and email.",
   link: "https://www.rbrpmrealty.com",
   tags: ["Process automation", "Inventory & occupancy", "Vendor integration", "Data reconciliation", "PostgreSQL", "DocuSign", "AI agents"],
   // Each item becomes a tab in the interactive showcase.
   features: [
     {
       title: "Live Room Inventory",
-      body: "Every house, room and floorplan with live availability, plus a Room Match quiz that pairs students with rooms that fit their budget and habits.",
+      body: "Live availability for every room, plus a quiz that matches students to rooms.",
       screen: "houses",
     },
     {
       title: "Online Applications",
-      body: "A multi-step application that saves as you go, with document uploads and answers stored in a searchable database, so no applicant falls through the cracks.",
+      body: "A save-as-you-go application, so no applicant falls through the cracks.",
       screen: "apply",
     },
     {
       title: "Lease Automation",
-      body: "Applicants link to rooms with an agreed rent, the generator fills the lease template, DocuSign sends it, and the signed envelope writes the lease back to the database.",
+      body: "Approved applicant to signed lease, with no retyping.",
       screen: "lease",
     },
     {
       title: "Occupancy Planning",
-      body: "An occupancy calendar across every room, with leases, move-in checklists, automatic emails and a full change history, all filterable and sortable.",
+      body: "One calendar for every room, lease and move-in.",
       screen: "admin",
     },
     {
       title: "AI Assistants",
-      body: "A WhatsApp reply assistant that drafts answers from past conversations and live availability for a human to approve, plus a browser robot that handles a vendor workflow with no API.",
+      body: "AI drafts replies and handles vendor data entry, with a person in control.",
       screen: "ai",
     },
   ],
@@ -277,7 +272,7 @@ export const projects: Project[] = [
     name: "Vendor Robot",
     tagline: "Automating a vendor with no API",
     description:
-      "Every new tenant needed a move-in inspection requested by hand in a vendor tool with no API. An AI browser agent now fills in each request, starting in practice mode and only sending after a person approves.",
+      "An AI agent files move-in inspections in a vendor tool with no API.",
     tags: ["Process automation", "AI agents", "Vendor management"],
     accent: "#86efac",
   },
@@ -285,7 +280,7 @@ export const projects: Project[] = [
     name: "RBR Admin for iOS",
     tagline: "Operations on the go",
     description:
-      "A native iPhone app so the team can check availability, applications and leases away from a desk, built on the same data as the web dashboard.",
+      "The team checks rooms, applications and leases from their phones.",
     tags: ["SwiftUI", "iOS", "OpenAPI"],
     accent: "#7dd3fc",
   },
@@ -293,7 +288,7 @@ export const projects: Project[] = [
     name: "This website",
     tagline: "Animated personal site",
     description:
-      "Built with Next.js and Framer Motion, exported as a static site and deployed to GitHub Pages by a GitHub Actions workflow.",
+      "Built by directing AI, deployed automatically on every change.",
     tags: ["Next.js", "TypeScript", "Framer Motion"],
     repo: "https://github.com/yangkeren0720/my-personal-website",
     accent: "#c4b5fd",
@@ -301,7 +296,7 @@ export const projects: Project[] = [
   {
     name: "Your next project",
     tagline: "Add a supply chain or operations project",
-    description: "A class project, case competition or job where you improved a process. Say what you changed and one number that shows it worked.",
+    description: "A process you improved, and one number that shows it worked.",
     tags: ["Skill", "Tool"],
     accent: "#fca5a5",
     placeholder: true,

@@ -166,14 +166,6 @@ export default function Dashboard() {
           </div>
         </Reveal>
 
-        <div className="dash-points">
-          {dashboards.points.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.08} className="dash-point">
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );

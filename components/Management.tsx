@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { management, principles } from "@/content/site";
 import Reveal from "./Reveal";
+import VendorHub from "./VendorHub";
 
 export default function Management() {
   return (
@@ -11,43 +12,46 @@ export default function Management() {
         <Reveal>
           <span className="eyebrow">03 · Management</span>
           <h2 className="section-title">{management.title}</h2>
-        </Reveal>
-        <Reveal delay={0.1}>
           <p className="ai-intro">{management.intro}</p>
         </Reveal>
-        <div className="mgmt-grid">
-          {management.areas.map((a, i) => (
-            <motion.div
-              key={a.title}
-              className="mgmt card"
-              initial={{ opacity: 0, x: i % 2 ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <h3>{a.title}</h3>
-              <p>{a.body}</p>
-            </motion.div>
-          ))}
+        <div className="mgmt-layout">
+          <Reveal delay={0.1}>
+            <VendorHub />
+          </Reveal>
+          <div className="mgmt-tiles">
+            {management.areas.map((a, i) => (
+              <motion.div
+                key={a.title}
+                className="mgmt-tile card"
+                title={a.body}
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ x: 6 }}
+              >
+                <span className="cap-num">0{i + 1}</span>
+                <h3>{a.title}</h3>
+              </motion.div>
+            ))}
+          </div>
         </div>
         <Reveal>
           <h3 className="mgmt-sub">How I work</h3>
         </Reveal>
-        <div className="principles">
+        <div className="cap-chips">
           {principles.map((p, i) => (
-            <motion.div
+            <motion.span
               key={p.title}
-              className="principle card"
-              initial={{ opacity: 0, y: 40 }}
+              className="cap-chip"
+              title={p.body}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -6 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
             >
-              <span className="principle-num">0{i + 1}</span>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </motion.div>
+              {p.title}
+            </motion.span>
           ))}
         </div>
       </div>
