@@ -10,10 +10,10 @@ export type Placeholder = { placeholder?: boolean };
 export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
-  status: "Open to senior operations & supply chain roles", // small badge above your name; "" hides it
-  headline: "AI Integration, Dashboards & Operations", // used in the browser tab title
+  status: "Open to supply chain specialist & S&OP planning roles", // small badge above your name; "" hides it
+  headline: "Supply Chain, AI Integration & Dashboards", // used in the browser tab title
   rolePrefix: "I work on",
-  roles: ["AI integration", "dashboards & data visualization", "supply chain & operations", "data you can trust"],
+  roles: ["AI integration", "dashboards & data visualization", "supply chain & S&OP planning", "data you can trust"],
   tagline:
     "I integrate AI into real operations and build the dashboards that run them. I took a student-housing business from spreadsheets and email to one platform with 18 AI workflows in production and live dashboards for occupancy, leasing and cost.",
   location: "United States", // placeholder: add your city
@@ -26,13 +26,13 @@ export const profile = {
 
 export const about = {
   paragraphs: [
-    "I own operations outcomes end to end. RBR Property Management ran on spreadsheets, email and several separate vendor tools. I mapped the whole flow, from available rooms to applications, contracts and move-in, and replaced the manual handoffs with one system: live availability, an occupancy calendar, automated lease contracts and move-in emails that go out on their own. Then I put AI to work on the steps that still took people hours.",
+    "I own operations outcomes end to end. RBR Property Management ran on spreadsheets, email and several separate vendor tools. I mapped the whole flow, from available rooms to applications, contracts and move-in, and, with no coding background, built one system by directing AI to replace the manual handoffs: live availability, an occupancy calendar, automated lease contracts and move-in emails that go out on their own. Then I put AI to work on the steps that still took people hours.",
     "The work I'm proudest of is the unglamorous part: reconciling records across systems until there is one source of truth, catching pricing errors before they reach a contract, and adding checks so the same mistake can't happen twice. That is the operations and supply chain work I want to keep scaling.",
   ],
   // Short facts shown as chips next to the bio.
   facts: [
     { label: "Strengths", value: "AI integration, dashboards, data visualization" },
-    { label: "Looking for", value: "Senior supply chain and operations roles" },
+    { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
     { label: "Currently", value: "Leading operations systems and AI at RBR Property Management" },
     { label: "Education", value: "Add your school and degree", placeholder: true },
     { label: "Languages", value: "English, 中文" },
@@ -59,7 +59,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     period: "2025 — Present",
-    title: "Operations & AI Automation Lead",
+    title: "Add your title at RBR", // replace with your real title
     org: "RBR Property Management",
     summary:
       "Own operations systems and AI strategy for a student-housing company: room inventory, applications, leasing, move-ins and the vendor tools around them.",
@@ -163,7 +163,7 @@ export const ai = {
     "Right-sized model for each task",
   ],
   builtWith:
-    "I also build with AI: I direct AI coding agents to turn operational needs into shipped software, which is how one person delivered this platform.",
+    "I'm not a programmer. I built this whole platform by directing AI, for about $300 a month: I describe what the business needs, review what it builds, cross-check the results against real records, and flag anything that needs fixing.",
 };
 
 export type Project = {
@@ -254,8 +254,8 @@ export const skills = [
   "Process Mapping", "Process Automation", "Inventory & Occupancy Planning",
   "Vendor Management", "Data Reconciliation", "Root-cause Analysis",
   "Dashboards & Reporting", "Workflow Design", "Contract Automation",
-  "SQL", "PostgreSQL", "TypeScript", "Next.js", "SwiftUI",
-  "GitHub Actions", "Azure", "English & 中文",
+  "Capacity Planning", "Cross-referencing & Data Validation",
+  "AI-assisted Development", "Prompting & AI Agents", "English & 中文",
 ];
 
 // Short "how I work" principles. Phrase them in your own words.

@@ -31,7 +31,7 @@ export default function Contact() {
         </Reveal>
         <Reveal delay={0.2}>
           <p className="contact-text">
-            II&apos;m always happy to talk about supply chain and operations roles, process improvement, or how I automated a business from the ground up.apos;m always happy to talk about senior supply chain and operations roles, putting AI to work in operations, or how I automated a business from the ground up.
+            I&apos;m always happy to talk about supply chain and S&amp;OP planning roles, putting AI to work in operations, or how I automated a business from the ground up.
           </p>
         </Reveal>
         <Reveal delay={0.3} className="contact-links">
