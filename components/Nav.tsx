@@ -9,6 +9,7 @@ const links = [
   { id: "experience", label: "Resume" },
   { id: "skywater", label: "SkyWater" },
   { id: "mino", label: "Mino" },
+  { id: "examples", label: "Stories" },
   { id: "ai", label: "AI" },
   { id: "work", label: "RBR" },
   { id: "contact", label: "Contact" },

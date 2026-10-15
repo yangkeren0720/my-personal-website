@@ -35,7 +35,7 @@ export const about = {
   facts: [
     { label: "Strengths", value: "Supply & demand planning, AI integration, dashboards, data visualization" },
     { label: "Looking for", value: "Supply chain specialist and S&OP planner roles" },
-    { label: "Currently", value: "Material Planner (semiconductor) and co-owner of RBR Property Management" },
+    { label: "Currently", value: "Material Planner at SkyWater · Manager at Belong · co-owner of RBR" },
     { label: "Education", value: "M.S. & B.S. Mathematics, Illinois State University · ASCM planning certificate" },
     { label: "Languages", value: "English, 中文 (native)" },
   ] as Array<{ label: string; value: string } & Placeholder>,
@@ -86,13 +86,18 @@ export const experience: Experience[] = [
   },
   {
     period: "Feb 2026 — Present",
-    title: "Office Manager (part-time)",
+    title: "Manager",
     org: "Belong Automotive Technology",
-    place: "Austin, TX",
-    summary: "Run day-to-day operations, procurement, import/export logistics and HR.",
+    place: "Austin, TX · part-time",
+    summary: "Oversee operations, purchasing, HR, IT and warehouse; report to the US CEO and work with US and China leadership.",
     highlights: [
-      "Direct procurement, supplier coordination, customs and freight forwarding.",
-      "Led the ERP choice (Odoo vs. NetSuite, SAP, custom) and a 160-page procurement design now in build.",
+      "Led the ERP choice (Odoo vs. NetSuite, SAP, custom) and a 160-page design with a 114-task plan.",
+      "Fixed under-licensed engineering software: ~$100K over 3 years, ~40% below the top quote.",
+      "Run procurement, import/export, customs and freight, plus full-cycle hiring.",
+    ],
+    links: [
+      { label: "ERP story", href: "#ex-odoo" },
+      { label: "Licensing story", href: "#ex-cad" },
     ],
   },
   {
@@ -117,6 +122,7 @@ export const experience: Experience[] = [
       { label: "Capacity story", href: "#capacity" },
       { label: "Invoice workflow", href: "#invoice-flow" },
       { label: "EV program spend", href: "#ev-programs" },
+      { label: "More Mino stories", href: "#examples" },
     ],
   },
   {

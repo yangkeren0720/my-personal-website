@@ -6,6 +6,7 @@ import PlanningLab from "@/components/PlanningLab";
 import SkyWaterStories from "@/components/SkyWaterStories";
 import MinoSection from "@/components/MinoSection";
 import Showcase from "@/components/Showcase";
+import Examples from "@/components/Examples";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
@@ -26,6 +27,7 @@ export default function Home() {
         <SkyWaterStories />
         <PlanningLab />
         <MinoSection />
+        <Examples />
         <AISection />
         <Showcase />
         <Skills />
