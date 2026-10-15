@@ -1,6 +1,6 @@
 "use client";
 
-import { about, stats, statsNote } from "@/content/site";
+import { about, statGroups } from "@/content/site";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 import PlaceholderBadge from "./PlaceholderBadge";
@@ -39,17 +39,24 @@ export default function About() {
           </div>
         </div>
 
-        <div className="stats">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08} className="stat card">
-              <span className="stat-value grad-text">
-                <Counter to={s.value} suffix={s.suffix} />
-              </span>
-              <span className="stat-label">{s.label}</span>
+        {statGroups.map((g, gi) => (
+          <div key={g.company} className={`stat-group ${gi === 0 ? "first" : ""}`}>
+            <Reveal className="stat-group-head">
+              <strong>{g.company}</strong>
+              <span>{g.role}</span>
             </Reveal>
-          ))}
-        </div>
-        <p className="stats-note">{statsNote}</p>
+            <div className="stats">
+              {g.items.map((s, i) => (
+                <Reveal key={s.label} delay={i * 0.08} className="stat card">
+                  <span className="stat-value grad-text">
+                    <Counter to={s.value} suffix={s.suffix} />
+                  </span>
+                  <span className="stat-label">{s.label}</span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        ))}
 
       </div>
     </section>

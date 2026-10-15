@@ -16,7 +16,7 @@ export const profile = {
   rolePrefix: "Planning powered by",
   roles: ["AI integration", "live dashboards", "data visualization", "clean, reconciled data"],
   tagline:
-    "Material Planner in semiconductor manufacturing, with 5+ years in supply chain across Tesla, Rivian and wafer-fab programs. I keep critical materials flowing, and I build the AI tools and live dashboards that keep the plan accurate.",
+    "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. I build the AI tools and live dashboards that keep the plan accurate.",
   location: "Austin, TX",
   locationPlaceholder: false,
   github: "https://github.com/yangkeren0720",
@@ -41,14 +41,40 @@ export const about = {
   ] as Array<{ label: string; value: string } & Placeholder>,
 };
 
-// Results from the RBR work (October 2026).
-export const statsNote = "From material planning at Infineon / SkyWater and purchasing at Mino Automation.";
-export const stats = [
-  { value: 3400, suffix: "+", label: "PO lines placed for one EV factory build" },
-  { value: 250, suffix: "", label: "materials in the shortage-risk report I rebuilt (from ~100)" },
-  { value: 179, suffix: "", label: "skilled trades staffed for the Cybertruck build" },
-  { value: 50, suffix: "%", label: "fewer missed invoices after my approval workflow" },
+// Headline numbers, kept separate per employer so the two jobs never blur.
+export const statGroups = [
+  {
+    company: "SkyWater",
+    role: "Material Planner · wafer fab",
+    items: [
+      { value: 250, suffix: "", label: "materials in the shortage-risk report I rebuilt (from ~100)" },
+      { value: 4, suffix: "", label: "recovery paths run at once; production never stopped" },
+      { value: 2, suffix: "", label: "acquisitions with supply kept running" },
+    ],
+  },
+  {
+    company: "Mino Automation",
+    role: "Purchasing Analyst · EV line build-outs",
+    items: [
+      { value: 3400, suffix: "+", label: "PO lines placed for the Rivian build" },
+      { value: 179, suffix: "", label: "skilled trades staffed for the Cybertruck build" },
+      { value: 50, suffix: "%", label: "fewer missed invoices after my approval workflow" },
+    ],
+  },
 ];
+
+export type Program = {
+  name: string;
+  place: string;
+  period: string;
+  job: string;
+  did: [string, string, string];
+  kpis: { value: string; label: string }[];
+  // One visual per panel: a crew mix, a process flow, or a SkyWater story visual.
+  crew?: { label: string; n: number }[];
+  flow?: string[];
+  visual?: "reset" | "report" | "runout" | "parallel" | "buffer";
+};
 
 export type Experience = {
   period: string;
@@ -57,8 +83,10 @@ export type Experience = {
   place?: string;
   summary: string;
   highlights: string[];
-  // Sub-assignments shown as small chips, e.g. customer programs.
-  programs?: { name: string; place: string; period: string }[];
+  // Clickable chips (customer programs, or key stories) that open a short
+  // animated panel showing what Eva did there.
+  programsLabel?: string;
+  programs?: Program[];
   // Buttons that jump to the demos for this role.
   links?: { label: string; href: string }[];
   kind?: "work" | "education";
@@ -77,11 +105,75 @@ export const experience: Experience[] = [
       "Spotted a single-source chemical stockout weeks ahead with a depletion model; production never stopped.",
       "Grew the shortage-risk report from ~100 to ~250 material lines, and kept supply running through two acquisitions.",
     ],
+    programsLabel: "Tap a story to see what I did",
+    programs: [
+      {
+        name: "Took over CMP planning",
+        place: "Ownership",
+        period: "MRP reset",
+        job: "Inherited CMP materials after a layoff, with no handover or documentation.",
+        did: ["Worked backward from ERP history, lead times and usage.", "Reset min/max and lead times item by item.", "Moved the items to MRP auto-release; planning stabilized."],
+        kpis: [
+          { value: "MRP", label: "auto-release replaced manual orders" },
+          { value: "Stable", label: "planning after the reset" },
+        ],
+        visual: "reset",
+      },
+      {
+        name: "Shortage-risk report",
+        place: "Dive Deep",
+        period: "~100 → ~250",
+        job: "The zero-bin report relied on past usage, so new materials never showed up.",
+        did: ["Found the gap: items with no history were invisible.", "Rebuilt the logic to include new and low-history items.", "Made the report the weekly shortage review."],
+        kpis: [
+          { value: "~250", label: "materials now visible" },
+          { value: "2.5×", label: "the old coverage" },
+        ],
+        visual: "report",
+      },
+      {
+        name: "A run-out the ERP hid",
+        place: "Dive Deep",
+        period: "Single-source",
+        job: "A single-source delivery slipped, but the ERP still showed enough supply.",
+        did: ["Rebuilt the run-out date from daily use, open POs and confirmed dates.", "Set daily control with engineering, warehouse, procurement and the supplier.", "Inventory hit about one bottle; the shipment arrived in time."],
+        kpis: [
+          { value: "~1 bottle", label: "at the low point" },
+          { value: "0", label: "production stops" },
+        ],
+        visual: "runout",
+      },
+      {
+        name: "Packaging change",
+        place: "Bias for Action",
+        period: "4 paths",
+        job: "A supplier packaging change failed its first qualification.",
+        did: ["Started four recovery paths at the same time.", "Pulled stock from the supplier, other sites and an alternate batch.", "Pushed re-qualification through; production kept running."],
+        kpis: [
+          { value: "4", label: "paths in parallel" },
+          { value: "0", label: "production stops" },
+        ],
+        visual: "parallel",
+      },
+      {
+        name: "End-of-life buy",
+        place: "Are Right, A Lot",
+        period: "In progress",
+        job: "A chemical is reaching end of life, and its shelf life is only six months.",
+        did: ["Weighed actual usage swings and qualification risk.", "Proposed a 100-bottle shared buffer on the 200-bottle baseline.", "Aligned the team on 300 bottles for the final batch."],
+        kpis: [
+          { value: "300", label: "bottles requested" },
+          { value: "6 mo", label: "shelf life to respect" },
+        ],
+        visual: "buffer",
+      },
+    ],
     links: [
       { label: "Story timeline", href: "#skywater" },
       { label: "Safety stock demo", href: "#safety-stock" },
       { label: "Stockout early warning", href: "#early-warning" },
       { label: "Supply risk heatmap", href: "#risk-heatmap" },
+      { label: "More SkyWater stories", href: "#stories-skywater" },
     ],
   },
   {
@@ -98,6 +190,7 @@ export const experience: Experience[] = [
     links: [
       { label: "ERP story", href: "#ex-odoo" },
       { label: "Licensing story", href: "#ex-cad" },
+      { label: "All Belong stories", href: "#stories-belong" },
     ],
   },
   {
@@ -111,18 +204,82 @@ export const experience: Experience[] = [
       "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
       "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
     ],
+    programsLabel: "Tap a program to see what I did",
     programs: [
-      { name: "Tesla Cybertruck", place: "Austin, TX", period: "2022–23" },
-      { name: "Faraday Future FF91", place: "Hanford, CA", period: "2022–23" },
-      { name: "Tesla Megapack", place: "Lathrop, CA", period: "2022" },
-      { name: "Rivian", place: "Normal, IL", period: "2021–22" },
+      {
+        name: "Tesla Cybertruck",
+        place: "Austin, TX",
+        period: "Sep 2022 – Sep 2023",
+        job: "Supply and labor capacity planning for the body-in-white line ramp.",
+        did: ["Sourced and onboarded 179 contract trades, all through the customer's safety onboarding.", "Negotiated labor rates down 20% and ran 34+ equipment rentals: welders, lifts, cranes.", "Built the cost-tracking template and managed time-and-materials and turnkey contracts."],
+        kpis: [
+          { value: "179", label: "trades staffed" },
+          { value: "−20%", label: "labor cost" },
+          { value: "34+", label: "equipment rentals" },
+        ],
+        crew: [
+          { label: "Millwrights", n: 80 },
+          { label: "Electricians", n: 70 },
+          { label: "Robot programmers", n: 15 },
+          { label: "PLC programmers", n: 6 },
+          { label: "Riggers", n: 4 },
+          { label: "Crane operators", n: 4 },
+        ],
+      },
+      {
+        name: "Faraday Future FF91",
+        place: "Hanford, CA",
+        period: "Apr 2022 – Jan 2023",
+        job: "Purchasing and crew sourcing to install and commission 54 robots across 7 lines.",
+        did: ["Sourced 51 trades: mechanical installers, electricians and a PLC programmer.", "Lined up 10+ pieces of mobile equipment and service from 8+ equipment makers.", "Audited the process equipment for completeness before commissioning."],
+        kpis: [
+          { value: "54", label: "robots" },
+          { value: "7", label: "lines" },
+          { value: "51", label: "trades sourced" },
+        ],
+        crew: [
+          { label: "Mechanical installers", n: 30 },
+          { label: "Electricians", n: 20 },
+          { label: "PLC programmer", n: 1 },
+        ],
+      },
+      {
+        name: "Tesla Megapack",
+        place: "Lathrop, CA",
+        period: "Feb – Apr 2022",
+        job: "Spare parts and long-lead buys for line installation and commissioning.",
+        did: ["Planned the spare parts the install and commissioning would need.", "Expedited long-lead items and handled supplier escalations.", "Negotiated a turnkey commissioning project."],
+        kpis: [
+          { value: "Turnkey", label: "commissioning deal" },
+          { value: "3 mo", label: "install window" },
+        ],
+        flow: ["Spare-parts plan", "Long-lead buys", "Escalations", "Turnkey commissioning"],
+      },
+      {
+        name: "Rivian",
+        place: "Normal, IL",
+        period: "Jun 2021 – Feb 2022",
+        job: "Purchasing and crew sourcing for a 7-line body-in-white build with 372 robots.",
+        did: ["Placed 3,400+ PO lines worth $10M.", "Sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
+        kpis: [
+          { value: "3,400+", label: "PO lines" },
+          { value: "$10M", label: "purchased" },
+          { value: "372", label: "robots" },
+        ],
+        crew: [
+          { label: "Mechanical installers", n: 120 },
+          { label: "Electricians", n: 100 },
+          { label: "Robot programmers", n: 60 },
+          { label: "PLC programmers", n: 30 },
+        ],
+      },
     ],
     links: [
       { label: "Program timeline", href: "#mino" },
       { label: "Capacity story", href: "#capacity" },
       { label: "Invoice workflow", href: "#invoice-flow" },
       { label: "EV program spend", href: "#ev-programs" },
-      { label: "More Mino stories", href: "#examples" },
+      { label: "More Mino stories", href: "#stories-mino" },
     ],
   },
   {

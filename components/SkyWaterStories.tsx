@@ -139,7 +139,7 @@ export default function SkyWaterStories() {
   );
 }
 
-function Visual({ kind }: { kind: Story["visual"] }) {
+export function Visual({ kind }: { kind: Story["visual"] }) {
   switch (kind) {
     case "start":
       return <StartVisual />;

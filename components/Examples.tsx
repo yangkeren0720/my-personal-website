@@ -69,6 +69,13 @@ const examples: Example[] = [
     steps: ["A chemical is ending; shelf life is six months.", "Weighed usage spikes and qualification risk against expiry.", "Challenged the 200 baseline; the team aligned on 300."],
   },
   {
+    id: "ex-suppliers",
+    company: "SkyWater",
+    title: "Suppliers as risk partners",
+    metric: { from: 0, to: 0, text: "Run-out date", label: "in every escalation" },
+    steps: ["Shortages go badly when the ask is just 'urgent'.", "Share forecasts early; escalate with a run-out date and a specific ask.", "Faster, more useful supplier responses."],
+  },
+  {
     id: "ex-capacity",
     company: "Mino",
     title: "Labor planned like supply",
@@ -118,13 +125,6 @@ const examples: Example[] = [
     steps: ["Engineering software was being used without enough licenses.", "Sized real demand, compared subscription vs perpetual, ran quotes.", "~$100K over 3 years; managers confirmed compliance."],
   },
   {
-    id: "ex-suppliers",
-    company: "SkyWater",
-    title: "Suppliers as risk partners",
-    metric: { from: 0, to: 0, text: "Run-out date", label: "in every escalation" },
-    steps: ["Shortages go badly when the ask is just 'urgent'.", "Share forecasts early; escalate with a run-out date and a specific ask.", "Faster, more useful supplier responses."],
-  },
-  {
     id: "ex-ai",
     company: "RBR",
     title: "A platform built by directing AI",
@@ -141,6 +141,13 @@ const examples: Example[] = [
 ];
 
 const companies: ("All" | Company)[] = ["All", "SkyWater", "Mino", "Belong", "RBR"];
+const companyNames: Record<Company, string> = { SkyWater: "SkyWater", Mino: "Mino Automation", Belong: "Belong", RBR: "RBR Property Management" };
+const companyRoles: Record<Company, string> = {
+  SkyWater: "Material Planner · wafer fab · 2023–now",
+  Mino: "Purchasing Analyst · EV line build-outs · 2020–2023",
+  Belong: "Manager · 2026–now",
+  RBR: "Co-Owner · side business",
+};
 
 export default function Examples() {
   const [filter, setFilter] = useState<"All" | Company>("All");
@@ -151,6 +158,13 @@ export default function Examples() {
   useEffect(() => {
     const onHash = () => {
       const id = location.hash.slice(1);
+      // Links like #stories-mino show just that company's cards.
+      const co = companies.find((c) => c !== "All" && `stories-${c.toLowerCase()}` === id);
+      if (co) {
+        setFilter(co);
+        document.getElementById("examples")?.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
       if (examples.some((e) => e.id === id)) {
         setFilter("All");
         setOpen(id);
@@ -185,11 +199,22 @@ export default function Examples() {
         </div>
         <motion.div layout className="ex-grid">
           <AnimatePresence mode="popLayout">
-            {shown.map((e) => (
-              <motion.div key={e.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }}>
-                <FlipCard ex={e} forceOpen={open === e.id} />
-              </motion.div>
-            ))}
+            {shown.flatMap((e, n) => {
+              // In the All view each employer gets its own heading, so stories never blur together.
+              const head =
+                filter === "All" && (n === 0 || shown[n - 1].company !== e.company) ? (
+                  <motion.div key={`h-${e.company}`} layout className={`ex-group co-${e.company.toLowerCase()}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <strong>{companyNames[e.company]}</strong>
+                    <span>{companyRoles[e.company]}</span>
+                  </motion.div>
+                ) : null;
+              const card = (
+                <motion.div key={e.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }}>
+                  <FlipCard ex={e} forceOpen={open === e.id} />
+                </motion.div>
+              );
+              return head ? [head, card] : [card];
+            })}
           </AnimatePresence>
         </motion.div>
       </div>

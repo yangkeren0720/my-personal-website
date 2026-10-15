@@ -1,14 +1,17 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { experience } from "@/content/site";
 import Reveal from "./Reveal";
 import PlaceholderBadge from "./PlaceholderBadge";
+import ProgramPanel from "./ProgramPanel";
 
 export default function Experience() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 60%"] });
+  // Which chip is open, as "jobIndex:name"; one at a time across the resume.
+  const [openKey, setOpenKey] = useState<string | null>(null);
 
   return (
     <section id="experience">
@@ -53,23 +56,52 @@ export default function Experience() {
                 </p>
                 <p className="timeline-summary">{job.summary}</p>
                 {job.programs && (
-                  <div className="timeline-programs">
-                    {job.programs.map((p, pi) => (
-                      <motion.span
-                        key={p.name}
-                        className="timeline-program"
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 + pi * 0.08 }}
-                      >
-                        <strong>{p.name}</strong>
-                        <span>
-                          {p.place} · {p.period}
-                        </span>
-                      </motion.span>
-                    ))}
-                  </div>
+                  <>
+                    {job.programsLabel && <span className="timeline-programs-label">{job.programsLabel}</span>}
+                    <div className="timeline-programs">
+                      {job.programs.map((p, pi) => {
+                        const key = `${i}:${p.name}`;
+                        const on = openKey === key;
+                        return (
+                          <motion.button
+                            type="button"
+                            key={p.name}
+                            className={`timeline-program ${on ? "on" : ""}`}
+                            aria-expanded={on}
+                            onClick={() => setOpenKey(on ? null : key)}
+                            initial={{ opacity: 0, y: 8 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 + pi * 0.08 }}
+                          >
+                            <strong>{p.name}</strong>
+                            <span>
+                              {p.place} · {p.period}
+                            </span>
+                            <i className="timeline-program-cue" aria-hidden>
+                              {on ? "−" : "+"}
+                            </i>
+                          </motion.button>
+                        );
+                      })}
+                    </div>
+                    <AnimatePresence initial={false} mode="wait">
+                      {job.programs.map((p) =>
+                        openKey === `${i}:${p.name}` ? (
+                          <motion.div
+                            key={p.name}
+                            className="prog-wrap"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          >
+                            <ProgramPanel p={p} onClose={() => setOpenKey(null)} />
+                          </motion.div>
+                        ) : null
+                      )}
+                    </AnimatePresence>
+                  </>
                 )}
                 {job.highlights.length > 0 && (
                   <ul>

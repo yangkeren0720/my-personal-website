@@ -5,7 +5,8 @@ import { animate, useInView } from "framer-motion";
 
 export default function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  // Vertical-only margin: a narrow "0" near the left edge on phones would never count as in view.
+  const inView = useInView(ref, { once: true, margin: "-60px 0px -60px 0px" });
   const [value, setValue] = useState(0);
 
   useEffect(() => {
