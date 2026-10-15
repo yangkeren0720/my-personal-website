@@ -1,0 +1,212 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import Reveal from "./Reveal";
+import { ProgramSpend } from "./PlanningLab";
+
+// Mino Automation, Jun 2020 – Oct 2023: the program timeline, the labor
+// capacity story and the invoice workflow, each as a visual.
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+// Months since Jun 2020.
+const START = { y: 2020, m: 6 };
+const END = { y: 2023, m: 10 };
+const mo = (y: number, m: number) => (y - START.y) * 12 + (m - START.m);
+const TOTAL = mo(END.y, END.m);
+
+const programs = [
+  { name: "US automation projects", place: "Purchasing & manpower", from: mo(2020, 6), to: mo(2021, 6), facts: "Project purchasing and labor planning across US sites", muted: true },
+  { name: "Rivian", place: "Normal, IL", from: mo(2021, 6), to: mo(2022, 2), facts: "3,400+ PO lines · $10M · 372 robots · 300+ technicians" },
+  { name: "Tesla Megapack", place: "Lathrop, CA", from: mo(2022, 2), to: mo(2022, 4), facts: "Spare parts, long-lead buys, turnkey commissioning" },
+  { name: "Faraday Future FF91", place: "Hanford, CA", from: mo(2022, 4), to: mo(2023, 1), facts: "54 robots · 7 lines · 51 trades sourced" },
+  { name: "Tesla Cybertruck", place: "Austin, TX", from: mo(2022, 9), to: mo(2023, 9), facts: "179 trades · 34+ equipment rentals · −20% labor cost" },
+];
+const years = [2021, 2022, 2023];
+
+export default function MinoSection() {
+  return (
+    <section id="mino" className="mino viz-root">
+      <div className="container">
+        <Reveal>
+          <span className="eyebrow">Mino Automation · Purchasing Analyst · 2020–2023</span>
+          <h2 className="section-title">
+            Supplying EV factory <em>build-outs</em>.
+          </h2>
+        </Reveal>
+        <Reveal>
+          <Gantt />
+        </Reveal>
+        <div className="mino-grid">
+          <Reveal className="card mino-card lab-anchor">
+            <span id="capacity" className="anchor-offset" />
+            <Capacity />
+          </Reveal>
+          <Reveal className="card mino-card lab-anchor" delay={0.08}>
+            <span id="invoice-flow" className="anchor-offset" />
+            <InvoiceFlow />
+          </Reveal>
+        </div>
+        <Reveal className="card mino-card mino-spend lab-anchor">
+          <span id="ev-programs" className="anchor-offset" />
+          <ProgramSpend />
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Gantt() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [hover, setHover] = useState<number | null>(null);
+  const pct = (m: number) => `${(m / TOTAL) * 100}%`;
+  return (
+    <div className="gantt card" ref={ref}>
+      <div className="gantt-head">
+        <span />
+        <div className="gantt-years">
+          {years.map((y) => (
+            <span key={y} style={{ left: pct(mo(y, 1)) }}>
+              {y}
+            </span>
+          ))}
+        </div>
+      </div>
+      {programs.map((p, n) => (
+        <div key={p.name} className={`gantt-row ${hover === n ? "on" : ""}`} onMouseEnter={() => setHover(n)} onMouseLeave={() => setHover(null)}>
+          <div className="gantt-label">
+            <strong>{p.name}</strong>
+            <span>{p.place}</span>
+          </div>
+          <div className="gantt-lane">
+            {years.map((y) => (
+              <i key={y} className="gantt-grid" style={{ left: pct(mo(y, 1)) }} />
+            ))}
+            <motion.span
+              className={`gantt-bar ${p.muted ? "muted" : ""}`}
+              style={{ left: pct(p.from) }}
+              initial={{ width: 0 }}
+              animate={{ width: inView ? pct(p.to - p.from) : 0 }}
+              transition={{ delay: 0.2 + n * 0.25, duration: 0.8, ease }}
+            />
+            <motion.span className="gantt-facts" style={{ left: pct(p.from) }} initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: 0.8 + n * 0.25 }}>
+              {p.facts}
+            </motion.span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// 200 worker dots: 100 planned, 100 reserved as backup, then ~20 called up.
+function Capacity() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const times = [400, 2000, 3600];
+    const timers = times.map((t, n) => setTimeout(() => setPhase(n + 1), t));
+    return () => timers.forEach(clearTimeout);
+  }, [inView]);
+  const captions = ["", "Forecast: ~100 workers at peak", "My upside case: +100 kept on call, not paid for", "Customer asks for ~20 more by tomorrow: done"];
+  return (
+    <div ref={ref} className="mino-inner">
+      <div className="lab-head">
+        <div>
+          <h3>Labor capacity, planned like supply</h3>
+          <p>Tesla-related automation build · each dot is one skilled worker</p>
+        </div>
+      </div>
+      <div className="lab-kpis">
+        <div>
+          <strong>100</strong>
+          <span>planned</span>
+        </div>
+        <div>
+          <strong>+100</strong>
+          <span>backup access</span>
+        </div>
+        <div>
+          <strong className="good">~20</strong>
+          <span>mobilized next day</span>
+        </div>
+      </div>
+      <div className="dots" aria-label="100 planned workers, 100 reserved as backup, about 20 of the reserve mobilized the next day">
+        {Array.from({ length: 200 }, (_, k) => {
+          const planned = k < 100;
+          const called = !planned && k < 120;
+          const cls = planned ? (phase >= 1 ? "planned" : "") : phase >= 2 ? (called && phase >= 3 ? "called" : "reserve") : "";
+          return <motion.i key={k} className={`dot ${cls}`} initial={false} animate={{ scale: cls ? 1 : 0.5 }} transition={{ delay: planned ? k * 0.006 : (k - 100) * 0.006 }} />;
+        })}
+      </div>
+      <motion.p key={phase} className="dots-caption" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
+        {captions[phase]}
+      </motion.p>
+      <div className="lab-legend">
+        <span>
+          <i className="sw dot-key planned" /> Planned
+        </span>
+        <span>
+          <i className="sw dot-key reserve" /> Reserved with vendors
+        </span>
+        <span>
+          <i className="sw dot-key called" /> Mobilized overnight
+        </span>
+      </div>
+    </div>
+  );
+}
+
+const steps = ["Request", "Approve", "PO", "Invoice", "Paid"];
+function InvoiceFlow() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "-60px" });
+  return (
+    <div ref={ref} className="mino-inner">
+      <div className="lab-head">
+        <div>
+          <h3>From email chasing to one workflow</h3>
+          <p>Self-taught SharePoint + Power Automate, built after hours</p>
+        </div>
+      </div>
+      <div className="lab-kpis">
+        <div>
+          <strong className="good">−50%</strong>
+          <span>missed invoices</span>
+        </div>
+        <div>
+          <strong>1</strong>
+          <span>shared queue</span>
+        </div>
+      </div>
+      <div className="flowline">
+        <div className="flowline-before">
+          <span className="flowline-cap">Before</span>
+          {["email", "spreadsheet", "email", "?"].map((t, n) => (
+            <motion.span key={n} className="scrap" animate={inView ? { rotate: [n * 7 - 10, n * 7 - 6, n * 7 - 10], y: [0, -3, 0] } : {}} transition={{ duration: 2 + n * 0.3, repeat: Infinity }}>
+              {t}
+            </motion.span>
+          ))}
+        </div>
+        <div className="flowline-after">
+          <span className="flowline-cap">After</span>
+          <div className="flow-steps">
+            {steps.map((s, n) => (
+              <span key={s} className="flow-step">
+                {s}
+              </span>
+            ))}
+            {inView && <motion.span className="flow-token" animate={{ left: ["0%", "100%"] }} transition={{ duration: 3.2, repeat: Infinity, ease: "linear" }} />}
+          </div>
+        </div>
+      </div>
+      <div className="lab-legend">
+        <span>Owner, status and next step visible for every request. Mockup, not a live capture.</span>
+      </div>
+    </div>
+  );
+}

@@ -27,7 +27,7 @@ export default function PlanningLab() {
     <section id="planning" className="lab viz-root">
       <div className="container">
         <Reveal>
-          <span className="eyebrow">Material planning, visualized</span>
+          <span className="eyebrow">SkyWater · the planning, as charts</span>
           <h2 className="section-title">
             How I keep a fab <em>supplied</em>.
           </h2>
@@ -46,8 +46,8 @@ export default function PlanningLab() {
             <RiskHeatmap />
           </Reveal>
           <Reveal className="lab-card card lab-anchor" delay={0.16}>
-            <span id="ev-programs" className="anchor-offset" />
-            <ProgramSpend />
+            <span id="eol-buy" className="anchor-offset" />
+            <EndOfLife />
           </Reveal>
         </div>
         <p className="lab-note">
@@ -426,7 +426,7 @@ const programs = {
 } as const;
 type Program = keyof typeof programs;
 
-function ProgramSpend() {
+export function ProgramSpend() {
   const [prog, setProg] = useState<Program>("rivian");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -470,6 +470,120 @@ function ProgramSpend() {
           <i className="sw hl" /> Largest category
         </span>
         <span>Totals are from my resume; the category split is sample data.</span>
+      </div>
+    </>
+  );
+}
+
+/* ---------- 5. End-of-life buy: 200 or 300 bottles? ---------- */
+
+const EOL_WEEKS = 26; // six-month shelf life
+function eolUsage(slip: boolean) {
+  // ~36/week (one spike) until the replacement qualifies, then tapering off.
+  const qualify = slip ? 7 : 4;
+  return Array.from({ length: EOL_WEEKS }, (_, w) => {
+    const spike = w === 2 ? 6 : 0;
+    return w < qualify ? 36 + spike : Math.max(0, 36 - (w - qualify + 1) * 12);
+  });
+}
+function eolPath(start: number, use: number[]) {
+  let left = start;
+  return use.map((u) => (left = Math.max(0, left - u)));
+}
+
+function EndOfLife() {
+  const [slip, setSlip] = useState<"plan" | "slip">("plan");
+  const [wrap, W] = useWidth<HTMLDivElement>();
+  const [hover, setHover] = useState<number | null>(null);
+  const use = useMemo(() => eolUsage(slip === "slip"), [slip]);
+  const a = useMemo(() => eolPath(200, use), [use]);
+  const b = useMemo(() => eolPath(300, use), [use]);
+  const outA = a.findIndex((v) => v === 0);
+  const outB = b.findIndex((v) => v === 0);
+  const ranOut = (arr: number[], idx: number) => idx >= 0 && use.slice(idx + 1).some((u) => u > 0);
+  const aOut = ranOut(a, outA);
+  const bOut = ranOut(b, outB);
+
+  const H = 200;
+  const pad = { l: 34, r: 12, t: 12, b: 24 };
+  const max = 300;
+  const x = (i: number) => pad.l + (i / (EOL_WEEKS - 1)) * (W - pad.l - pad.r);
+  const y = (v: number) => pad.t + (1 - v / max) * (H - pad.t - pad.b);
+  const line = (vals: number[]) => vals.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const pA = line(a);
+  const pB = line(b);
+
+  return (
+    <>
+      <CardHead title="End-of-life buy: 200 or 300?" sub="Bottles left for a chemical being phased out">
+        <Toggle
+          id="eol"
+          value={slip}
+          onChange={setSlip}
+          options={[
+            { key: "plan", label: "Qualifies on plan" },
+            { key: "slip", label: "Qualification slips" },
+          ]}
+        />
+      </CardHead>
+      <div className="lab-kpis">
+        <div>
+          <motion.strong key={slip + "a"} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className={aOut ? "bad" : "good"}>
+            {aOut ? `Wk ${outA + 1}` : "OK"}
+          </motion.strong>
+          <span>200 bottles {aOut ? "run out" : "cover it"}</span>
+        </div>
+        <div>
+          <motion.strong key={slip + "b"} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className={bOut ? "bad" : "good"}>
+            {bOut ? `Wk ${outB + 1}` : "OK"}
+          </motion.strong>
+          <span>300 bottles {bOut ? "run out" : "cover it"}</span>
+        </div>
+      </div>
+      <div ref={wrap} className="lab-chart" onMouseLeave={() => setHover(null)}>
+        <svg width={W} height={H} role="img" aria-label={`Bottles left with 200 vs 300 bottles when qualification ${slip === "slip" ? "slips" : "is on plan"}. Sample data.`}>
+          {[0, 100, 200, 300].map((v) => (
+            <g key={v}>
+              <line x1={pad.l} x2={W - pad.r} y1={y(v)} y2={y(v)} className="lab-grid-line" />
+              <text x={pad.l - 6} y={y(v) + 4} textAnchor="end" className="lab-axis">
+                {v}
+              </text>
+            </g>
+          ))}
+          <motion.path d={pA} initial={{ d: pA }} animate={{ d: pA }} transition={{ duration: 0.7, ease }} className="lab-line s1" />
+          <motion.path d={pB} initial={{ d: pB }} animate={{ d: pB }} transition={{ duration: 0.7, ease }} className="lab-line hl" />
+          {aOut && <motion.circle key={"a" + slip} initial={{ scale: 0 }} animate={{ scale: 1 }} cx={x(outA)} cy={y(0)} r={5} className="lab-stockout" style={{ transformOrigin: `${x(outA)}px ${y(0)}px` }} />}
+          {bOut && <motion.circle key={"b" + slip} initial={{ scale: 0 }} animate={{ scale: 1 }} cx={x(outB)} cy={y(0)} r={5} className="lab-stockout" style={{ transformOrigin: `${x(outB)}px ${y(0)}px` }} />}
+          <line x1={x(EOL_WEEKS - 1)} x2={x(EOL_WEEKS - 1)} y1={pad.t} y2={H - pad.b} className="lab-marker" />
+          <text x={x(EOL_WEEKS - 1) - 6} y={pad.t + 10} textAnchor="end" className="lab-ref-label strong">
+            shelf life ends
+          </text>
+          {[0, 8, 16, 25].map((i) => (
+            <text key={i} x={x(i)} y={H - 6} textAnchor="middle" className="lab-axis">
+              W{i + 1}
+            </text>
+          ))}
+          {a.map((_, i) => (
+            <rect key={i} x={x(i) - W / EOL_WEEKS / 2} y={0} width={W / EOL_WEEKS} height={H} fill="transparent" onMouseEnter={() => setHover(i)} />
+          ))}
+          {hover !== null && <line x1={x(hover)} x2={x(hover)} y1={pad.t} y2={H - pad.b} className="lab-cross" pointerEvents="none" />}
+        </svg>
+        {hover !== null && (
+          <div className="lab-tip" style={{ left: Math.min(Math.max(x(hover), 90), W - 90) }}>
+            <b>Week {hover + 1}</b> · used {use[hover]} · left: {a[hover]} vs {b[hover]}
+          </div>
+        )}
+      </div>
+      <div className="lab-legend">
+        <span>
+          <i className="sw s1" /> Buy 200 (baseline)
+        </span>
+        <span>
+          <i className="sw hl" /> Buy 300 (with my buffer)
+        </span>
+        <span>
+          <i className="sw stockout" /> Runs out
+        </span>
       </div>
     </>
   );

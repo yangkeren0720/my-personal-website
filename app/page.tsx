@@ -2,12 +2,10 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import AISection from "@/components/AISection";
-import SupplyChain from "@/components/SupplyChain";
 import PlanningLab from "@/components/PlanningLab";
-import Management from "@/components/Management";
-import Dashboard from "@/components/Dashboard";
+import SkyWaterStories from "@/components/SkyWaterStories";
+import MinoSection from "@/components/MinoSection";
 import Showcase from "@/components/Showcase";
-import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
@@ -25,13 +23,11 @@ export default function Home() {
         <Hero />
         <Experience />
         <About />
-        <SupplyChain />
+        <SkyWaterStories />
         <PlanningLab />
-        <Dashboard />
+        <MinoSection />
         <AISection />
-        <Management />
         <Showcase />
-        <Projects />
         <Skills />
         <Contact />
       </main>

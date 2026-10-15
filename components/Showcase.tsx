@@ -25,7 +25,7 @@ export default function Showcase() {
     <section id="work">
       <div className="container">
         <Reveal>
-          <span className="eyebrow">Featured work</span>
+          <span className="eyebrow">Side business · RBR Property Management</span>
           <h2 className="section-title">
             {featured.name.split(" ").slice(0, 1).join(" ")}{" "}
             <em>{featured.name.split(" ").slice(1).join(" ")}</em>

@@ -15,7 +15,7 @@ export default function AISection() {
       </div>
       <div className="container">
         <Reveal>
-          <span className="eyebrow">02 · AI integration</span>
+          <span className="eyebrow">AI integration</span>
           <h2 className="section-title ai-title">{ai.title}</h2>
           <p className="ai-intro">{ai.intro}</p>
         </Reveal>

@@ -12,7 +12,7 @@ export default function About() {
         <Reveal>
           <span className="eyebrow">About</span>
           <h2 className="section-title">
-            Supply chain thinking, <em>applied</em> to a real business.
+            Planning under <em>constraints</em>.
           </h2>
         </Reveal>
 

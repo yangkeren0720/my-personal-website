@@ -29,7 +29,7 @@ export const profile = {
 
 export const about = {
   paragraphs: [
-    "I plan materials for a semiconductor fab, I bought for automotive factory build-outs, and I co-own a business where I directed AI to build one system for the whole chain.",
+    "I plan under constraints: wafer-fab materials at SkyWater, labor and equipment capacity for EV factory builds at Mino, and planning systems at Belong. One method throughout: reconcile the signals, expose the constraint, make the trade-off explicit.",
   ],
   // Short facts shown as chips next to the bio.
   facts: [
@@ -42,12 +42,12 @@ export const about = {
 };
 
 // Results from the RBR work (October 2026).
-export const statsNote = "Results from operations work at RBR Property Management.";
+export const statsNote = "From material planning at Infineon / SkyWater and purchasing at Mino Automation.";
 export const stats = [
-  { value: 18, suffix: "", label: "AI-powered workflows running in production" },
-  { value: 182, suffix: "", label: "lease records unified into one source of truth" },
-  { value: 127, suffix: "", label: "pricing errors caught before reaching a contract" },
-  { value: 65, suffix: "", label: "lost applications recovered" },
+  { value: 3400, suffix: "+", label: "PO lines placed for one EV factory build" },
+  { value: 250, suffix: "", label: "materials in the shortage-risk report I rebuilt (from ~100)" },
+  { value: 179, suffix: "", label: "skilled trades staffed for the Cybertruck build" },
+  { value: 50, suffix: "%", label: "fewer missed invoices after my approval workflow" },
 ];
 
 export type Experience = {
@@ -78,28 +78,10 @@ export const experience: Experience[] = [
       "Grew the shortage-risk report from ~100 to ~250 material lines, and kept supply running through two acquisitions.",
     ],
     links: [
+      { label: "Story timeline", href: "#skywater" },
       { label: "Safety stock demo", href: "#safety-stock" },
       { label: "Stockout early warning", href: "#early-warning" },
       { label: "Supply risk heatmap", href: "#risk-heatmap" },
-    ],
-  },
-  {
-    period: "2023 — Present",
-    title: "Co-Owner",
-    org: "RBR Property Management",
-    place: "Student housing",
-    summary: "Run operations, systems and AI for a business I co-own with my husband.",
-    highlights: [
-      "Built live supply & demand dashboards with drill-down and an AI ask box.",
-      "Put 18 AI workflows into production, each with a human check.",
-      "Unified 182 leases from 4 sources; caught 127 pricing errors.",
-    ],
-    links: [
-      { label: "RBR platform", href: "#work" },
-      { label: "Supply chain flow", href: "#supply-chain" },
-      { label: "Live dashboard", href: "#dashboards" },
-      { label: "AI demos", href: "#ai" },
-      { label: "Management", href: "#management" },
     ],
   },
   {
@@ -110,7 +92,7 @@ export const experience: Experience[] = [
     summary: "Run day-to-day operations, procurement, import/export logistics and HR.",
     highlights: [
       "Direct procurement, supplier coordination, customs and freight forwarding.",
-      "Led the company's Odoo ERP rollout: 114 tasks across 4 phases.",
+      "Led the ERP choice (Odoo vs. NetSuite, SAP, custom) and a 160-page procurement design now in build.",
     ],
   },
   {
@@ -130,7 +112,24 @@ export const experience: Experience[] = [
       { name: "Tesla Megapack", place: "Lathrop, CA", period: "2022" },
       { name: "Rivian", place: "Normal, IL", period: "2021–22" },
     ],
-    links: [{ label: "EV program spend", href: "#ev-programs" }],
+    links: [
+      { label: "Program timeline", href: "#mino" },
+      { label: "Capacity story", href: "#capacity" },
+      { label: "Invoice workflow", href: "#invoice-flow" },
+      { label: "EV program spend", href: "#ev-programs" },
+    ],
+  },
+  {
+    period: "2023 — Present",
+    title: "Co-Owner",
+    org: "RBR Property Management",
+    place: "Side business",
+    summary: "Co-own a student-housing business; built its systems, dashboards and AI tools by directing AI.",
+    highlights: [],
+    links: [
+      { label: "AI demos", href: "#ai" },
+      { label: "RBR platform", href: "#work" },
+    ],
   },
   {
     period: "2015 — Dec 2021",
@@ -355,12 +354,10 @@ export const projects: Project[] = [
 ];
 
 export const skills = [
-  "AI Integration", "LLM Agents", "Dashboards", "Data Visualization", "KPI Design",
-  "Process Mapping", "Process Automation", "Inventory & Occupancy Planning",
-  "Vendor Management", "Data Reconciliation", "Root-cause Analysis",
-  "Dashboards & Reporting", "Workflow Design", "Contract Automation",
-  "Capacity Planning", "Cross-referencing & Data Validation",
-  "AI-assisted Development", "Prompting & AI Agents", "English & 中文",
+  "Material Planning", "S&OP / SIOP", "MRP & ERP", "Safety Stock & Min/Max", "Demand Forecasting",
+  "Supplier Management", "Strategic Sourcing", "Capacity Planning", "Purchasing & POs",
+  "Shortage Risk Dashboards", "Data Visualization", "Power Automate & SharePoint",
+  "SQL", "Advanced Excel", "AI Integration", "Lean / Six Sigma", "English & 中文",
 ];
 
 // Short "how I work" principles. Phrase them in your own words.
