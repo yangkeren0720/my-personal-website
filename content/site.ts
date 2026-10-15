@@ -172,7 +172,7 @@ export const experience: Experience[] = [
       { label: "Story timeline", href: "#skywater" },
       { label: "Safety stock demo", href: "#safety-stock" },
       { label: "Stockout early warning", href: "#early-warning" },
-      { label: "Supply risk heatmap", href: "#risk-heatmap" },
+      { label: "Weeks-of-inventory view", href: "#woi" },
       { label: "More SkyWater stories", href: "#stories-skywater" },
     ],
   },

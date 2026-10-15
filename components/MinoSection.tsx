@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Reveal from "./Reveal";
-import { ProgramSpend } from "./PlanningLab";
+import { CardHead, Toggle } from "./PlanningLab";
 
 // Mino Automation, Jun 2020 – Oct 2023: the program timeline, the labor
 // capacity story and the invoice workflow, each as a visual.
@@ -208,5 +208,64 @@ function InvoiceFlow() {
         <span>Owner, status and next step visible for every request. Mockup, not a live capture.</span>
       </div>
     </div>
+  );
+}
+
+// EV program purchasing: where the spend went, by program.
+
+const spendByProgram = {
+  rivian: { label: "Rivian", lines: "3,400+ PO lines", total: "$10M", split: [["Robots & tooling", 46], ["Contract labor", 28], ["Equipment rental", 12], ["Spare parts", 9], ["Services", 5]] },
+  cyber: { label: "Cybertruck", lines: "179 trades staffed", total: "−20% labor cost", split: [["Contract labor", 52], ["Equipment rental", 21], ["Robots & tooling", 14], ["Services", 8], ["Spare parts", 5]] },
+  ff: { label: "Faraday Future", lines: "54 robots, 7 lines", total: "51 trades sourced", split: [["Contract labor", 38], ["Services", 24], ["Robots & tooling", 20], ["Equipment rental", 11], ["Spare parts", 7]] },
+  mega: { label: "Megapack", lines: "Long-lead parts", total: "Turnkey commissioning", split: [["Spare parts", 36], ["Services", 30], ["Equipment rental", 16], ["Contract labor", 12], ["Robots & tooling", 6]] },
+} as const;
+type Program = keyof typeof spendByProgram;
+
+function ProgramSpend() {
+  const [prog, setProg] = useState<Program>("rivian");
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [hover, setHover] = useState<string | null>(null);
+  const p = spendByProgram[prog];
+  const max = Math.max(...p.split.map(([, v]) => v));
+
+  return (
+    <>
+      <CardHead title="EV line build-outs" sub="Purchasing mix by program (share of spend)">
+        <Toggle id="pg" value={prog} onChange={setProg} options={(Object.keys(spendByProgram) as Program[]).map((k) => ({ key: k, label: spendByProgram[k].label }))} />
+      </CardHead>
+      <div className="lab-kpis">
+        <div>
+          <motion.strong key={prog + "a"} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
+            {p.total}
+          </motion.strong>
+          <span>{prog === "rivian" ? "purchased" : "highlight"}</span>
+        </div>
+        <div>
+          <motion.strong key={prog + "b"} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
+            {p.lines}
+          </motion.strong>
+          <span>scope</span>
+        </div>
+      </div>
+      <div className="spend" ref={ref} onMouseLeave={() => setHover(null)}>
+        {/* keyed by category so bars glide to new widths and positions */}
+        {p.split.map(([name, v], i) => (
+          <motion.div layout key={name} className={`spend-row ${hover === name ? "on" : ""}`} transition={{ layout: { duration: 0.5, ease } }} onMouseEnter={() => setHover(name)}>
+            <span className="spend-label">{name}</span>
+            <span className="spend-track">
+              <motion.span className={`spend-fill ${i === 0 ? "hl" : ""}`} initial={{ width: 0 }} animate={{ width: inView ? `${(v / max) * 100}%` : 0 }} transition={{ duration: 0.7, delay: inView ? i * 0.06 : 0, ease }} />
+            </span>
+            <span className="spend-v">{v}%</span>
+          </motion.div>
+        ))}
+      </div>
+      <div className="lab-legend">
+        <span>
+          <i className="sw hl" /> Largest category
+        </span>
+        <span>Totals are from my resume; the category split is sample data.</span>
+      </div>
+    </>
   );
 }
