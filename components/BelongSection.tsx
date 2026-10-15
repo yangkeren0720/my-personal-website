@@ -41,7 +41,7 @@ export default function BelongSection() {
             </>
           }
           about="A Tier 1 automotive supplier that designs, builds, programs and commissions robotic car-body lines (welding, assembly and joining) for North American automakers, including EV programs."
-          summary="I report to the US CEO, work with US and China leadership, and bring AI into operations and administration."
+          summary="I report to the US CEO, work with US and China leadership, bring AI into operations and administration, and teach my team to use it properly."
           kpis={[
             { value: 5, label: "departments I oversee" },
             { value: 160, label: "page ERP design I wrote" },
@@ -116,16 +116,24 @@ function Roadmap() {
 const aiFlow = ["Recorded meeting", "AI drafts notes and plan updates", "I check the notes and the logic", "Shared with the team"];
 const aiUses = [
   {
+    area: "Operations",
     title: "Meetings to plan updates",
     body: "Weekly ERP meetings with the developers are recorded. AI drafts the notes and proposed plan updates; nothing goes out until I've checked it.",
   },
   {
+    area: "Operations",
     title: "Research for decisions",
     body: "AI organizes research and lays out options and cost assumptions side by side, as in the four-way ERP comparison, so management gets a clear choice.",
   },
   {
-    title: "Everyday admin",
-    body: "Routine summaries and drafts start from AI, which saves time across the departments I oversee. I review and decide; AI never has the final word.",
+    area: "Administration",
+    title: "Legal documents and applications",
+    body: "I handle the company's legal paperwork. AI helps me organize the documents and track the paperwork for each application.",
+  },
+  {
+    area: "Team",
+    title: "Teaching my team to use AI",
+    body: "I'm rolling AI out to my team and teaching each person how to use it properly, so each of them can work more as a decision maker.",
   },
 ];
 
@@ -145,6 +153,7 @@ function BelongAI() {
       <div className="bai-uses">
         {aiUses.map((u, n) => (
           <Reveal key={u.title} delay={n * 0.08} className="bai-use card">
+            <span className="bai-tag">{u.area}</span>
             <strong>{u.title}</strong>
             <p>{u.body}</p>
           </Reveal>
