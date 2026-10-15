@@ -23,6 +23,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Experience />
         <About />
         <SupplyChain />
         <PlanningLab />
@@ -31,7 +32,6 @@ export default function Home() {
         <Management />
         <Showcase />
         <Projects />
-        <Experience />
         <Skills />
         <Contact />
       </main>

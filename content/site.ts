@@ -57,6 +57,8 @@ export type Experience = {
   highlights: string[];
   // Sub-assignments shown as small chips, e.g. customer programs.
   programs?: { name: string; place: string; period: string }[];
+  // Buttons that jump to the demos for this role.
+  links?: { label: string; href: string }[];
   kind?: "work" | "education";
 } & Placeholder;
 
@@ -73,6 +75,11 @@ export const experience: Experience[] = [
       "Spotted a single-source chemical stockout weeks ahead with a depletion model; production never stopped.",
       "Grew the shortage-risk report from ~100 to ~250 material lines, and kept supply running through two acquisitions.",
     ],
+    links: [
+      { label: "Safety stock demo", href: "#safety-stock" },
+      { label: "Stockout early warning", href: "#early-warning" },
+      { label: "Supply risk heatmap", href: "#risk-heatmap" },
+    ],
   },
   {
     period: "2023 — Present",
@@ -84,6 +91,13 @@ export const experience: Experience[] = [
       "Built live supply & demand dashboards with drill-down and an AI ask box.",
       "Put 18 AI workflows into production, each with a human check.",
       "Unified 182 leases from 4 sources; caught 127 pricing errors.",
+    ],
+    links: [
+      { label: "RBR platform", href: "#work" },
+      { label: "Supply chain flow", href: "#supply-chain" },
+      { label: "Live dashboard", href: "#dashboards" },
+      { label: "AI demos", href: "#ai" },
+      { label: "Management", href: "#management" },
     ],
   },
   {
@@ -114,6 +128,7 @@ export const experience: Experience[] = [
       { name: "Tesla Megapack", place: "Lathrop, CA", period: "2022" },
       { name: "Rivian", place: "Normal, IL", period: "2021–22" },
     ],
+    links: [{ label: "EV program spend", href: "#ev-programs" }],
   },
   {
     period: "2015 — Dec 2021",

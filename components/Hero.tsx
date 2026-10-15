@@ -112,7 +112,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8, ease }}
         >
-          <a href="#work" className="btn btn-primary">
+          <a href="#experience" className="btn btn-primary">
             See my work <span aria-hidden>→</span>
           </a>
           <a href="#contact" className="btn">
@@ -126,7 +126,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.a
-        href="#about"
+        href="#experience"
         className="scroll-cue"
         aria-label="Scroll down"
         initial={{ opacity: 0 }}

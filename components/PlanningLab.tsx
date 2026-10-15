@@ -33,20 +33,27 @@ export default function PlanningLab() {
           </h2>
         </Reveal>
         <div className="lab-grid">
-          <Reveal className="lab-card card">
+          <Reveal className="lab-card card lab-anchor">
+            <span id="safety-stock" className="anchor-offset" />
             <SafetyStock />
           </Reveal>
-          <Reveal className="lab-card card" delay={0.08}>
+          <Reveal className="lab-card card lab-anchor" delay={0.08}>
+            <span id="early-warning" className="anchor-offset" />
             <EarlyWarning />
           </Reveal>
-          <Reveal className="lab-card card" delay={0.08}>
+          <Reveal className="lab-card card lab-anchor" delay={0.08}>
+            <span id="risk-heatmap" className="anchor-offset" />
             <RiskHeatmap />
           </Reveal>
-          <Reveal className="lab-card card" delay={0.16}>
+          <Reveal className="lab-card card lab-anchor" delay={0.16}>
+            <span id="ev-programs" className="anchor-offset" />
             <ProgramSpend />
           </Reveal>
         </div>
-        <p className="lab-note">Sample data, shaped like real planning work. No employer data is shown.</p>
+        <p className="lab-note">
+          Sample data, shaped like real planning work. No employer data is shown.{" "}
+          <a href="#experience" className="back-link">← Back to resume</a>
+        </p>
       </div>
     </section>
   );

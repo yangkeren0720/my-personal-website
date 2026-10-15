@@ -6,12 +6,12 @@ import { profile } from "@/content/site";
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
+  { id: "experience", label: "Resume" },
   { id: "supply-chain", label: "Supply Chain" },
   { id: "planning", label: "Planning" },
   { id: "ai", label: "AI Integration" },
   { id: "management", label: "Management" },
-  { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
+  { id: "work", label: "RBR" },
   { id: "contact", label: "Contact" },
 ];
 

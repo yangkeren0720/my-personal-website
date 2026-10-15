@@ -583,3 +583,14 @@ main, .footer { position: relative; z-index: 1; }
 
 @media (max-width: 900px) { .lab-grid { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .lab-card { padding: 16px; } .heat-row { grid-template-columns: 84px repeat(12, minmax(0, 1fr)); gap: 2px; } .heat-label { font-size: 10.5px; } .spend-row { grid-template-columns: 104px 1fr 36px; font-size: 12px; } }
+.timeline-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.timeline-link { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500; border: 1px solid var(--border-strong); background: rgba(var(--fg-rgb), 0.03); transition: background .2s, border-color .2s, transform .2s; }
+.timeline-link span { color: var(--accent); transition: transform .2s; }
+.timeline-link:hover { border-color: var(--accent); background: rgba(255, 154, 98, 0.1); transform: translateY(-1px); }
+.timeline-link:hover span { transform: translateX(3px); }
+.lab-anchor { position: relative; }
+.anchor-offset { position: absolute; top: -90px; }
+section[id] { scroll-margin-top: 0; }
+.lab-anchor:has(.anchor-offset:target) { animation: target-flash 2.2s ease-out 0.4s; }
+@keyframes target-flash { 0%, 40% { box-shadow: 0 0 0 3px var(--accent); } 100% { box-shadow: 0 0 0 3px transparent; } }
+.back-link { color: var(--accent); font-weight: 500; }

@@ -14,7 +14,7 @@ export default function Experience() {
     <section id="experience">
       <div className="container">
         <Reveal>
-          <span className="eyebrow">Experience</span>
+          <span className="eyebrow">Resume</span>
           <h2 className="section-title">
             Where I&apos;ve <em>worked</em>.
           </h2>
@@ -77,6 +77,15 @@ export default function Experience() {
                       <li key={hi}>{h}</li>
                     ))}
                   </ul>
+                )}
+                {job.links && (
+                  <div className="timeline-links">
+                    {job.links.map((l) => (
+                      <a key={l.label} href={l.href} className="timeline-link">
+                        {l.label} <span aria-hidden>→</span>
+                      </a>
+                    ))}
+                  </div>
                 )}
               </div>
             </motion.article>
