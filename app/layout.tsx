@@ -14,7 +14,7 @@ const serif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.name} · ${profile.roles[0]}`,
+  title: `${profile.name} · ${profile.headline}`,
   description: profile.tagline,
   openGraph: { title: profile.name, description: profile.tagline, type: "website" },
 };

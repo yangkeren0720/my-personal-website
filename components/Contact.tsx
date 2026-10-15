@@ -24,14 +24,14 @@ export default function Contact() {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="contact-title">
-            Let&apos;s build something
+            Let&apos;s make operations
             <br />
-            <span className="grad-text">people actually use.</span>
+            <span className="grad-text">run smoother.</span>
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="contact-text">
-            I&apos;m always happy to talk about engineering roles, product ideas, or how the RBR platform works under the hood.
+            I&apos;m always happy to talk about supply chain and operations roles, process improvement, or how I automated a business from the ground up.
           </p>
         </Reveal>
         <Reveal delay={0.3} className="contact-links">

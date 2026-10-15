@@ -11,9 +11,11 @@ export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
   status: "Open to new opportunities", // small badge above your name; "" hides it
-  roles: ["Software Engineer", "Full-stack Builder", "Product Owner", "Problem Solver"],
+  headline: "Operations & Supply Chain", // used in the browser tab title
+  rolePrefix: "I work on",
+  roles: ["operations & supply chain", "process automation", "data you can trust", "vendor & systems integration"],
   tagline:
-    "I build software that runs a real business, from the tenant-facing website to the admin tools, database and automations behind it.",
+    "I make operations run smoothly. At a student-housing company I mapped how a room goes from listing to signed lease, automated the handoffs, reconciled data across vendors, and built the dashboards the team runs on.",
   location: "United States", // placeholder: add your city
   locationPlaceholder: true,
   github: "https://github.com/yangkeren0720",
@@ -24,24 +26,26 @@ export const profile = {
 
 export const about = {
   paragraphs: [
-    "I like owning a problem end to end. At RBR Property Management I took a business that ran on spreadsheets, email and third-party tools and built the system it now runs on: a public housing website, an online application flow, an admin dashboard for leases and availability, and automations that send leases, emails and reminders on their own.",
-    "I care about the details that customers feel, like an application that saves as you go, and about the data underneath it staying correct when real people and real money depend on it.",
+    "I like owning a process end to end. RBR Property Management ran on spreadsheets, email and several separate vendor tools. I mapped the whole flow, from available rooms to applications, contracts and move-in, and replaced the manual handoffs with one system: live availability, an occupancy calendar, automated lease contracts and move-in emails that go out on their own.",
+    "The work I'm proudest of is the unglamorous part: reconciling records across systems until there is one source of truth, catching pricing errors before they reach a contract, and adding checks so the same mistake can't happen twice. That is the kind of operations and supply chain work I want to keep doing.",
   ],
   // Short facts shown as chips next to the bio.
   facts: [
-    { label: "Focus", value: "Full-stack web, data, automation" },
-    { label: "Currently", value: "Building RBR Property Management's platform" },
+    { label: "Focus", value: "Operations, process automation, data" },
+    { label: "Looking for", value: "Supply chain and operations roles" },
+    { label: "Currently", value: "Running operations systems at RBR Property Management" },
     { label: "Education", value: "Add your school and degree", placeholder: true },
     { label: "Languages", value: "English, 中文" },
   ] as Array<{ label: string; value: string } & Placeholder>,
 };
 
-// Numbers counted from the RBR codebase (October 2026).
+// Results from the RBR work (October 2026).
+export const statsNote = "Results from operations work at RBR Property Management.";
 export const stats = [
-  { value: 181, suffix: "", label: "API routes" },
-  { value: 171, suffix: "", label: "database models" },
-  { value: 96, suffix: "", label: "schema migrations shipped" },
-  { value: 135, suffix: "k", label: "lines of code" },
+  { value: 182, suffix: "", label: "lease records unified into one source of truth" },
+  { value: 4, suffix: "", label: "data sources reconciled into one" },
+  { value: 127, suffix: "", label: "pricing errors caught before reaching a contract" },
+  { value: 65, suffix: "", label: "lost applications recovered" },
 ];
 
 export type Experience = {
@@ -55,18 +59,17 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     period: "2025 — Present",
-    title: "Software Engineer & Product Owner",
+    title: "Operations & Systems Lead",
     org: "RBR Property Management",
     summary:
-      "Designed and built the company's web platform and internal tools on Next.js, PostgreSQL and Azure.",
+      "Own the operations systems for a student-housing company: room inventory, applications, leasing, move-ins and the vendor tools around them.",
     highlights: [
-      "Migrated the platform from flat files to a normalized PostgreSQL schema with audit history and a rollback path.",
-      "Built a lease generator that turns approved applications into DocuSign-ready contracts from a clause-level template, and writes signed leases back to the database.",
-      "Consolidated 182 leases from four sources into one table with de-duplication rules, driving an occupancy calendar.",
-      "Found and fixed a systematic rent and fee mix-up in imported lease data before it reached any contract.",
-      "Recovered lost rental applications from notification emails, then added backups and a recycle bin so it can't recur.",
-      "Built an AI browser agent, run from CI, that automates a vendor workflow with no API, with a practice mode and human sign-off before going live.",
-      "Set up CI/CD with automated migrations, uptime monitoring and alerting for the production app on Azure.",
+      "Consolidated 182 leases from four vendor and legacy sources into one table with clear source-of-truth rules, driving an occupancy calendar the team plans from.",
+      "Automated the order-to-contract flow: approved applications become DocuSign-ready leases from a clause-level template, and signed leases write back to the records automatically.",
+      "Found a systematic rent and fee mix-up in imported vendor data and corrected it on 127 leases before any contract went out.",
+      "Recovered 65 lost rental applications from notification emails, then added backups and a recycle bin so it can't recur.",
+      "Automated a manual vendor workflow that had no API using an AI browser agent, with a practice mode and human sign-off before going live.",
+      "Moved room availability from flat files to a database with an audit trail on every change, and set up monitoring and alerts so problems surface early.",
     ],
     placeholder: true, // confirm the title and dates
   },
@@ -103,21 +106,21 @@ export type Project = {
 
 export const featured = {
   name: "RBR Property Management",
-  tagline: "The platform a student-housing company runs on",
+  tagline: "The operations system a student-housing company runs on",
   description:
-    "A public website where students browse houses and apply, plus the admin system the team uses every day for availability, applications, leases, move-ins and tenant communication.",
+    "Room inventory, applications, leasing, move-ins and tenant communication in one place, replacing spreadsheets, email and several separate vendor tools.",
   link: "https://www.rbrpmrealty.com",
-  tags: ["Next.js", "React", "PostgreSQL", "Prisma", "Azure", "DocuSign API", "Claude API", "GitHub Actions"],
+  tags: ["Process automation", "Inventory & occupancy", "Vendor integration", "Data reconciliation", "PostgreSQL", "DocuSign", "AI agents"],
   // Each item becomes a tab in the interactive showcase.
   features: [
     {
-      title: "Houses & Room Match",
-      body: "Public pages for every house with floorplans, rooms and live availability, plus a Room Match quiz that pairs students with rooms that fit their budget and habits.",
+      title: "Live Room Inventory",
+      body: "Every house, room and floorplan with live availability, plus a Room Match quiz that pairs students with rooms that fit their budget and habits.",
       screen: "houses",
     },
     {
       title: "Online Applications",
-      body: "A multi-step application with drafts that save as you go, document uploads to Azure Blob Storage, and answers stored in relational tables admins can search.",
+      body: "A multi-step application that saves as you go, with document uploads and answers stored in a searchable database, so no applicant falls through the cracks.",
       screen: "apply",
     },
     {
@@ -126,8 +129,8 @@ export const featured = {
       screen: "lease",
     },
     {
-      title: "Admin Dashboard",
-      body: "Leases, an occupancy calendar, properties, move-in checklists, automatic emails and a full change history, all filterable and sortable.",
+      title: "Occupancy Planning",
+      body: "An occupancy calendar across every room, with leases, move-in checklists, automatic emails and a full change history, all filterable and sortable.",
       screen: "admin",
     },
     {
@@ -140,20 +143,20 @@ export const featured = {
 
 export const projects: Project[] = [
   {
-    name: "RBR Admin for iOS",
-    tagline: "SwiftUI companion app",
+    name: "Vendor Robot",
+    tagline: "Automating a vendor with no API",
     description:
-      "A native SwiftUI app for the RBR admin team, built on a versioned admin API with an OpenAPI spec. Swift types are generated from the spec so the app and server can't drift, and sign-in tokens live in the Keychain.",
-    tags: ["SwiftUI", "iOS", "OpenAPI"],
-    accent: "#7dd3fc",
+      "Every new tenant needed a move-in inspection requested by hand in a vendor tool with no API. An AI browser agent now fills in each request, starting in practice mode and only sending after a person approves.",
+    tags: ["Process automation", "AI agents", "Vendor management"],
+    accent: "#86efac",
   },
   {
-    name: "Vendor Robot",
-    tagline: "AI browser agent",
+    name: "RBR Admin for iOS",
+    tagline: "Operations on the go",
     description:
-      "A GitHub Actions job that runs a headless browser where Claude fills in move-in inspection requests in a vendor tool with no API. It starts in practice mode and only sends after a person approves.",
-    tags: ["Claude API", "Headless Chromium", "GitHub Actions"],
-    accent: "#86efac",
+      "A native iPhone app so the team can check availability, applications and leases away from a desk, built on the same data as the web dashboard.",
+    tags: ["SwiftUI", "iOS", "OpenAPI"],
+    accent: "#7dd3fc",
   },
   {
     name: "This website",
@@ -166,37 +169,38 @@ export const projects: Project[] = [
   },
   {
     name: "Your next project",
-    tagline: "Add a school, hackathon or side project",
-    description: "What it does, what you built, and one number that shows it worked.",
-    tags: ["Tech", "Stack"],
+    tagline: "Add a supply chain or operations project",
+    description: "A class project, case competition or job where you improved a process. Say what you changed and one number that shows it worked.",
+    tags: ["Skill", "Tool"],
     accent: "#fca5a5",
     placeholder: true,
   },
 ];
 
 export const skills = [
-  "TypeScript", "JavaScript", "React", "Next.js", "Node.js", "SwiftUI",
-  "PostgreSQL", "Prisma", "SQL", "Azure App Service", "Azure Blob Storage",
-  "Application Insights", "GitHub Actions", "REST APIs", "DocuSign eSignature",
-  "Claude API", "HTML & CSS", "Git",
+  "Process Mapping", "Process Automation", "Inventory & Occupancy Planning",
+  "Vendor Management", "Data Reconciliation", "Root-cause Analysis",
+  "Dashboards & Reporting", "Workflow Design", "Contract Automation",
+  "SQL", "PostgreSQL", "AI Agents", "TypeScript", "Next.js", "SwiftUI",
+  "GitHub Actions", "Azure", "English & 中文",
 ];
 
 // Short "how I work" principles. Phrase them in your own words.
 export const principles = [
   {
     title: "Start from the customer",
-    body: "Every feature began with a student, parent or teammate who was stuck. I watch where they get stuck before I write code.",
+    body: "Every change began with a student, parent or teammate who was stuck. I watch where the process breaks before I change it.",
   },
   {
     title: "Own it end to end",
-    body: "I design the schema, build the API and the UI, deploy it, and get the alert email when it breaks.",
+    body: "I map the process, fix the data, automate the handoffs, and get the alert when something breaks.",
   },
   {
-    title: "Keep the data right",
-    body: "Real leases and real deposits live in this database, so migrations are reversible, changes are audited, and duplicates are impossible by design.",
+    title: "Dive into the data",
+    body: "Real leases and real money depend on these records, so I check them against the source documents, audit every change, and make duplicates impossible.",
   },
   {
-    title: "Ship, then simplify",
-    body: "Small releases to production, then cleaning up what turned out to be unnecessary.",
+    title: "Simplify, then automate",
+    body: "Cut the steps that don't need to exist first, then automate what's left, with a human check where mistakes would be costly.",
   },
 ];

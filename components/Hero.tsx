@@ -72,7 +72,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         >
-          <span className="hero-role-prefix">I&apos;m a</span>
+          <span className="hero-role-prefix">{profile.rolePrefix}</span>
           <span className="hero-role-slot">
             <AnimatePresence mode="wait">
               <motion.span

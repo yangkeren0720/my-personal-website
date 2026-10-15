@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { about, principles, stats } from "@/content/site";
+import { about, principles, stats, statsNote } from "@/content/site";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 import PlaceholderBadge from "./PlaceholderBadge";
@@ -50,7 +50,7 @@ export default function About() {
             </Reveal>
           ))}
         </div>
-        <p className="stats-note">Numbers from the RBR Property Management codebase I build and maintain.</p>
+        <p className="stats-note">{statsNote}</p>
 
         <div className="principles">
           {principles.map((p, i) => (
