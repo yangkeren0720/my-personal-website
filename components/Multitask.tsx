@@ -198,7 +198,7 @@ function Router() {
             );
           })}
       </div>
-      <p className="mt-note">Sample week for illustration. RBR&apos;s automations are live; Belong&apos;s are being built.</p>
+      <p className="mt-note">Sample week for illustration. RBR&apos;s automations are live; at Belong, AI meeting notes are live and the ERP is being built.</p>
     </div>
   );
 }
@@ -211,6 +211,7 @@ const automations: { key: Exclude<RoleKey, "skywater">; company: string; role: s
     items: [
       { text: "Odoo ERP for purchasing, inventory and approvals", state: "In build" },
       { text: "Price-change alerts and clear approval paths", state: "In build" },
+      { text: "AI drafts meeting notes and plan updates; I check each one", state: "Live" },
     ],
   },
   {

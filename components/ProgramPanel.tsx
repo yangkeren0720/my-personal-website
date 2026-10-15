@@ -77,7 +77,7 @@ function Crew({ crew }: { crew: { label: string; n: number }[] }) {
         <div key={c.label} className={`crew-row ${hover === c.label ? "on" : ""} ${hover && hover !== c.label ? "dim" : ""}`} onMouseEnter={() => setHover(c.label)}>
           <span className="crew-label">{c.label}</span>
           <span className="crew-track">
-            <motion.span className="crew-bar" initial={{ width: 0 }} animate={{ width: `${Math.max(2, (c.n / max) * 100)}%` }} transition={{ delay: 0.3 + n * 0.12, duration: 0.7, ease }} />
+            <motion.span className="crew-bar" initial={{ width: "0%" }} animate={{ width: `${Math.max(2, (c.n / max) * 100)}%` }} transition={{ delay: 0.3 + n * 0.12, duration: 0.7, ease }} />
           </span>
           <span className="crew-n">
             <Count to={c.n} delay={0.3 + n * 0.12} />

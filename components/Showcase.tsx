@@ -221,7 +221,7 @@ function Screen({ kind }: { kind: string }) {
               <motion.span
                 className={`mock-cal-bar c${i % 3}`}
                 style={{ left: `${start}%` }}
-                initial={{ width: 0 }}
+                initial={{ width: "0%" }}
                 animate={{ width: `${width}%` }}
                 transition={{ duration: 0.9, delay: 0.3 + i * 0.08, ease }}
               />

@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 
-// The opening of each employer section: who, what role and when, then the
-// headline numbers for that job only.
+// The opening of each employer section: who, what role and when, what the
+// company does, then the headline numbers for that job only.
 
 type Kpi = { value: number; prefix?: string; suffix?: string; label: string };
 
@@ -15,6 +15,7 @@ export default function CompanyHead({
   role,
   period,
   title,
+  about,
   summary,
   kpis,
 }: {
@@ -23,6 +24,7 @@ export default function CompanyHead({
   role: string;
   period: string;
   title: ReactNode;
+  about?: string;
   summary: string;
   kpis?: Kpi[];
 }) {
@@ -36,6 +38,12 @@ export default function CompanyHead({
           </span>
         </div>
         <h2 className="section-title">{title}</h2>
+        {about && (
+          <p className="co-about">
+            <span>The company</span>
+            {about}
+          </p>
+        )}
         <p className="co-summary">{summary}</p>
       </Reveal>
       {kpis && (

@@ -484,7 +484,7 @@ export function SeatsChart() {
           <div key={name as string} className="sc-quote">
             <span>{name}</span>
             <span className="sc-quote-track">
-              <motion.i className={i ? "chosen" : ""} initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.8, delay: 1.2 + i * 0.3, ease }} />
+              <motion.i className={i ? "chosen" : ""} initial={{ width: "0%" }} animate={{ width: `${pct}%` }} transition={{ duration: 0.8, delay: 1.2 + i * 0.3, ease }} />
             </span>
             <b>{amt}</b>
           </div>
@@ -502,9 +502,9 @@ export function SeatsChart() {
 
 // ---------- RBR ----------
 
-// How I build with AI: describe, AI builds, I cross-check against real records, ship.
+// How I build with AI: describe, Claude Code builds, Codex cross-checks, I check against real records, ship.
 export function BuildLoop() {
-  const nodes = ["I describe the need", "AI builds it", "I cross-check against real records", "Ship"];
+  const nodes = ["I describe the need", "Claude Code builds it", "Codex cross-checks it", "I check it against real records", "Ship"];
   const modules = ["Live room inventory", "Online applications", "Lease automation", "Occupancy calendar", "AI reply drafts", "Vendor-entry agents"];
   const [lit, setLit] = useState(0);
   useEffect(() => {
@@ -515,7 +515,7 @@ export function BuildLoop() {
     <div className="loop">
       <ol className="loop-steps">
         {nodes.map((n, i) => (
-          <li key={n} className={lit % 5 > i ? "on" : ""}>
+          <li key={n} className={lit % (nodes.length + 1) > i ? "on" : ""}>
             <span className="tsf-dot">{i + 1}</span>
             {n}
           </li>
@@ -546,7 +546,7 @@ export function ArrivalTimeline() {
         <motion.div key={t} className={`arr-step ${i === steps.length - 1 ? "fix" : ""}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.45 }}>
           <span className="arr-t">{t}</span>
           <span className="arr-track" aria-label={`energy ${e}%`}>
-            <motion.i initial={{ width: 0 }} animate={{ width: `${e}%` }} transition={{ delay: 0.4 + i * 0.45, duration: 0.6, ease }} />
+            <motion.i initial={{ width: "0%" }} animate={{ width: `${e}%` }} transition={{ delay: 0.4 + i * 0.45, duration: 0.6, ease }} />
           </span>
         </motion.div>
       ))}

@@ -41,6 +41,7 @@ export default function MinoSection() {
               Supplying EV line <em>build-outs</em>.
             </>
           }
+          about="Builds automated production lines for car makers: robotic welding lines for car bodies (body-in-white) and EV battery and powertrain assembly lines."
           summary="Purchasing and capacity planning for automation lines built for Tesla, Rivian and Faraday Future."
           kpis={[
             { value: 3400, suffix: "+", label: "PO lines placed for the Rivian build" },
@@ -105,8 +106,8 @@ function Gantt() {
             <motion.span
               className={`gantt-bar ${p.muted ? "muted" : ""}`}
               style={{ left: pct(p.from) }}
-              initial={{ width: 0 }}
-              animate={{ width: inView ? pct(p.to - p.from) : 0 }}
+              initial={{ width: "0%" }}
+              animate={{ width: inView ? pct(p.to - p.from) : "0%" }}
               transition={{ delay: 0.2 + n * 0.25, duration: 0.8, ease }}
             />
             <motion.span className="gantt-facts" style={{ left: pct(p.from) }} initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: 0.8 + n * 0.25 }}>
@@ -272,7 +273,7 @@ function ProgramSpend() {
           <motion.div layout key={name} className={`spend-row ${hover === name ? "on" : ""}`} transition={{ layout: { duration: 0.5, ease } }} onMouseEnter={() => setHover(name)}>
             <span className="spend-label">{name}</span>
             <span className="spend-track">
-              <motion.span className={`spend-fill ${i === 0 ? "hl" : ""}`} initial={{ width: 0 }} animate={{ width: inView ? `${(v / max) * 100}%` : 0 }} transition={{ duration: 0.7, delay: inView ? i * 0.06 : 0, ease }} />
+              <motion.span className={`spend-fill ${i === 0 ? "hl" : ""}`} initial={{ width: "0%" }} animate={{ width: inView ? `${(v / max) * 100}%` : "0%" }} transition={{ duration: 0.7, delay: inView ? i * 0.06 : 0, ease }} />
             </span>
             <span className="spend-v">{v}%</span>
           </motion.div>

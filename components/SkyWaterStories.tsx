@@ -256,7 +256,7 @@ function RunoutVisual() {
         <div key={r.label} className="v-runout-row">
           <span className="v-runout-label">{r.label}</span>
           <span className="v-runout-track">
-            <motion.span className={`v-runout-bar ${r.cls}`} initial={{ width: 0 }} animate={{ width: `${(r.weeks / 10) * 100}%` }} transition={{ delay: 0.3 + n * 0.5, duration: 0.9, ease }} />
+            <motion.span className={`v-runout-bar ${r.cls}`} initial={{ width: "0%" }} animate={{ width: `${(r.weeks / 10) * 100}%` }} transition={{ delay: 0.3 + n * 0.5, duration: 0.9, ease }} />
             <span className="v-delivery" style={{ left: "60%" }} />
           </span>
           <motion.span className="v-runout-note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 + n * 0.5 }}>

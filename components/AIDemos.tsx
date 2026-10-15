@@ -269,7 +269,7 @@ function AskDemo() {
                 <span className="ask-track">
                   <motion.span
                     className={`ask-fill ${i === 0 ? "hl" : ""}`}
-                    initial={{ width: 0 }}
+                    initial={{ width: "0%" }}
                     animate={{ width: `${(v / 5) * 100}%` }}
                     transition={{ duration: 0.6, delay: 0.2 + i * 0.07, ease }}
                   />

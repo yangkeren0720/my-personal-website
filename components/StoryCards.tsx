@@ -264,11 +264,11 @@ const stories: Story[] = [
     company: "RBR",
     title: "A platform built by directing AI",
     metric: { value: "~$300/mo", label: "of AI to build and run it" },
-    context: "Leasing ran on spreadsheets and separate tools. I'm not a programmer, so I directed AI to build one system and checked everything it built.",
+    context: "Leasing ran on spreadsheets and separate tools. I'm not a programmer, so I build with Claude Code and Codex, have each check the other's work, and check it all against real records.",
     facts: [
       ["~$300/mo", "AI cost"],
       ["6", "modules running"],
-      ["Every output", "cross-checked"],
+      ["Claude Code + Codex", "each checks the other"],
     ],
     chartTitle: "How I build, and what's running",
     chart: () => <BuildLoop />,
@@ -279,7 +279,7 @@ const stories: Story[] = [
         lines: [<>312 − 312 = 0 → <b>ship</b></>, <>Anything else → fix first</>],
       },
     ],
-    steps: ["Leasing ran on spreadsheets and separate tools.", "Directed AI to build one system; cross-checked every output against real records.", "Live dashboards and AI assistants, about $300 a month."],
+    steps: ["Leasing ran on spreadsheets and separate tools.", "Built one system with Claude Code and Codex, each checking the other; I check every output against real records.", "Live dashboards and AI assistants, about $300 a month."],
     note: "Record counts are sample; ~$300/month is real.",
   },
   {

@@ -251,7 +251,7 @@ export const experience: Experience[] = [
     title: "Co-Owner",
     org: "RBR Property Management",
     place: "Side business",
-    summary: "Co-own a student-housing business; built its systems, dashboards and AI tools by directing AI.",
+    summary: "Co-own a student-housing business; built its systems, dashboards and AI tools with Claude Code and Codex, each cross-checking the other.",
     highlights: [],
     links: [
       { label: "RBR platform", href: "#work" },
@@ -315,7 +315,7 @@ export const ai = {
     "Right-sized model for each task",
   ],
   builtWith:
-    "I'm not a programmer. I built this whole platform by directing AI, for about $300 a month, and I cross-check everything it builds against real records.",
+    "I'm not a programmer. I build with Claude Code and Codex, have each one cross-check the other's work, then check everything against real records. About $300 a month.",
 };
 
 export const featured = {

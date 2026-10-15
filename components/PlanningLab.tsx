@@ -433,7 +433,7 @@ function WOIView() {
                   <span className="woi-name">{m.name}</span>
                   <span className="woi-track">
                     <i className="woi-band" style={{ left: pctOf(WOI_TARGET[0]), width: `${((WOI_TARGET[1] - WOI_TARGET[0]) / WOI_SCALE) * 100}%` }} />
-                    <motion.span className={`woi-bar ${st}`} initial={{ width: 0 }} animate={{ width: inView ? pctOf(v) : 0 }} transition={{ duration: 0.6, ease, delay: week === 0 ? n * 0.06 : 0 }} />
+                    <motion.span className={`woi-bar ${st}`} initial={{ width: "0%" }} animate={{ width: inView ? pctOf(v) : "0%" }} transition={{ duration: 0.6, ease, delay: week === 0 ? n * 0.06 : 0 }} />
                     <i className="woi-min" style={{ left: pctOf(WOI_MIN) }} />
                   </span>
                   <span className={`woi-val ${st}`} title={woiLabel[st]}>

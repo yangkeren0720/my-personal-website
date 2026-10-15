@@ -15,7 +15,7 @@ const departments = [
   { name: "Operations", what: "Sets day-to-day priorities and manages performance" },
   { name: "Purchasing", what: "Direct procurement, suppliers, import/export, customs and freight" },
   { name: "HR", what: "Full-cycle hiring, onboarding, training, employee relations" },
-  { name: "IT", what: "Odoo ERP project lead; engineering-software licensing" },
+  { name: "IT", what: "Odoo ERP project lead, software licensing, AI tools" },
   { name: "Warehouse", what: "Receiving, inventory and outbound" },
 ];
 
@@ -40,7 +40,8 @@ export default function BelongSection() {
               Five departments, <em>one</em> manager.
             </>
           }
-          summary="I report to the US CEO and work with US and China leadership."
+          about="A Tier 1 automotive supplier that designs, builds, programs and commissions robotic car-body lines (welding, assembly and joining) for North American automakers, including EV programs."
+          summary="I report to the US CEO, work with US and China leadership, and bring AI into operations and administration."
           kpis={[
             { value: 5, label: "departments I oversee" },
             { value: 160, label: "page ERP design I wrote" },
@@ -51,6 +52,8 @@ export default function BelongSection() {
         <DeptMap />
         <SubHead>The ERP I'm leading, in four phases</SubHead>
         <Roadmap />
+        <SubHead id="belong-ai">AI in operations and administration</SubHead>
+        <BelongAI />
         <SubHead id="belong-stories">Belong stories</SubHead>
         <StoryCards company="Belong" />
       </div>
@@ -106,5 +109,47 @@ function Roadmap() {
         three-way matching. Odoo was chosen over NetSuite, SAP and a custom build.
       </p>
     </Reveal>
+  );
+}
+
+// How AI is used in Belong's operations and administration: AI drafts, Eva checks.
+const aiFlow = ["Recorded meeting", "AI drafts notes and plan updates", "I check the notes and the logic", "Shared with the team"];
+const aiUses = [
+  {
+    title: "Meetings to plan updates",
+    body: "Weekly ERP meetings with the developers are recorded. AI drafts the notes and proposed plan updates; nothing goes out until I've checked it.",
+  },
+  {
+    title: "Research for decisions",
+    body: "AI organizes research and lays out options and cost assumptions side by side, as in the four-way ERP comparison, so management gets a clear choice.",
+  },
+  {
+    title: "Everyday admin",
+    body: "Routine summaries and drafts start from AI, which saves time across the departments I oversee. I review and decide; AI never has the final word.",
+  },
+];
+
+function BelongAI() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px -80px 0px" });
+  return (
+    <div className="bai" ref={ref}>
+      <ol className="bai-flow">
+        {aiFlow.map((step, n) => (
+          <motion.li key={step} initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.15 + n * 0.3, duration: 0.45, ease }} className={n === 1 ? "ai" : n === 2 ? "me" : ""}>
+            <span className="bai-n">{n + 1}</span>
+            {step}
+          </motion.li>
+        ))}
+      </ol>
+      <div className="bai-uses">
+        {aiUses.map((u, n) => (
+          <Reveal key={u.title} delay={n * 0.08} className="bai-use card">
+            <strong>{u.title}</strong>
+            <p>{u.body}</p>
+          </Reveal>
+        ))}
+      </div>
+    </div>
   );
 }
