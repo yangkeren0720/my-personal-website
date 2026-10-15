@@ -11,11 +11,11 @@ export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
   status: "Open to senior operations & supply chain roles", // small badge above your name; "" hides it
-  headline: "Operations, Supply Chain & AI Automation", // used in the browser tab title
+  headline: "AI Integration, Dashboards & Operations", // used in the browser tab title
   rolePrefix: "I work on",
-  roles: ["operations strategy", "AI-powered automation", "supply chain systems", "data you can trust"],
+  roles: ["AI integration", "dashboards & data visualization", "supply chain & operations", "data you can trust"],
   tagline:
-    "I lead operations transformation with AI. I took a student-housing business from spreadsheets and email to one platform with 18 AI-powered workflows in production, from contract reading to vendor data entry to customer replies.",
+    "I integrate AI into real operations and build the dashboards that run them. I took a student-housing business from spreadsheets and email to one platform with 18 AI workflows in production and live dashboards for occupancy, leasing and cost.",
   location: "United States", // placeholder: add your city
   locationPlaceholder: true,
   github: "https://github.com/yangkeren0720",
@@ -31,7 +31,7 @@ export const about = {
   ],
   // Short facts shown as chips next to the bio.
   facts: [
-    { label: "Focus", value: "Operations strategy, AI automation, data" },
+    { label: "Strengths", value: "AI integration, dashboards, data visualization" },
     { label: "Looking for", value: "Senior supply chain and operations roles" },
     { label: "Currently", value: "Leading operations systems and AI at RBR Property Management" },
     { label: "Education", value: "Add your school and degree", placeholder: true },
@@ -64,6 +64,7 @@ export const experience: Experience[] = [
     summary:
       "Own operations systems and AI strategy for a student-housing company: room inventory, applications, leasing, move-ins and the vendor tools around them.",
     highlights: [
+      "Built live dashboards for occupancy, open rooms per house, leasing and AI cost per feature, with drill-down from a chart to the records behind it, plus an AI box that answers questions from the same numbers.",
       "Put 18 AI-powered workflows into production, each with a human check where mistakes are costly, per-feature cost tracking, and the choice of a cheaper model where it does the job.",
       "Consolidated 182 leases from four vendor and legacy sources into one table with clear source-of-truth rules, driving an occupancy calendar the team plans from.",
       "Automated the order-to-contract flow: approved applications become DocuSign-ready leases from a clause-level template, and signed leases write back to the records automatically.",
@@ -94,6 +95,27 @@ export const experience: Experience[] = [
     placeholder: true,
   },
 ];
+
+// "Dashboards & data visualization" section. The demo itself uses the
+// made-up numbers in content/dashboard.ts.
+export const dashboards = {
+  intro:
+    "I build dashboards that turn operational data into decisions: live KPIs, charts you can drill into, and an AI assistant that answers questions from the same numbers. Try the demo below; it runs on sample data shaped like the dashboards I built at RBR.",
+  points: [
+    {
+      title: "One source of truth",
+      body: "The dashboard, the reports and the AI assistant read the same numbers, so nobody argues about whose spreadsheet is right.",
+    },
+    {
+      title: "From chart to record",
+      body: "Tap a day or a house to see the records behind it. A dashboard should answer the next question, not just the first one.",
+    },
+    {
+      title: "AI that can read the data",
+      body: "Managers ask in plain English and get answers from live data through read-only, checked queries, with the chart that backs it up.",
+    },
+  ],
+};
 
 // "AI in operations" section: how AI is used at RBR, all in production.
 export const ai = {
@@ -228,10 +250,11 @@ export const projects: Project[] = [
 ];
 
 export const skills = [
+  "AI Integration", "LLM Agents", "Dashboards", "Data Visualization", "KPI Design",
   "Process Mapping", "Process Automation", "Inventory & Occupancy Planning",
   "Vendor Management", "Data Reconciliation", "Root-cause Analysis",
   "Dashboards & Reporting", "Workflow Design", "Contract Automation",
-  "SQL", "PostgreSQL", "AI Agents", "TypeScript", "Next.js", "SwiftUI",
+  "SQL", "PostgreSQL", "TypeScript", "Next.js", "SwiftUI",
   "GitHub Actions", "Azure", "English & 中文",
 ];
 

@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import AISection from "@/components/AISection";
+import Dashboard from "@/components/Dashboard";
 import Showcase from "@/components/Showcase";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
@@ -21,6 +22,7 @@ export default function Home() {
         <Hero />
         <About />
         <AISection />
+        <Dashboard />
         <Showcase />
         <Projects />
         <Experience />
