@@ -873,7 +873,7 @@ section[id] { scroll-margin-top: 0; }
 .mt-token.co-skywater .mt-token-in { --co: #3987e5; } .mt-token.co-belong .mt-token-in { --co: #a78bfa; } .mt-token.co-rbr .mt-token-in { --co: #f472b6; }
 .mt-role.co-skywater { --co: #3987e5; } .mt-role.co-belong { --co: #a78bfa; } .mt-role.co-rbr { --co: #f472b6; }
 .mt-note { margin: 10px 0 0; font-size: 12px; color: var(--text-faint); }
-.mt-autos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+.mt-autos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 18px; }
 .mt-auto { --co: var(--accent); padding: 20px 22px; border-top: 4px solid var(--co); }
 .mt-auto.co-skywater { --co: #3987e5; } .mt-auto.co-belong { --co: #a78bfa; } .mt-auto.co-rbr { --co: #f472b6; }
 .mt-auto-head strong { display: block; font-size: 16px; }

@@ -14,9 +14,9 @@ export const profile = {
   headline: "Supply Chain & S&OP Planning",
   title: "Supply Chain & S&OP Planner", // big line under your name // used in the browser tab title
   rolePrefix: "Planning powered by",
-  roles: ["AI integration", "live dashboards", "data visualization", "clean, reconciled data"],
+  roles: ["live dashboards", "data visualization", "clean, reconciled data"],
   tagline:
-    "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. I build the AI tools and live dashboards that keep the plan accurate.",
+    "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. Outside SkyWater, I manage five departments at Belong and co-own a property business I automated with AI.",
   location: "Austin, TX",
   locationPlaceholder: false,
   github: "https://github.com/yangkeren0720",
@@ -271,7 +271,7 @@ export const experience: Experience[] = [
 
 // "AI in operations" section: how AI is used at RBR, all in production.
 export const ai = {
-  title: "I use AI to run supply chain work faster and with fewer errors.",
+  title: "I use AI to run my property business faster and with fewer errors.",
   intro:
     "All of these run in production at RBR. Watch them work:",
   uses: [
