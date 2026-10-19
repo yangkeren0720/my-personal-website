@@ -11,12 +11,19 @@ export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
   status: "Seeking Supply Chain Specialist & S&OP Planner roles", // small badge above your name; "" hides it
-  headline: "Supply Chain & S&OP Planning",
+  headline: "Supply Chain & S&OP Planner who builds software",
   title: "Supply Chain & S&OP Planner", // big line under your name // used in the browser tab title
-  rolePrefix: "Planning powered by",
-  roles: ["live dashboards", "data visualization", "clean, reconciled data"],
+  rolePrefix: "who also builds",
+  roles: ["software", "websites", "live dashboards"],
+  // Proof chips under the tagline: each one jumps to the work that backs it.
+  // All of it is RBR work (and this site), never SkyWater.
+  builds: [
+    { label: "Software", detail: "Admin system + iPhone app", href: "#rbr-build" },
+    { label: "Websites", detail: "rbrpmrealty.com and this site", href: "#work" },
+    { label: "Dashboards", detail: "Inventory, capacity, vacancy", href: "#work" },
+  ],
   tagline:
-    "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. Outside SkyWater, I manage five departments at Belong and co-own a property business I automated with AI.",
+    "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. Outside SkyWater, I manage five departments at Belong and co-own a property business whose software, website and dashboards I built by directing AI.",
   location: "Austin, TX",
   locationPlaceholder: false,
   github: "https://github.com/yangkeren0720",
@@ -251,7 +258,7 @@ export const experience: Experience[] = [
     title: "Co-Owner",
     org: "RBR Property Management",
     place: "Austin area · side business",
-    summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing two AI coding agents, Claude Code and OpenAI Codex.",
+    summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing Claude Code and Codex, each cross-checking the other, with every output checked against real records.",
     highlights: [
       "Built operations dashboards for 41 rooms: a live inventory of every room's status, a semester-by-semester capacity plan, an occupancy calendar and vacancy by house and quarter.",
       "Launched the platform behind them (public website, 35-screen admin system and an iPhone/iPad app) and shipped 364 live updates in 7 months.",
@@ -285,12 +292,12 @@ export const experience: Experience[] = [
         did: [
           "Online application that saves as you go and links the applicant to the room they want.",
           "Lease Generator fills the lease from the application; one click sends it to DocuSign.",
-          "Robots enter the signed lease, deposit and move-in inspection in TenantCloud, and 10+ kinds of emails go out on schedule.",
+          "Robots enter the signed lease, deposit and move-in inspection in TenantCloud, and 12 automatic emails go out along the way.",
         ],
         kpis: [
           { value: "~15 min", label: "hands-on per new lease" },
           { value: "~1 h 40", label: "per lease before" },
-          { value: "10+", label: "automatic email types" },
+          { value: "12", label: "automatic emails" },
         ],
         flow: ["Apply", "Lease", "DocuSign", "TenantCloud", "Move-in"],
       },
@@ -318,12 +325,12 @@ export const experience: Experience[] = [
         job: "A native admin app on the same live data, so the business runs from a phone.",
         did: [
           "32 native screens for rooms, applicants, leases and settings.",
-          "180 API endpoints shared with the website, written down in an OpenAPI contract.",
+          "184 API endpoints shared with the website, written down in an OpenAPI contract.",
           "Built by Codex and reviewed by Claude, with a test server of made-up data.",
         ],
         kpis: [
           { value: "32", label: "app screens" },
-          { value: "180", label: "API endpoints" },
+          { value: "184", label: "API endpoints" },
         ],
         flow: ["Database", "API contract", "Website", "App"],
       },
@@ -333,13 +340,13 @@ export const experience: Experience[] = [
         period: "2026",
         job: "All business data moved out of scattered files into one database that the website and app share.",
         did: [
-          "189 tables and 106 schema migrations, moved over in 9 batches.",
+          "196 tables and 111 schema migrations, moved over in 9 batches.",
           "Change history with undo, plus backups and a recycle bin.",
           "Hosting and services kept to about $45–80 a month.",
         ],
         kpis: [
-          { value: "189", label: "tables" },
-          { value: "106", label: "migrations" },
+          { value: "196", label: "tables" },
+          { value: "111", label: "migrations" },
           { value: "$45–80", label: "a month" },
         ],
         flow: ["Old files", "9 batches", "PostgreSQL", "Website + app"],
@@ -534,9 +541,9 @@ export const rbrPlatform = {
     { group: "AI", items: ["Claude API (Opus, Sonnet, Haiku)", "Claude Code", "OpenAI Codex"] },
   ],
   numbers: [
-    { value: 189, label: "database tables" },
-    { value: 106, label: "schema migrations" },
-    { value: 180, label: "API endpoints shared by site and app" },
+    { value: 196, label: "database tables" },
+    { value: 111, label: "schema migrations" },
+    { value: 184, label: "API endpoints shared by site and app" },
     { value: 35, label: "admin screens" },
     { value: 39000, prefix: "~", label: "automated checks in one release test" },
     { value: 80, prefix: "$45–", label: "a month for hosting and services" },

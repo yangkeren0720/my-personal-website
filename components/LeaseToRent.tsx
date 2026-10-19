@@ -301,7 +301,7 @@ export default function LeaseToRent() {
         {[
           [8, "lease scenarios, mapped step by step"],
           [12, "automatic emails along the way"],
-          [18, "Claude API features at work"],
+          [19, "Claude API features at work"],
           [3, "Claude robots that log in to TenantCloud"],
         ].map(([n, label], i) => (
           <Reveal key={label as string} delay={i * 0.08} className="co-kpi">

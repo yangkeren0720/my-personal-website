@@ -77,6 +77,20 @@ main, .footer { position: relative; z-index: 1; }
 .hero-role-slot > span { display: inline-block; }
 .hero-tagline { max-width: 620px; color: var(--text-dim); font-size: 18px; margin: 20px 0 36px; }
 .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.hero-builds { display: flex; flex-wrap: wrap; gap: 12px; margin: -12px 0 32px; }
+.hero-build { display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: var(--text); text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+.hero-build:hover { border-color: var(--accent); transform: translateY(-2px); }
+.hero-build svg { color: var(--accent); flex: none; }
+.hero-build span { display: flex; flex-direction: column; line-height: 1.25; }
+.hero-build strong { font-size: 15px; font-weight: 600; }
+.hero-build small { font-size: 12.5px; color: var(--text-dim); }
+@media (max-width: 560px) {
+  .hero-builds { gap: 8px; flex-wrap: nowrap; }
+  .hero-build { flex: 1 1 0; flex-direction: column; gap: 6px; padding: 12px 6px; text-align: center; }
+  .hero-build span { align-items: center; }
+  .hero-build strong { font-size: 13.5px; }
+  .hero-build small { display: none; }
+}
 .hero-loc { margin-left: 8px; font-size: 14px; color: var(--text-faint); }
 .scroll-cue {
   position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
