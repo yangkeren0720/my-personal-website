@@ -39,7 +39,7 @@ const stories: Story[] = [
     short: "Risk report",
     title: "Fixed a report that hid new materials",
     tag: "Dive Deep",
-    lines: ["The zero-bin report relied on past usage.", "New items with no history never showed up.", "Rebuilt the logic: ~100 → ~250 materials visible."],
+    lines: ["The zero-bin report relied on past usage.", "New items with no history never showed up.", "Widened it to all ~5,000 reorder-point items."],
     visual: "report",
   },
   {
@@ -201,20 +201,20 @@ function ResetVisual() {
         </div>
       ))}
       <motion.div className="v-badge" {...pop(2)}>
-        MRP auto-release ✓
+        MRP planning ✓
       </motion.div>
     </div>
   );
 }
 
 function ReportVisual() {
-  const [n, setN] = useState(100);
+  const [n, setN] = useState(250);
   useEffect(() => {
     const t = setTimeout(() => {
       const start = performance.now();
       const tick = (now: number) => {
         const p = Math.min(1, (now - start) / 1600);
-        setN(Math.round(100 + 150 * (1 - Math.pow(1 - p, 3))));
+        setN(Math.round((250 + 4750 * (1 - Math.pow(1 - p, 3))) / 10) * 10);
         if (p < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
@@ -229,8 +229,8 @@ function ReportVisual() {
         ))}
       </div>
       <div className="v-big">
-        <span className="v-num">{n}</span>
-        <span>materials visible</span>
+        <span className="v-num">{n === 5000 ? "~5,000" : n.toLocaleString()}</span>
+        <span>items checked weekly</span>
       </div>
       <div className="v-legend">
         <span>

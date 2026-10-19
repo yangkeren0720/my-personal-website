@@ -44,7 +44,7 @@ export default function PlanningCharts() {
             <EndOfLife />
           </Reveal>
         </div>
-        <p className="lab-note">Sample data, shaped like real planning work. No employer data is shown.</p>
+        <p className="lab-note">Sample data, shaped like real planning work. No employer names or quantities are shown.</p>
       </div>
   );
 }
@@ -324,6 +324,7 @@ function EarlyWarning() {
 /* ---------- 3. Weeks of inventory (WOI) per material ---------- */
 
 const WOI_MIN = 4; // 4 weeks is the floor unless storage limits it
+const WOI_HIGH = 3; // under 3 weeks is high risk, 3–4 medium (the weekly risk tiers)
 const WOI_SCALE = 10;
 const WOI_WEEKS = 12;
 const WOI_TICKS = [0, 2, 4, 6, 8, 10];
@@ -340,10 +341,10 @@ const woiData: { name: string; woi: number[]; storage?: boolean }[] = [
   { name: "Etch gas", woi: [5.9, 5.6, 5.3, 5.0, 4.7, 4.4, 4.1, 5.6, 5.3, 5.0, 4.7, 4.4] },
 ];
 
-type WoiStatus = "min" | "lim" | "ok";
-const woiStatus = (v: number, m: number): WoiStatus => (v >= WOI_MIN ? "ok" : woiData[m].storage ? "lim" : "min");
-const woiLabel: Record<WoiStatus, string> = { min: "Below minimum", lim: "Storage-limited", ok: "At or above minimum" };
-const woiIcon: Record<WoiStatus, string> = { min: "⚠", lim: "▣", ok: "✓" };
+type WoiStatus = "min" | "med" | "lim" | "ok";
+const woiStatus = (v: number, m: number): WoiStatus => (v >= WOI_MIN ? "ok" : woiData[m].storage ? "lim" : v < WOI_HIGH ? "min" : "med");
+const woiLabel: Record<WoiStatus, string> = { min: "High risk (under 3 wks)", med: "Medium risk (3–4 wks)", lim: "Storage-limited", ok: "At or above minimum" };
+const woiIcon: Record<WoiStatus, string> = { min: "⚠", med: "!", lim: "▣", ok: "✓" };
 
 function WOIView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -375,7 +376,11 @@ function WOIView() {
           <div className="lab-kpis">
             <div>
               <strong className="bad">{count(["min"])}</strong>
-              <span>below 4-wk minimum</span>
+              <span>under 3 wks</span>
+            </div>
+            <div>
+              <strong className="warn">{count(["med"])}</strong>
+              <span>3–4 wks</span>
             </div>
             <div>
               <strong>{count(["lim"])}</strong>
@@ -383,7 +388,7 @@ function WOIView() {
             </div>
             <div>
               <strong>{count(["ok"])}</strong>
-              <span>at or above minimum</span>
+              <span>4+ wks</span>
             </div>
           </div>
 
@@ -458,7 +463,10 @@ function WOIView() {
               <i className="sw ref" /> 4-wk minimum
             </span>
             <span>
-              <i className="sw woi-key min" /> ⚠ Below minimum
+              <i className="sw woi-key min" /> ⚠ High risk, under 3 wks
+            </span>
+            <span>
+              <i className="sw woi-key med" /> ! Medium, 3–4 wks
             </span>
             <span>
               <i className="sw woi-key lim" /> ▣ Storage-limited
@@ -467,7 +475,7 @@ function WOIView() {
               <i className="sw woi-key ok" /> ✓ At or above minimum
             </span>
           </div>
-          <p className="woi-note">4 weeks is the floor. Where on-site storage is limited, stock can sit below it on site, and extra is kept at a nearby third-party warehouse.</p>
+          <p className="woi-note">4 weeks is the floor; under 3 weeks is high risk and goes on the weekly risk review. Where on-site storage is limited, stock can sit below it on site, and extra is kept at a nearby third-party warehouse.</p>
         </div>
       </div>
     </>
@@ -591,6 +599,10 @@ function EndOfLife() {
           <motion.path d={pB} initial={{ d: pB }} animate={{ d: pB }} transition={{ duration: 0.7, ease }} className="lab-line hl" />
           {aOut && <motion.circle key={"a" + slip} initial={{ scale: 0 }} animate={{ scale: 1 }} cx={x(outA)} cy={y(0)} r={5} className="lab-stockout" style={{ transformOrigin: `${x(outA)}px ${y(0)}px` }} />}
           {bOut && <motion.circle key={"b" + slip} initial={{ scale: 0 }} animate={{ scale: 1 }} cx={x(outB)} cy={y(0)} r={5} className="lab-stockout" style={{ transformOrigin: `${x(outB)}px ${y(0)}px` }} />}
+          <line x1={pad.l} x2={W - pad.r} y1={y(100)} y2={y(100)} className="lab-ref cap" />
+          <text x={W - pad.r - 6} y={y(100) + 15} textAnchor="end" className="lab-ref-label">
+            on-site storage, ~100
+          </text>
           <line x1={x(EOL_WEEKS - 1)} x2={x(EOL_WEEKS - 1)} y1={pad.t} y2={H - pad.b} className="lab-marker" />
           <text x={x(EOL_WEEKS - 1) - 6} y={pad.t + 10} textAnchor="end" className="lab-ref-label strong">
             shelf life ends
@@ -622,6 +634,7 @@ function EndOfLife() {
           <i className="sw stockout" /> Runs out
         </span>
       </div>
+      <p className="woi-note">On-site storage holds about 100 bottles, so the rest of the final buy waits at a nearby third-party warehouse and comes in as it's used.</p>
     </>
   );
 }

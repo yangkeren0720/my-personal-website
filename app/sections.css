@@ -602,7 +602,7 @@ main, .footer { position: relative; z-index: 1; }
 .lab-toggle button.on { color: var(--bg); }
 .lab-toggle button span { position: relative; z-index: 1; }
 .lab-toggle button .lab-pill { position: absolute; inset: 0; z-index: 0; border-radius: 999px; background: var(--text); }
-.lab-kpis { display: flex; gap: 28px; }
+.lab-kpis { display: flex; flex-wrap: wrap; gap: 10px 28px; }
 .lab-kpis div { display: flex; flex-direction: column; }
 .lab-kpis strong { display: inline-block; font-size: 26px; font-weight: 700; line-height: 1.1; color: var(--text); }
 .lab-kpis span { font-size: 12px; color: var(--text-faint); }
@@ -1474,3 +1474,30 @@ section[id] { scroll-margin-top: 0; }
   .rp { --rp-name: 78px; }
   .rp-row { grid-template-columns: 78px minmax(0, 1fr); }
 }
+
+/* SkyWater extras: zero-bin rate, usage check, supplier changes */
+.zb-dot { fill: var(--series-1); stroke: var(--surface-1); stroke-width: 1.5px; }
+.zb-dot.under { fill: var(--good-mark); }
+.sw.zb-under { width: 10px; height: 10px; border-radius: 50%; background: var(--good-mark); }
+.uc { display: flex; flex-direction: column; gap: 8px; }
+.uc-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) 48px; gap: 10px; align-items: center; font-size: 13px; color: var(--text-dim); }
+.uc-track { position: relative; height: 16px; border-radius: 4px; background: rgba(var(--fg-rgb), 0.05); }
+.uc-bar { position: absolute; left: 0; top: 2px; bottom: 2px; border-radius: 0 4px 4px 0; background: rgba(var(--fg-rgb), 0.28); transition: background 0.3s; }
+.uc-row.on .uc-bar { background: var(--critical); }
+.uc-row.on .uc-name, .uc-row.on .uc-val { color: var(--text); font-weight: 600; }
+.uc-th { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1.5px dashed var(--text-dim); transition: left 0.4s; }
+.uc-val { font-variant-numeric: tabular-nums; text-align: right; }
+.chg-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.chg-card { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.chg-card b { font-size: 15px; color: var(--text); }
+.chg-card p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--text-dim); }
+.chg-top { display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px; }
+.chg-tag { padding: 2px 9px; border-radius: 999px; color: var(--series-1); border: 1px solid color-mix(in srgb, var(--series-1) 45%, transparent); font-weight: 600; }
+.chg-status { color: var(--text-faint); }
+.woi-bar.med, .sw.woi-key.med { background: var(--warning); }
+.woi-val.med b { color: var(--warning-ink, var(--warning)); }
+.woi-dot.med { fill: var(--warning); }
+.lab-ref.cap { stroke: var(--warning-ink, var(--warning)); }
+@media (max-width: 900px) { .chg-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .chg-list { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .lab-kpis { gap: 8px 18px; } .lab-kpis strong { font-size: 22px; } }
