@@ -8,6 +8,7 @@ import StoryCards from "./StoryCards";
 import LeaseToRent from "./LeaseToRent";
 import RBRDevices from "./RBRDevices";
 import RBRBuild from "./RBRBuild";
+import RBRWorkflow from "./RBRWorkflow";
 
 // Everything from RBR Property Management, the side business Eva co-owns.
 export default function RBRSection() {
@@ -31,6 +32,8 @@ export default function RBRSection() {
         <LeaseToRent />
         <SubHead id="work">The platform</SubHead>
         <Showcase />
+        <SubHead id="rbr-flow">Application to move-in</SubHead>
+        <RBRWorkflow />
         <SubHead id="rbr-phone">On the phone</SubHead>
         <RBRDevices />
         <SubHead id="rbr-build">How it's built</SubHead>

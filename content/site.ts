@@ -250,11 +250,122 @@ export const experience: Experience[] = [
     period: "2023 — Present",
     title: "Co-Owner",
     org: "RBR Property Management",
-    place: "Side business",
-    summary: "Co-own a student-housing business; built its systems, dashboards and AI tools with Claude Code and Codex, each cross-checking the other.",
-    highlights: [],
+    place: "Austin area · side business",
+    summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing two AI coding agents, Claude Code and OpenAI Codex.",
+    highlights: [
+      "Built operations dashboards for 41 rooms: a live inventory of every room's status, a semester-by-semester capacity plan, an occupancy calendar and vacancy by house and quarter.",
+      "Launched the platform behind them (public website, 35-screen admin system and an iPhone/iPad app) and shipped 364 live updates in 7 months.",
+      "Automated the path from application to signed lease to move-in, cutting hands-on time per new lease from about 1 hour 40 minutes to about 15 minutes.",
+      "Put 19 AI features into production, including 3 robots that do TenantCloud data entry, saving about 180 hours of office work a year.",
+    ],
+    programsLabel: "Tap a project to see what I did",
+    programs: [
+      {
+        name: "Operations dashboards",
+        place: "Admin system",
+        period: "2026",
+        job: "One live view of supply and demand for every room, so each semester is planned before it starts.",
+        did: [
+          "Built a live room inventory with six states (open, pending, filled, not listed, freeing up, signed to finish) by house and room.",
+          "Built a semester capacity plan: rooms carried over, newly signed, waiting for signature and still open, three semesters ahead.",
+          "Added an occupancy calendar and a vacancy rate by house and quarter, with the counting rule written on the page.",
+        ],
+        kpis: [
+          { value: "41", label: "rooms tracked live" },
+          { value: "6", label: "room states" },
+          { value: "3", label: "semesters planned ahead" },
+        ],
+        flow: ["Inventory", "Demand", "Leases", "Move-ins"],
+      },
+      {
+        name: "Lease pipeline",
+        place: "Website + admin",
+        period: "2026",
+        job: "Application to signed lease to move-in, with no retyping between steps.",
+        did: [
+          "Online application that saves as you go and links the applicant to the room they want.",
+          "Lease Generator fills the lease from the application; one click sends it to DocuSign.",
+          "Robots enter the signed lease, deposit and move-in inspection in TenantCloud, and 10+ kinds of emails go out on schedule.",
+        ],
+        kpis: [
+          { value: "~15 min", label: "hands-on per new lease" },
+          { value: "~1 h 40", label: "per lease before" },
+          { value: "10+", label: "automatic email types" },
+        ],
+        flow: ["Apply", "Lease", "DocuSign", "TenantCloud", "Move-in"],
+      },
+      {
+        name: "AI in operations",
+        place: "Claude API",
+        period: "2026",
+        job: "AI features in production, each with its own model, effort level and daily budget.",
+        did: [
+          "Robots that enter leases, request move-in inspections and prorate last-month rent in TenantCloud, which has no API.",
+          "WhatsApp reply drafts and a signed-lease PDF reader; nothing is sent or saved until a person approves.",
+          "Every AI call is logged with its cost, with a monthly budget warning.",
+        ],
+        kpis: [
+          { value: "19", label: "AI features" },
+          { value: "3", label: "TenantCloud robots" },
+          { value: "~180 h", label: "office work saved a year" },
+        ],
+        flow: ["Read", "Draft", "Person approves", "Save"],
+      },
+      {
+        name: "iPhone & iPad app",
+        place: "Swift / SwiftUI",
+        period: "2026",
+        job: "A native admin app on the same live data, so the business runs from a phone.",
+        did: [
+          "32 native screens for rooms, applicants, leases and settings.",
+          "180 API endpoints shared with the website, written down in an OpenAPI contract.",
+          "Built by Codex and reviewed by Claude, with a test server of made-up data.",
+        ],
+        kpis: [
+          { value: "32", label: "app screens" },
+          { value: "180", label: "API endpoints" },
+        ],
+        flow: ["Database", "API contract", "Website", "App"],
+      },
+      {
+        name: "Data platform",
+        place: "PostgreSQL on Azure",
+        period: "2026",
+        job: "All business data moved out of scattered files into one database that the website and app share.",
+        did: [
+          "189 tables and 106 schema migrations, moved over in 9 batches.",
+          "Change history with undo, plus backups and a recycle bin.",
+          "Hosting and services kept to about $45–80 a month.",
+        ],
+        kpis: [
+          { value: "189", label: "tables" },
+          { value: "106", label: "migrations" },
+          { value: "$45–80", label: "a month" },
+        ],
+        flow: ["Old files", "9 batches", "PostgreSQL", "Website + app"],
+      },
+      {
+        name: "AI build process",
+        place: "Claude Code + Codex",
+        period: "2026",
+        job: "How a non-programmer ships software safely: one AI builds, the other reviews.",
+        did: [
+          "Write a brief for each task: the goal, files allowed to change, checks to run and what done means.",
+          "Claude builds the website and Codex the app; each reviews the other's work, sorted into must fix, should fix and note.",
+          "Every change runs on a test database first; one nightly release goes live after my typed approval.",
+        ],
+        kpis: [
+          { value: "364", label: "live updates in 7 months" },
+          { value: "~39,000", label: "checks in one release test" },
+          { value: "36", label: "audit issues fixed" },
+        ],
+        flow: ["Brief", "Build", "Cross-review", "Test copy", "Release"],
+      },
+    ],
     links: [
-      { label: "RBR platform", href: "#work" },
+      { label: "Dashboards", href: "#work" },
+      { label: "On the phone", href: "#rbr-phone" },
+      { label: "How it's built", href: "#rbr-build" },
       { label: "AI demos", href: "#ai" },
     ],
   },
@@ -331,8 +442,24 @@ export const featured = {
   // in the browser bar.
   features: [
     {
+      title: "Operations Dashboard",
+      body: "Today's work queue and a semester-by-semester plan for every room: carried over, newly signed, waiting for signature and still open, plus vacancy by house and quarter.",
+      screen: "admin",
+      video: "/rbr/rbr-dashboard.mp4",
+      poster: "/rbr/rbr-dashboard.jpg",
+      path: "rbrpmrealty.com/admin",
+    },
+    {
+      title: "Inventory & Occupancy",
+      body: "Every room's status at a glance (open, pending, filled, freeing up), then a month-by-month occupancy calendar of every lease and move-in.",
+      screen: "admin",
+      video: "/rbr/rbr-inventory.mp4",
+      poster: "/rbr/rbr-inventory.jpg",
+      path: "rbrpmrealty.com/admin?tab=availability",
+    },
+    {
       title: "Live Room Inventory",
-      body: "Every open room, live from the same database the admin screens use, with house photos and an interactive floor plan.",
+      body: "The public side of the same data: every open room on the website, live from the database the dashboards use, with house photos and an interactive floor plan.",
       screen: "houses",
       video: "/rbr/rbr-home.mp4",
       poster: "/rbr/rbr-home.jpg",
@@ -361,14 +488,6 @@ export const featured = {
       video: "/rbr/rbr-lease-generator.mp4",
       poster: "/rbr/rbr-lease-generator.jpg",
       path: "rbrpmrealty.com/admin/lease-generator",
-    },
-    {
-      title: "Occupancy Planning",
-      body: "One calendar for every room, lease and move-in.",
-      screen: "admin",
-      video: "/rbr/rbr-admin-planning.mp4",
-      poster: "/rbr/rbr-admin-planning.jpg",
-      path: "rbrpmrealty.com/admin",
     },
     {
       title: "Robots & Lease Flows",
@@ -422,6 +541,15 @@ export const rbrPlatform = {
     { value: 39000, prefix: "~", label: "automated checks in one release test" },
     { value: 80, prefix: "$45–", label: "a month for hosting and services" },
   ] as { value: number; prefix?: string; label: string }[],
+  // Value stream for one new lease: hands-on minutes by hand versus now (rough
+  // estimates from the robots' step lists, so the site says "about").
+  workflow: [
+    { step: "Write the lease and send it to sign", who: "Website", before: 45, now: 10, how: "The Lease Generator fills it from the application; one click sends it to DocuSign." },
+    { step: "Enter the lease in TenantCloud", who: "Robot", before: 20, now: 2, how: "A robot adds the tenant, dates, rent, prorated first month, deposit and signed PDF." },
+    { step: "Move-in email and inspection", who: "Robot", before: 15, now: 1, how: "Door code, Wi-Fi and checklist go out 5 days ahead; a robot assigns the inspection." },
+    { step: "Welcome and setup emails", who: "Website", before: 10, now: 0, how: "Sent automatically once everyone has signed." },
+    { step: "Last-month rent proration", who: "Robot", before: 7, now: 1, how: "A robot prorates rent and the cleaning fee when a lease ends mid-month." },
+  ],
   // How each change is made: two AI coding agents, one builds and the other reviews.
   loop: [
     { step: "Brief", body: "I write the goal, the files allowed to change, the checks to run and what done means." },

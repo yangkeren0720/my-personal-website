@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { rbrPlatform } from "@/content/site";
 import Counter from "./Counter";
 import Reveal from "./Reveal";
@@ -15,14 +15,17 @@ export default function RBRBuild() {
   const { stack, numbers, loop } = rbrPlatform;
   const [step, setStep] = useState(0);
   const [auto, setAuto] = useState(true);
+  // Hovering or tabbing into the loop holds the current step so it can be read.
+  const [hold, setHold] = useState(false);
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-80px 0px -80px 0px" });
 
   useEffect(() => {
-    if (!auto || !inView) return;
+    if (!auto || hold || reduce || !inView) return;
     const t = setTimeout(() => setStep((s) => (s + 1) % loop.length), STEP_MS);
     return () => clearTimeout(t);
-  }, [step, auto, inView, loop.length]);
+  }, [step, auto, hold, reduce, inView, loop.length]);
 
   return (
     <div className="rbr-build">
@@ -61,7 +64,16 @@ export default function RBRBuild() {
       </div>
 
       <Reveal>
-        <div className="rbr-loop" ref={ref}>
+        <div
+          className="rbr-loop"
+          ref={ref}
+          onMouseEnter={() => setHold(true)}
+          onMouseLeave={() => setHold(false)}
+          onFocus={() => setHold(true)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHold(false);
+          }}
+        >
           <ol className="rbr-loop-steps">
             {loop.map((s, i) => (
               <li key={s.step}>

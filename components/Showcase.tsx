@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion } from "framer-motion";
 import { featured } from "@/content/site";
 import Collapse from "./Collapse";
 import Reveal from "./Reveal";
@@ -33,7 +33,9 @@ export default function Showcase() {
 
   const current = featured.features[active];
   const advance = useCallback(() => setActive((a) => (a + 1) % featured.features.length), []);
-  const autoplay = wide && !paused;
+  // Visitors who ask for less motion change tabs themselves.
+  const reduce = useReducedMotion();
+  const autoplay = wide && !paused && !reduce;
 
   // A clip the browser can't play keeps its still frame and moves on with the timer.
   const [broken, setBroken] = useState<string | null>(null);
@@ -65,7 +67,15 @@ export default function Showcase() {
           </div>
         </Reveal>
 
-        <div className="showcase" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div
+          className="showcase"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setPaused(false);
+          }}
+        >
           <div className="showcase-tabs" role="tablist">
             {featured.features.map((f, i) => (
               <button
