@@ -325,28 +325,110 @@ export const featured = {
     "Inventory, demand, orders and fulfillment in one system, replacing spreadsheets and email.",
   link: "https://www.rbrpmrealty.com",
   tags: ["Process automation", "Inventory & occupancy", "Vendor integration", "Data reconciliation", "PostgreSQL", "DocuSign", "AI agents"],
-  // Each item becomes a tab in the interactive showcase.
+  // Each item becomes a tab in the interactive showcase. `video` is a real
+  // screen recording in /public/rbr (public pages from the live site, admin
+  // screens from a test copy with made-up data); `path` is the address shown
+  // in the browser bar.
   features: [
     {
       title: "Live Room Inventory",
-      body: "Live availability for every room, plus a quiz that matches students to rooms.",
+      body: "Every open room, live from the same database the admin screens use, with house photos and an interactive floor plan.",
       screen: "houses",
+      video: "/rbr/rbr-home.mp4",
+      poster: "/rbr/rbr-home.jpg",
+      path: "rbrpmrealty.com",
+    },
+    {
+      title: "Room Match Quiz",
+      body: "Eight quick questions rank today's open rooms by fit, then the student applies in one click.",
+      screen: "houses",
+      video: "/rbr/rbr-room-match.mp4",
+      poster: "/rbr/rbr-room-match.jpg",
+      path: "rbrpmrealty.com/room-match",
     },
     {
       title: "Online Applications",
       body: "A save-as-you-go application, so no applicant falls through the cracks.",
       screen: "apply",
+      video: "/rbr/rbr-apply.mp4",
+      poster: "/rbr/rbr-apply.jpg",
+      path: "rbrpmrealty.com/application",
     },
     {
       title: "Lease Automation",
       body: "Approved applicant to signed lease, with no retyping.",
       screen: "lease",
+      video: "/rbr/rbr-lease-generator.mp4",
+      poster: "/rbr/rbr-lease-generator.jpg",
+      path: "rbrpmrealty.com/admin/lease-generator",
     },
     {
       title: "Occupancy Planning",
       body: "One calendar for every room, lease and move-in.",
       screen: "admin",
+      video: "/rbr/rbr-admin-planning.mp4",
+      poster: "/rbr/rbr-admin-planning.jpg",
+      path: "rbrpmrealty.com/admin",
     },
+    {
+      title: "Robots & Lease Flows",
+      body: "Every lease scenario mapped step by step: what the website does, what the TenantCloud robots do, and what is left for a person.",
+      screen: "lease",
+      video: "/rbr/rbr-lease-flows.mp4",
+      poster: "/rbr/rbr-lease-flows.jpg",
+      path: "rbrpmrealty.com/admin/lease-flows",
+    },
+  ] as { title: string; body: string; screen: string; video?: string; poster?: string; path?: string }[],
+  recordingNote: "Real screen recordings. Admin and app screens show made-up sample data.",
+};
+
+// The RBR platform's own numbers, its phone views and how it is built.
+// Counts are from the platform's code and release history (Oct 2026).
+export const rbrPlatform = {
+  kpis: [
+    { value: 41, label: "rooms in 8 houses run on the platform" },
+    { value: 364, label: "live updates shipped in 7 months" },
+    { value: 19, label: "AI features in production, each with its own model and budget" },
+  ],
+  devices: [
+    {
+      title: "The public site on a phone",
+      body: "Every page works on a phone: house photos, floor plans and the live room list.",
+      video: "/rbr/rbr-phone.mp4",
+      poster: "/rbr/rbr-phone.jpg",
+      kind: "web",
+    },
+    {
+      title: "The iPhone & iPad admin app",
+      body: "A native Swift app with 32 screens that runs the same admin actions as the website, so the business runs from a phone.",
+      video: "/rbr/rbr-app.mp4",
+      poster: "/rbr/rbr-app.jpg",
+      kind: "app",
+    },
+  ],
+  stack: [
+    { group: "Website", items: ["Next.js 15", "React 19", "JavaScript"] },
+    { group: "Data", items: ["PostgreSQL", "Prisma", "Change history & undo"] },
+    { group: "Cloud", items: ["Microsoft Azure", "GitHub Actions CI/CD"] },
+    { group: "App", items: ["Swift / SwiftUI", "OpenAPI contract"] },
+    { group: "Integrations", items: ["DocuSign", "Microsoft 365 & sign-in", "TenantCloud", "WhatsApp", "Google Maps"] },
+    { group: "AI", items: ["Claude API (Opus, Sonnet, Haiku)", "Claude Code", "OpenAI Codex"] },
+  ],
+  numbers: [
+    { value: 189, label: "database tables" },
+    { value: 106, label: "schema migrations" },
+    { value: 180, label: "API endpoints shared by site and app" },
+    { value: 35, label: "admin screens" },
+    { value: 39000, prefix: "~", label: "automated checks in one release test" },
+    { value: 80, prefix: "$45–", label: "a month for hosting and services" },
+  ] as { value: number; prefix?: string; label: string }[],
+  // How each change is made: two AI coding agents, one builds and the other reviews.
+  loop: [
+    { step: "Brief", body: "I write the goal, the files allowed to change, the checks to run and what done means." },
+    { step: "Build", body: "One AI builds it on its own branch: Claude for the website, Codex for the app." },
+    { step: "Cross-review", body: "The other AI reviews every change. The same model never builds and reviews." },
+    { step: "Test copy", body: "Each change runs on a test database with made-up data, never on live records." },
+    { step: "Nightly release", body: "Finished work is combined and tested together, then goes live after my typed approval." },
   ],
 };
 

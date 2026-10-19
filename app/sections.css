@@ -1235,3 +1235,53 @@ section[id] { scroll-margin-top: 0; }
   .bai-flow li:not(:last-child)::after { content: "↓"; right: auto; left: 22px; top: auto; bottom: -13px; transform: none; }
   .bai-flow li:nth-child(2)::after { display: block; }
 }
+
+/* ---------- RBR: real screen recordings, phones, how it's built ---------- */
+.browser-body.has-video { height: auto; aspect-ratio: 16 / 10; padding: 0; background: #f4f7f7; }
+.browser-body.has-video .screen { position: absolute; inset: 0; }
+.screen-video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+@media (max-width: 560px) { .browser-body.has-video { height: auto; padding: 0; } }
+.showcase-note { margin: 14px 0 0; font-size: 13px; color: var(--text-faint); text-align: right; }
+@media (max-width: 900px) { .showcase-note { text-align: left; } }
+
+.rbr-devices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+.rbr-device { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+.phone { width: min(270px, 72vw); padding: 10px; border-radius: 46px; background: #0d0d12; border: 1px solid var(--border-strong); box-shadow: 0 40px 90px -40px color-mix(in srgb, var(--co) 70%, transparent), inset 0 0 0 2px rgba(255, 255, 255, 0.06); }
+.phone-screen { position: relative; display: flex; flex-direction: column; aspect-ratio: 600 / 1304; border-radius: 36px; overflow: hidden; background: #fff; }
+.phone-status { position: relative; flex: 0 0 auto; height: 34px; background: #f7fafa; }
+.phone-island { position: absolute; left: 50%; top: 9px; width: 34%; height: 20px; border-radius: 999px; background: #0d0d12; transform: translateX(-50%); }
+.phone-video { display: block; width: 100%; flex: 1 1 auto; min-height: 0; object-fit: cover; object-position: top center; }
+.rbr-device-text { max-width: 340px; }
+.rbr-device-text strong { display: block; margin-bottom: 6px; font-size: 17px; color: var(--text); }
+.rbr-device-text p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--text-dim); }
+@media (max-width: 700px) { .rbr-devices { grid-template-columns: 1fr; gap: 48px; } }
+
+.rbr-build { display: flex; flex-direction: column; gap: 18px; }
+.rbr-stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.rbr-stack-group { padding: 16px 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); }
+.rbr-stack-label { display: block; margin-bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); }
+.rbr-stack-items { display: flex; flex-wrap: wrap; gap: 7px; }
+.rbr-numbers { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.rbr-number { display: flex; flex-direction: column; gap: 4px; padding: 16px 16px 14px; border-radius: 14px; border: 1px solid var(--border); border-top: 3px solid var(--co); background: var(--surface); }
+.rbr-number strong { font-family: var(--font-display); font-size: clamp(26px, 2.6vw, 34px); line-height: 1; font-weight: 400; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rbr-number > span { font-size: 13px; line-height: 1.4; color: var(--text-dim); }
+.rbr-loop { position: relative; padding: 22px 22px 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); }
+.rbr-loop-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.rbr-loop-steps button { width: 100%; display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--text-dim); font: inherit; font-size: 14.5px; text-align: left; cursor: pointer; transition: border-color .3s, background .3s, color .3s; }
+.rbr-loop-steps button:hover { color: var(--text); }
+.rbr-loop-steps button.done { color: var(--text); }
+.rbr-loop-steps button.on { color: var(--text); border-color: var(--co); background: color-mix(in srgb, var(--co) 12%, transparent); }
+.rbr-loop-n { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: rgba(var(--fg-rgb), 0.08); font-size: 12px; font-weight: 700; transition: background .3s, color .3s; }
+.rbr-loop-steps button.on .rbr-loop-n, .rbr-loop-steps button.done .rbr-loop-n { background: var(--co); color: #1a1030; }
+.rbr-loop-track { margin: 16px 0 0; height: 3px; border-radius: 3px; background: rgba(var(--fg-rgb), 0.08); overflow: hidden; }
+.rbr-loop-fill { display: block; height: 100%; border-radius: 3px; background: var(--grad); }
+.rbr-loop-body { margin: 14px 0 0; min-height: 3.2em; font-size: 16px; line-height: 1.55; color: var(--text); }
+.rbr-loop-again { display: block; margin-top: 6px; font-size: 12.5px; color: var(--text-faint); }
+@media (max-width: 1000px) { .rbr-numbers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .rbr-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .rbr-loop-steps { grid-template-columns: 1fr; gap: 8px; } }
+@media (max-width: 560px) {
+  .rbr-stack { grid-template-columns: 1fr; }
+  .rbr-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) { .rbr-stack-group { padding: 13px 15px; } .rbr-stack-label { margin-bottom: 8px; } }
