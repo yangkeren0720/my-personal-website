@@ -1501,3 +1501,23 @@ section[id] { scroll-margin-top: 0; }
 @media (max-width: 900px) { .chg-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .chg-list { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .lab-kpis { gap: 8px 18px; } .lab-kpis strong { font-size: 22px; } }
+.zbs-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.zbs-tile { padding: 12px 14px; border-radius: 12px; background: rgba(var(--fg-rgb), 0.04); border: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px; }
+.zbs-tile strong { font-size: 26px; font-weight: 700; line-height: 1.1; color: var(--text); }
+.zbs-tile strong.good { color: var(--good); }
+.zbs-tile span { font-size: 12px; color: var(--text-faint); }
+.zbs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.zbs-panel { padding: 14px; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.zbs-panel > b { font-size: 14px; color: var(--text); margin-bottom: 2px; }
+.zbs-panel p { margin: 4px 0 0; font-size: 12px; line-height: 1.45; color: var(--text-faint); }
+.zbs-row { display: grid; grid-template-columns: 112px minmax(0, 1fr) 36px; gap: 8px; align-items: center; font-size: 12.5px; color: var(--text-dim); }
+.zbs-track { position: relative; height: 12px; border-radius: 4px; background: rgba(var(--fg-rgb), 0.05); }
+.zbs-bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; background: var(--series-1); }
+.zbs-bar.hl { background: var(--highlight); }
+.zbs-bar.good { background: var(--good-mark); }
+.zbs-bar.warn { background: var(--warning); }
+.zbs-bar.bad { background: var(--critical); }
+.zbs-bar.dim { background: rgba(var(--fg-rgb), 0.28); }
+.zbs-val { text-align: right; font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
+@media (max-width: 900px) { .zbs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .zbs-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .zbs-grid { grid-template-columns: 1fr; } .zbs-tile strong { font-size: 22px; } }

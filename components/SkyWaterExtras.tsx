@@ -127,6 +127,111 @@ function ZeroBinRate() {
   );
 }
 
+/* ---------- Weekly zero-bin summary (week of Oct 19, 2026) ---------- */
+
+// Built from the weekly report's summary tab. Shares only: counts, item,
+// supplier and people names are left out.
+const zbTiles: { v: string; label: string; cls?: string }[] = [
+  { v: "4.8%", label: "zero-bin rate (target 5%)", cls: "good" },
+  { v: "−5%", label: "zero bins vs last week", cls: "good" },
+  { v: "18%", label: "of last week's list cleared" },
+  { v: "14%", label: "of this week's list is new" },
+];
+const zbPanels: { title: string; note: string; rows: { label: string; pct: number; cls?: string }[] }[] = [
+  {
+    title: "Where this week's list came from",
+    note: "Carried-over items each get a note: received, ETA, or a planning change.",
+    rows: [
+      { label: "Carried over", pct: 86 },
+      { label: "New this week", pct: 14, cls: "hl" },
+    ],
+  },
+  {
+    title: "Last movement before zero",
+    note: "Most went to zero in the last two months, so the list stays current.",
+    rows: [
+      { label: "This month", pct: 28 },
+      { label: "Last month", pct: 28 },
+      { label: "2–3 months", pct: 20 },
+      { label: "4–6 months", pct: 14 },
+      { label: "7–8 months", pct: 6 },
+      { label: "Older", pct: 4 },
+    ],
+  },
+  {
+    title: "Is the minimum still right?",
+    note: "No recent use means the item may need a lower min/max or time-phased planning instead.",
+    rows: [
+      { label: "No use this year", pct: 48, cls: "warn" },
+      { label: "No use since 2023", pct: 21, cls: "bad" },
+    ],
+  },
+  {
+    title: "Which suppliers",
+    note: "The top two suppliers hold almost a quarter of zero bins, so they get a weekly follow-up.",
+    rows: [
+      { label: "Supplier A", pct: 12 },
+      { label: "Supplier B", pct: 10 },
+      { label: "Supplier C", pct: 4 },
+      { label: "Supplier D", pct: 3 },
+      { label: "All others", pct: 70, cls: "dim" },
+    ],
+  },
+  {
+    title: "Consigned or bought",
+    note: "Consigned stock is refilled by the supplier, so the follow-up goes to them.",
+    rows: [
+      { label: "Bought", pct: 92 },
+      { label: "Consigned", pct: 8, cls: "hl" },
+    ],
+  },
+  {
+    title: "Below min, but not yet zero",
+    note: "The next zero bins. Most already have an order on the way; the rest get one.",
+    rows: [
+      { label: "Order on the way", pct: 77, cls: "good" },
+      { label: "No order yet", pct: 4, cls: "bad" },
+      { label: "No min/max set", pct: 19, cls: "warn" },
+    ],
+  },
+];
+
+function ZeroBinSummary() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px 0px -60px 0px" });
+  return (
+    <>
+      <CardHead title="Zero-bin dashboard: weekly summary" sub="Week of Oct 19, 2026 · every reorder-point item at the fab, ~5,000 in all" />
+      <div className="zbs-tiles">
+        {zbTiles.map((t) => (
+          <div key={t.label} className="zbs-tile">
+            <strong className={t.cls}>{t.v}</strong>
+            <span>{t.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="zbs-grid" ref={ref}>
+        {zbPanels.map((p, pi) => (
+          <div key={p.title} className="zbs-panel">
+            <b>{p.title}</b>
+            {p.rows.map((r, i) => (
+              <div key={r.label} className="zbs-row">
+                <span className="zbs-label">{r.label}</span>
+                <span className="zbs-track">
+                  <motion.span className={`zbs-bar ${r.cls ?? ""}`} initial={{ width: "0%" }} animate={{ width: inView ? `${r.pct}%` : "0%" }} transition={{ duration: 0.8, ease, delay: pi * 0.08 + i * 0.05 }} />
+                </span>
+                <span className="zbs-val">{r.pct}%</span>
+              </div>
+            ))}
+            <p>{p.note}</p>
+          </div>
+        ))}
+      </div>
+      <p className="woi-note">Real shares from one week's summary; counts and names left out. Each panel answers one question in the weekly review.</p>
+    </>
+  );
+}
+
 /* ---------- Usage-change check ---------- */
 
 // Recent 2-month average vs the past average, one monthly review.
@@ -227,6 +332,10 @@ export default function SkyWaterExtras() {
   return (
     <div className="lab viz-root">
       <div className="lab-grid">
+        <Reveal className="lab-card card lab-anchor lab-wide">
+          <span id="zero-bin-summary" className="anchor-offset" />
+          <ZeroBinSummary />
+        </Reveal>
         <Reveal className="lab-card card lab-anchor">
           <span id="zero-bin" className="anchor-offset" />
           <ZeroBinRate />
