@@ -8,6 +8,17 @@ import Reveal from "./Reveal";
 import PlaceholderBadge from "./PlaceholderBadge";
 import ProgramPanel from "./ProgramPanel";
 
+// A click on a linked card's empty space (not a chip, link or selected text)
+// goes to that employer's section, same as its main button.
+function openSection(e: React.MouseEvent, href: string) {
+  const t = e.target as HTMLElement;
+  if (t.closest("a, button, .timeline-programs, .prog-wrap") || window.getSelection()?.toString()) return;
+  const el = document.querySelector(href);
+  if (!el) return;
+  history.pushState(null, "", href);
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export default function Experience() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 60%"] });
@@ -45,7 +56,10 @@ export default function Experience() {
                 viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
                 transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.2 }}
               />
-              <div className={`timeline-card card ${job.placeholder ? "placeholder" : ""} ${job.kind === "education" ? "edu" : ""}`}>
+              <div
+                className={`timeline-card card ${job.placeholder ? "placeholder" : ""} ${job.kind === "education" ? "edu" : ""} ${job.section ? "linked" : ""}`}
+                onClick={job.section ? (e) => openSection(e, job.section!.href) : undefined}
+              >
                 <div className="timeline-head">
                   <span className="timeline-period">{job.period}</span>
                   <PlaceholderBadge show={job.placeholder} />
@@ -56,6 +70,11 @@ export default function Experience() {
                   {job.place && <span className="timeline-place"> · {job.place}</span>}
                 </p>
                 <p className="timeline-summary">{job.summary}</p>
+                {job.section && (
+                  <a href={job.section.href} className="btn btn-primary timeline-section-btn">
+                    {job.section.label} <span aria-hidden>→</span>
+                  </a>
+                )}
                 {job.programs && (
                   <>
                     {job.programsLabel && <span className="timeline-programs-label">{job.programsLabel}</span>}

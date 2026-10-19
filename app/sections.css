@@ -671,6 +671,13 @@ main, .footer { position: relative; z-index: 1; }
 .timeline-link span { color: var(--accent); transition: transform .2s; }
 .timeline-link:hover { border-color: var(--accent); background: rgba(255, 154, 98, 0.1); transform: translateY(-1px); }
 .timeline-link:hover span { transform: translateX(3px); }
+.timeline-card.linked { cursor: pointer; transition: border-color .2s, transform .2s; }
+.timeline-card.linked:hover { border-color: var(--accent); }
+.timeline-card.linked .timeline-programs, .timeline-card.linked .prog-wrap { cursor: auto; }
+.timeline-section-btn { margin: 4px 0 18px; padding: 11px 20px; font-size: 14px; gap: 8px; }
+.timeline-section-btn span { transition: transform .2s; }
+.timeline-section-btn:hover span { transform: translateX(3px); }
+@media (max-width: 600px) { .timeline-section-btn { width: 100%; justify-content: center; } }
 .lab-anchor { position: relative; }
 /* Cards slide up 36px as they reveal, so leave room for the nav plus that. */
 .anchor-offset { position: absolute; top: -120px; }

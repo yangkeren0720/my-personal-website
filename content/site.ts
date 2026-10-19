@@ -66,6 +66,8 @@ export type Experience = {
   // animated panel showing what Eva did there.
   programsLabel?: string;
   programs?: Program[];
+  // The employer's own section; the whole card and its main button go there.
+  section?: { label: string; href: string };
   // Buttons that jump to the demos for this role.
   links?: { label: string; href: string }[];
   kind?: "work" | "education";
@@ -76,6 +78,7 @@ export const experience: Experience[] = [
     period: "Dec 2023 — Present",
     title: "Material Planner",
     org: "SkyWater Technology (began under Infineon Technologies)",
+    section: { label: "See the full SkyWater section", href: "#skywater" },
     place: "Austin, TX",
     summary: "Plan demand and supply for critical wafer-fab materials: specialty gases, CMP slurry, photoresist and process chemicals.",
     highlights: [
@@ -162,6 +165,7 @@ export const experience: Experience[] = [
     period: "2023 — Present",
     title: "Co-Owner",
     org: "RBR Property Management",
+    section: { label: "See the full RBR section", href: "#rbr" },
     place: "Austin area · side business",
     summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing Claude Code and Codex, each cross-checking the other, with every output checked against real records.",
     highlights: [
@@ -285,6 +289,7 @@ export const experience: Experience[] = [
     period: "Feb 2026 — Present",
     title: "Office Manager (part-time)",
     org: "Belong Automotive Technology",
+    section: { label: "See the full Belong section", href: "#belong" },
     place: "Austin, TX · part-time",
     summary: "Oversee operations, purchasing, HR, IT and warehouse; report to the US CEO and work with US and China leadership.",
     highlights: [
@@ -302,6 +307,7 @@ export const experience: Experience[] = [
     period: "Jun 2021 — Oct 2023",
     title: "Purchasing Analyst",
     org: "Mino Automation USA",
+    section: { label: "See the full Mino section", href: "#mino" },
     place: "Supplier partner to Tesla, Rivian and Faraday Future",
     summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
     highlights: [
