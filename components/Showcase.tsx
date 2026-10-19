@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion } from "framer-motion";
 import { featured } from "@/content/site";
 import Collapse from "./Collapse";
 import Reveal from "./Reveal";
+import LoopVideo from "./LoopVideo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const AUTO_ADVANCE_MS = 6000;
+// A tab with a recording moves on when the clip ends; this is only a backstop
+// for a clip that never plays (blocked autoplay, slow network).
+const VIDEO_BACKSTOP_MS = 40000;
 
-// Featured project: tabs on the left, an animated mock of each screen on the right.
+// Featured project: tabs on the left, a real screen recording of each screen on
+// the right (or an animated drawing when a tab has no recording).
 // The RBR platform tour, shown inside the RBR section.
 export default function Showcase() {
   const [active, setActive] = useState(0);
@@ -26,13 +31,26 @@ export default function Showcase() {
     return () => mq.removeEventListener("change", on);
   }, []);
 
-  useEffect(() => {
-    if (paused || !wide) return;
-    const t = setTimeout(() => setActive((a) => (a + 1) % featured.features.length), AUTO_ADVANCE_MS);
-    return () => clearTimeout(t);
-  }, [active, paused, wide]);
-
   const current = featured.features[active];
+  const advance = useCallback(() => setActive((a) => (a + 1) % featured.features.length), []);
+  // Visitors who ask for less motion change tabs themselves.
+  const reduce = useReducedMotion();
+  const autoplay = wide && !paused && !reduce;
+
+  // A clip the browser can't play keeps its still frame and moves on with the timer.
+  const [broken, setBroken] = useState<string | null>(null);
+  const timed = !current.video || broken === current.video;
+
+  useEffect(() => {
+    if (!autoplay) return;
+    const t = setTimeout(advance, timed ? AUTO_ADVANCE_MS : VIDEO_BACKSTOP_MS);
+    return () => clearTimeout(t);
+  }, [active, autoplay, advance, timed]);
+
+  // How far the current clip has played, for the tab's progress bar.
+  const progress = useMotionValue(0);
+  useEffect(() => progress.set(0), [active, progress]);
+  const onProgress = useCallback((p: number) => progress.set(p), [progress]);
 
   return (
     <div className="rbr-platform">
@@ -49,7 +67,15 @@ export default function Showcase() {
           </div>
         </Reveal>
 
-        <div className="showcase" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div
+          className="showcase"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setPaused(false);
+          }}
+        >
           <div className="showcase-tabs" role="tablist">
             {featured.features.map((f, i) => (
               <button
@@ -70,13 +96,16 @@ export default function Showcase() {
                     </Collapse>
                   )}
                 </AnimatePresence>
-                {i === active && (
+                {i === active && !timed && (
+                  <motion.span className="showcase-tab-bar" style={{ scaleX: autoplay ? progress : 0 }} />
+                )}
+                {i === active && timed && (
                   <motion.span
                     key={`bar-${active}-${paused}`}
                     className="showcase-tab-bar"
                     initial={{ scaleX: 0 }}
-                    animate={{ scaleX: paused || !wide ? 0 : 1 }}
-                    transition={{ duration: paused || !wide ? 0.2 : AUTO_ADVANCE_MS / 1000, ease: "linear" }}
+                    animate={{ scaleX: autoplay ? 1 : 0 }}
+                    transition={{ duration: autoplay ? AUTO_ADVANCE_MS / 1000 : 0.2, ease: "linear" }}
                   />
                 )}
               </button>
@@ -88,24 +117,40 @@ export default function Showcase() {
               <span className="dot r" />
               <span className="dot y" />
               <span className="dot g" />
-              <span className="browser-url">rbrpmrealty.com/{current.screen === "admin" || current.screen === "lease" ? "admin" : current.screen}</span>
+              <span className="browser-url">
+                {current.path ?? `rbrpmrealty.com/${current.screen === "admin" || current.screen === "lease" ? "admin" : current.screen}`}
+              </span>
             </div>
-            <div className="browser-body">
+            <div className={`browser-body ${current.video ? "has-video" : ""}`}>
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={current.screen}
+                  key={current.video ?? current.screen}
                   className="screen"
                   initial={{ opacity: 0, y: 24, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -24, scale: 0.98 }}
                   transition={{ duration: 0.5, ease }}
                 >
-                  <Screen kind={current.screen} />
+                  {current.video && current.poster ? (
+                    <LoopVideo
+                      className="screen-video"
+                      src={current.video}
+                      poster={current.poster}
+                      label={`Screen recording: ${current.title}`}
+                      loop={!autoplay}
+                      onEnded={advance}
+                      onProgress={onProgress}
+                      onError={() => setBroken(current.video ?? null)}
+                    />
+                  ) : (
+                    <Screen kind={current.screen} />
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
           </Reveal>
         </div>
+        {featured.recordingNote && <p className="showcase-note">{featured.recordingNote}</p>}
 
         {featured.link && (
           <Reveal className="showcase-link">
@@ -126,7 +171,7 @@ const item = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.45, ease } },
 };
 
-// Stylized illustrations of each screen. These are drawings, not screenshots.
+// Stylized illustrations of a screen, for a tab without a recording. These are drawings, not screenshots.
 function Screen({ kind }: { kind: string }) {
   if (kind === "houses") {
     return (
