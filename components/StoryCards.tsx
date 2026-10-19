@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Collapse from "./Collapse";
 import Reveal from "./Reveal";
-import { ArrivalTimeline, BuildLoop, CostWaterfall, ErpGrid, HandoverChart, HolidayChart, RepairChart, RunoutChart, SeatsChart, SpikeChart, Spark, TimesheetFlow } from "./StoryCharts";
+import { ArrivalTimeline, BuildLoop, CostWaterfall, BridgeChart, ErpGrid, HandoverChart, HolidayChart, RepairChart, RunoutChart, SeatsChart, SpikeChart, Spark, TimesheetFlow } from "./StoryCharts";
 
 // Story cards for each employer. A card names the story and its headline
 // number; opening it shows the full story under the row: a chart, the formula
@@ -145,6 +145,34 @@ const stories: Story[] = [
     ],
     steps: ["A big install quote: equipment rental, labor and service.", "Used our own air skaters instead of renting; matched each role's skill level to its task.", "About 20% cheaper, on schedule; the supplier relationship stayed strong."],
     note: "The split between the two levers is sample; ~20% total and no schedule impact are real.",
+  },
+  {
+    id: "ex-weldsaver",
+    company: "Mino",
+    title: "A 90-day part, bridged",
+    metric: { value: "0 days", label: "of install lost to a 90-day lead time" },
+    context: "On the Rivian build, a WeldSaver (the valve that shuts off a welding gun's cooling water if its cap falls off) was missed on the order. The maker's lead time was 90 days, too long for the install schedule.",
+    facts: [
+      ["90 days", "maker's lead time"],
+      ["2", "sources combined"],
+      ["0", "days the install waited"],
+    ],
+    chartTitle: "Waiting for the part vs bridging it",
+    chart: () => <BridgeChart />,
+    formulas: [
+      {
+        name: "A working unit now",
+        expr: <>Working unit = Temporary core (Mino China) + Remaining parts (US distributor)</>,
+        lines: [<>Temporary core: no temperature control, good enough to run</>, <>Assembled on site from both shipments</>],
+      },
+      {
+        name: "The proper part later",
+        expr: <>Order the full part on day 0 → swap it in on day 90</>,
+        lines: [<>Install keeps moving; <b>no 90-day wait</b></>],
+      },
+    ],
+    steps: ["A WeldSaver was missed on the order, and the maker quoted 90 days.", "With the China team: a temporary core from China plus the remaining parts from the US distributor, assembled on site. The proper part was ordered the same day.", "The install kept going; the proper part was swapped in when it arrived."],
+    note: "The day the bridge was assembled is sample. The 90-day lead time and the two-source fix are real.",
   },
   {
     id: "ex-timesheets",

@@ -181,9 +181,10 @@ export const experience: Experience[] = [
     place: "Supplier partner to Tesla, Rivian and Faraday Future",
     summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
     highlights: [
-      "Rivian: 3,400+ PO lines ($10M) for 372 robots across 7 lines.",
+      "Rivian: 900+ material requisition lines and ~$10M in POs for 372 robots across 7 lines.",
       "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
       "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
+      "Also bought and staffed for Nissan, Lucid, Linamar and follow-on Tesla and Rivian jobs (2022–2023).",
     ],
     programsLabel: "Tap a program to see what I did",
     programs: [
@@ -241,9 +242,9 @@ export const experience: Experience[] = [
         place: "Normal, IL",
         period: "Jun 2021 – Feb 2022",
         job: "Purchasing and crew sourcing for a 7-line body-in-white build with 372 robots.",
-        did: ["Placed 3,400+ PO lines worth $10M.", "Sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
+        did: ["Ran 900+ material requisition lines (500+ part numbers, 53 brands) and ~800 manpower PO lines, ~$10M in all.", "Sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
         kpis: [
-          { value: "3,400+", label: "PO lines" },
+          { value: "900+", label: "requisition lines" },
           { value: "$10M", label: "purchased" },
           { value: "372", label: "robots" },
         ],
@@ -590,7 +591,7 @@ export const skills = [
 // RBR counts come from the RBR code as of 2026-10-19; re-count when updating.
 export const builds = {
   planning: [
-    { value: 3400, suffix: "+", label: "PO lines on one EV line build", org: "Mino" },
+    { value: 900, suffix: "+", label: "material requisition lines on one EV line build", org: "Mino" },
     { value: 372, label: "robots across 7 lines on that build", org: "Mino" },
     { value: 300, suffix: "+", label: "skilled technicians sourced", org: "Mino" },
     { value: 5000, prefix: "~", label: "items on the weekly zero-bin review", org: "SkyWater" },
