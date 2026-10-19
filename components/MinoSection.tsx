@@ -12,20 +12,19 @@ import { CardHead, Toggle } from "./PlanningLab";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Months since Jun 2020.
-const START = { y: 2020, m: 6 };
+// Months since Jun 2021.
+const START = { y: 2021, m: 6 };
 const END = { y: 2023, m: 10 };
 const mo = (y: number, m: number) => (y - START.y) * 12 + (m - START.m);
 const TOTAL = mo(END.y, END.m);
 
 const programs = [
-  { name: "US automation projects", place: "Purchasing & manpower", from: mo(2020, 6), to: mo(2021, 6), facts: "Project purchasing and labor planning across US sites", muted: true },
   { name: "Rivian", place: "Normal, IL", from: mo(2021, 6), to: mo(2022, 2), facts: "3,400+ PO lines · $10M · 372 robots · 300+ technicians" },
   { name: "Tesla Megapack", place: "Lathrop, CA", from: mo(2022, 2), to: mo(2022, 4), facts: "Spare parts, long-lead buys, turnkey commissioning" },
   { name: "Faraday Future FF91", place: "Hanford, CA", from: mo(2022, 4), to: mo(2023, 1), facts: "54 robots · 7 lines · 51 trades sourced" },
   { name: "Tesla Cybertruck", place: "Austin, TX", from: mo(2022, 9), to: mo(2023, 9), facts: "179 trades · 34+ equipment rentals · −20% labor cost" },
 ];
-const years = [2021, 2022, 2023];
+const years = [2022, 2023];
 
 export default function MinoSection() {
   return (
@@ -35,7 +34,7 @@ export default function MinoSection() {
           co="mino"
           company="Mino Automation USA"
           role="Purchasing Analyst"
-          period="Jun 2020 – Oct 2023"
+          period="Jun 2021 – Oct 2023"
           title={
             <>
               Supplying EV line <em>build-outs</em>.
@@ -53,7 +52,7 @@ export default function MinoSection() {
         <Reveal>
           <Gantt />
         </Reveal>
-        <SubHead>Capacity and workflow</SubHead>
+        <SubHead built="I built the workflow, before AI">Capacity and workflow</SubHead>
         <div className="mino-grid">
           <Reveal className="card mino-card lab-anchor">
             <span id="capacity" className="anchor-offset" />
@@ -104,7 +103,7 @@ function Gantt() {
               <i key={y} className="gantt-grid" style={{ left: pct(mo(y, 1)) }} />
             ))}
             <motion.span
-              className={`gantt-bar ${p.muted ? "muted" : ""}`}
+              className="gantt-bar"
               style={{ left: pct(p.from) }}
               initial={{ width: "0%" }}
               animate={{ width: inView ? pct(p.to - p.from) : "0%" }}

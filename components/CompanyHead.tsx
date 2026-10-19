@@ -63,10 +63,12 @@ export default function CompanyHead({
   );
 }
 
-export function SubHead({ id, children }: { id?: string; children: ReactNode }) {
+// `built` adds a small pill for work Eva built herself (never in SkyWater).
+export function SubHead({ id, built, children }: { id?: string; built?: string; children: ReactNode }) {
   return (
     <h3 className="sub-head" id={id}>
       {children}
+      {built && <span className="built-badge">{built}</span>}
     </h3>
   );
 }

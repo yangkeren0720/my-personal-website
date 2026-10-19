@@ -52,7 +52,7 @@ export default function BelongSection() {
         <DeptMap />
         <SubHead>The ERP I'm leading, in four phases</SubHead>
         <Roadmap />
-        <SubHead id="belong-ai">AI in operations and administration</SubHead>
+        <SubHead id="belong-ai" built="I rolled this out">AI in operations and administration</SubHead>
         <BelongAI />
         <SubHead id="belong-stories">Belong stories</SubHead>
         <StoryCards company="Belong" />

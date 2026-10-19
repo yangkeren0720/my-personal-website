@@ -7,6 +7,7 @@ import { profile } from "@/content/site";
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
+  { id: "builds", label: "Builds" },
   { id: "experience", label: "Resume" },
   { id: "skywater", label: "SkyWater" },
   { id: "mino", label: "Mino" },

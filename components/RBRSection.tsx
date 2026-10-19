@@ -30,13 +30,13 @@ export default function RBRSection() {
         />
         <SubHead id="lease-to-rent">From lease to rent</SubHead>
         <LeaseToRent />
-        <SubHead id="work">The platform</SubHead>
+        <SubHead id="work" built="I built this">The platform</SubHead>
         <Showcase />
         <SubHead id="rbr-flow">Application to move-in</SubHead>
         <RBRWorkflow />
         <SubHead id="rbr-phone">On the phone</SubHead>
         <RBRDevices />
-        <SubHead id="rbr-build">How it's built</SubHead>
+        <SubHead id="rbr-build" built="I built this">How it's built</SubHead>
         <RBRBuild />
         <SubHead id="ai">AI at work</SubHead>
         <AISection />

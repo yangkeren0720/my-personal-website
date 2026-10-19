@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { profile } from "@/content/site";
 import PlaceholderBadge from "./PlaceholderBadge";
+import Counter from "./Counter";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -97,14 +98,23 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.p
-          className="hero-tagline"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3, duration: 0.8, ease }}
-        >
-          {profile.tagline}
-        </motion.p>
+        <div className="hero-stats">
+          {profile.heroStats.map((st, i) => (
+            <motion.div
+              key={st.label}
+              className="hero-stat"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3 + i * 0.1, duration: 0.7, ease }}
+            >
+              <strong>
+                {st.prefix}
+                <Counter to={st.value} suffix={st.suffix} />
+              </strong>
+              <span>{st.label}</span>
+            </motion.div>
+          ))}
+        </div>
 
         <div className="hero-builds">
           {profile.builds.map((b, i) => (

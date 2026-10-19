@@ -10,9 +10,9 @@ export type Placeholder = { placeholder?: boolean };
 export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
-  status: "Seeking Supply Chain Specialist & S&OP Planner roles", // small badge above your name; "" hides it
-  headline: "Supply Chain & S&OP Planner who builds software",
-  title: "Supply Chain & S&OP Planner", // big line under your name // used in the browser tab title
+  status: "Open to Senior Supply Chain, S&OP and Procurement roles", // small badge above your name; "" hides it
+  headline: "Senior Supply Chain & S&OP Planner who builds software",
+  title: "Senior Supply Chain & S&OP Planner", // big line under your name // used in the browser tab title
   rolePrefix: "who also builds",
   roles: ["software", "websites", "live dashboards"],
   // Proof chips under the tagline: each one jumps to the work that backs it.
@@ -20,7 +20,15 @@ export const profile = {
   builds: [
     { label: "Software", detail: "Admin system + iPhone app", href: "#rbr-build" },
     { label: "Websites", detail: "rbrpmrealty.com and this site", href: "#work" },
-    { label: "Dashboards", detail: "Inventory, capacity, vacancy", href: "#work" },
+    { label: "Dashboards", detail: "Rooms, leases, AI cost", href: "#work" },
+  ],
+  // Four counting-up numbers that replace a paragraph in the hero. Each one
+  // names its employer; no AI wording next to the SkyWater number.
+  heroStats: [
+    { value: 5, suffix: "+", label: "years planning supply" },
+    { value: 10, prefix: "$", suffix: "M", label: "in POs for one EV line build (Mino)" },
+    { value: 0, label: "production stops at the wafer fab (SkyWater)" },
+    { value: 5, label: "direct reports (Belong)" },
   ],
   tagline:
     "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. Outside SkyWater, I manage five departments at Belong and co-own a property business whose software, website and dashboards I built by directing AI.",
@@ -165,7 +173,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    period: "Jun 2020 — Oct 2023",
+    period: "Jun 2021 — Oct 2023",
     title: "Purchasing Analyst",
     org: "Mino Automation USA",
     place: "Supplier partner to Tesla, Rivian and Faraday Future",
@@ -573,3 +581,37 @@ export const skills = [
   "Shortage Risk Dashboards", "Data Visualization", "Power Automate & SharePoint",
   "SQL", "Advanced Excel", "AI Integration", "Lean / Six Sigma", "English & 中文",
 ];
+
+// "Two skills, one method" band right after the hero. Planning numbers name
+// their employer. Builder proof is RBR and this site (AI-built) and Mino's
+// workflow (self-taught, before AI). Never SkyWater on the builder side.
+// RBR counts come from the RBR code as of 2026-10-19; re-count when updating.
+export const builds = {
+  planning: [
+    { value: 3400, suffix: "+", label: "PO lines on one EV line build", org: "Mino" },
+    { value: 372, label: "robots across 7 lines on that build", org: "Mino" },
+    { value: 300, suffix: "+", label: "skilled technicians sourced", org: "Mino" },
+    { value: 250, prefix: "~", label: "materials on the weekly shortage review", org: "SkyWater" },
+    { value: 2, label: "acquisitions with supply kept running", org: "SkyWater" },
+    { value: 5, label: "direct reports across five departments", org: "Belong" },
+  ],
+  method: ["Gather the signals", "Find the constraint", "Pick the trade-off", "Check against real records"],
+  tiles: [
+    { label: "Software", number: "196 tables · 184 endpoints", detail: "Admin system + iPhone app", href: "#rbr-build", video: "/rbr/rbr-lease-generator.mp4", poster: "/rbr/rbr-lease-generator.jpg" },
+    { label: "Websites", number: "2 live sites", detail: "rbrpmrealty.com and this site", href: "#work", video: "/rbr/rbr-home.mp4", poster: "/rbr/rbr-home.jpg" },
+    { label: "Dashboards", number: "6 live dashboards", detail: "Rooms, leases, applicants, AI cost", href: "#work", video: "/rbr/rbr-dashboard.mp4", poster: "/rbr/rbr-dashboard.jpg" },
+  ],
+  how: [
+    { label: "I write the spec", who: "Eva", mine: true },
+    { label: "Claude Code builds it", who: "AI", mine: false },
+    { label: "Codex checks it", who: "AI", mine: false },
+    { label: "I check it against real records", who: "Eva", mine: true },
+    { label: "It ships", who: "Live", mine: false },
+  ],
+  howNote: "About $300 a month in AI tools, no developer.",
+  beforeAI: [
+    "Taught myself SharePoint + Power Automate at Mino: missed invoices down ~50%",
+    "Computer Science minor",
+    "SQL · R · Python · Excel macros",
+  ],
+};
