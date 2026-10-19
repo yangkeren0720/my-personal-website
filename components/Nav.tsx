@@ -10,9 +10,9 @@ const links = [
   { id: "builds", label: "Builds" },
   { id: "experience", label: "Resume" },
   { id: "skywater", label: "SkyWater" },
-  { id: "mino", label: "Mino" },
-  { id: "belong", label: "Belong" },
   { id: "rbr", label: "RBR" },
+  { id: "belong", label: "Belong" },
+  { id: "mino", label: "Mino" },
   { id: "multitask", label: "Multitask" },
   { id: "contact", label: "Contact" },
 ];

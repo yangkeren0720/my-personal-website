@@ -27,9 +27,9 @@ export default function Home() {
         <SOPDemo />
         <Experience />
         <SkyWaterSection />
-        <MinoSection />
-        <BelongSection />
         <RBRSection />
+        <BelongSection />
+        <MinoSection />
         <Multitask />
         <Contact />
       </main>
