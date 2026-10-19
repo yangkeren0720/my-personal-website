@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Collapse from "./Collapse";
 import Reveal from "./Reveal";
-import { ArrivalTimeline, BuildLoop, CostWaterfall, ErpGrid, HandoverChart, HolidayChart, RunoutChart, SeatsChart, SpikeChart, Spark, TimesheetFlow } from "./StoryCharts";
+import { ArrivalTimeline, BuildLoop, CostWaterfall, ErpGrid, HandoverChart, HolidayChart, RepairChart, RunoutChart, SeatsChart, SpikeChart, Spark, TimesheetFlow } from "./StoryCharts";
 
 // Story cards for each employer. A card names the story and its headline
 // number; opening it shows the full story under the row: a chart, the formula
@@ -258,6 +258,35 @@ const stories: Story[] = [
     ],
     steps: ["Engineering software was being used without enough licenses.", "Sized real demand, compared subscription vs perpetual, ran competing quotes.", "~$100K over 3 years for 3 seats; managers confirmed compliance."],
     note: "The daily usage curve is sample, and $167K is worked back from ~40%. 3 seats and ~$100K over 3 years are real.",
+  },
+  {
+    id: "ex-repair",
+    company: "Belong",
+    title: "The cheapest rate wasn't the cheapest repair",
+    metric: { value: "17", label: "vendors asked for one repair" },
+    context: "A large machining center in our warehouse wouldn't power on. I sent the repair out for quotes and compared what each one would really cost, travel included, not just the hourly rate.",
+    facts: [
+      ["17", "vendors contacted"],
+      ["4", "quotes back"],
+      ["2", "staffing scenarios"],
+      ["40 hrs", "on-site work"],
+    ],
+    chartTitle: "Total cost vs a local baseline (100%), two ways to staff it",
+    chart: () => <RepairChart />,
+    formulas: [
+      {
+        name: "Real cost of a visit",
+        expr: <>Total = Labor + Travel + Lodging</>,
+        lines: [<>Same 40 hours on site, but travel ran from about 1 hour to 2 days each way</>],
+      },
+      {
+        name: "Vs the baseline",
+        expr: <>Index = {F("Vendor total", "40 hrs × local rate")}</>,
+        lines: [<>Lowest hourly rate, far away: <b>~3×</b> the baseline with two technicians</>, <>Nearest vendor: <b>~1.2×</b> with one technician</>],
+      },
+    ],
+    steps: ["An older machining center was down and needed a specialist.", "Contacted 17 vendors by email and web form, got 4 quotes, built two staffing scenarios.", "The nearest vendor was lowest in both; one technician over four days beat two over two days for every vendor."],
+    note: "Vendors are unnamed and costs are shown as a share of the baseline. Vendor counts, hours and the ratios come from my RFQ summary.",
   },
   {
     id: "ex-ai",

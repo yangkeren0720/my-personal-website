@@ -500,6 +500,50 @@ export function SeatsChart() {
   );
 }
 
+// Machine repair quotes as a share of a local baseline, two staffing scenarios per vendor.
+export function RepairChart() {
+  const rows: { name: string; a: number; b: number; note: string }[] = [
+    { name: "Vendor A", a: 129, b: 119, note: "nearest" },
+    { name: "Vendor B", a: 189, b: 162, note: "" },
+    { name: "Vendor C", a: 256, b: 212, note: "" },
+    { name: "Vendor D", a: 307, b: 203, note: "lowest hourly rate" },
+  ];
+  const max = 320;
+  return (
+    <>
+      <div className="rp" role="img" aria-label="Repair cost as a share of the local baseline. Two technicians over two days, then one technician over four days: Vendor A 129% and 119%, B 189% and 162%, C 256% and 212%, D 307% and 203%.">
+        <div className="rp-base" style={{ left: `calc(var(--rp-name, 96px) + (100% - var(--rp-name, 96px) - 54px) * ${100 / max})` }}>
+          <span>baseline 100%</span>
+        </div>
+        {rows.map((r, i) => (
+          <div key={r.name} className="rp-row">
+            <span className="rp-name">
+              {r.name}
+              {r.note && <em>{r.note}</em>}
+            </span>
+            <div className="rp-bars">
+              {[r.a, r.b].map((v, k) => (
+                <div key={k} className="rp-bar">
+                  <span className="rp-track">
+                    <motion.i className={k ? "one" : "two"} initial={{ width: "0%" }} animate={{ width: `${(v / max) * 100}%` }} transition={{ duration: 0.8, delay: 0.2 + i * 0.15 + k * 0.08, ease }} />
+                  </span>
+                  <b>{v}%</b>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <Legend
+        items={[
+          ["rp-two box", "2 technicians × 2 days"],
+          ["rp-one box", "1 technician × 4 days"],
+        ]}
+      />
+    </>
+  );
+}
+
 // ---------- RBR ----------
 
 // How I build with AI: describe, Claude Code builds, Codex cross-checks, I check against real records, ship.

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import Reveal from "./Reveal";
 import CompanyHead, { SubHead } from "./CompanyHead";
 import StoryCards from "./StoryCards";
@@ -24,6 +24,14 @@ const phases = [
   { name: "Full accounting", state: "Planned" },
   { name: "Sales and CRM", state: "Planned" },
   { name: "HR and people", state: "Planned" },
+];
+
+// The implementation plan behind the roadmap (from the 114-task Gantt).
+const planChips = [
+  { value: "114", label: "tasks" },
+  { value: "13", label: "modules" },
+  { value: "22", label: "alert rules" },
+  { value: "~22", label: "weeks, buffer included" },
 ];
 
 export default function BelongSection() {
@@ -50,8 +58,12 @@ export default function BelongSection() {
         />
         <SubHead>What I oversee</SubHead>
         <DeptMap />
+        <SubHead>How a purchase will move through the ERP</SubHead>
+        <ErpFlow />
         <SubHead>The ERP I'm leading, in four phases</SubHead>
         <Roadmap />
+        <SubHead>Running the office</SubHead>
+        <OfficeOps />
         <SubHead id="belong-ai" built="I rolled this out">AI in operations and administration</SubHead>
         <BelongAI />
         <SubHead id="belong-stories">Belong stories</SubHead>
@@ -104,6 +116,13 @@ function Roadmap() {
           </motion.div>
         ))}
       </div>
+      <div className="roadmap-chips">
+        {planChips.map((c, n) => (
+          <motion.span key={c.label} className="roadmap-chip" initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.3 + n * 0.12, duration: 0.4, ease }}>
+            <b>{c.value}</b> {c.label}
+          </motion.span>
+        ))}
+      </div>
       <p className="roadmap-note">
         Supply chain first: it carries the most risk and it's where I know the work best. The design includes about 22 alert rules, budget alerts near 80% and
         three-way matching. Odoo was chosen over NetSuite, SAP and a custom build.
@@ -114,21 +133,24 @@ function Roadmap() {
 
 // How AI is used in Belong's operations and administration: AI drafts, Eva checks.
 const aiFlow = ["Recorded meeting", "AI drafts notes and plan updates", "I check the notes and the logic", "Shared with the team"];
-const aiUses: { area: string; title: string; body: string; team?: boolean }[] = [
+const aiUses: { area: string; title: string; body: string; example?: string; team?: boolean }[] = [
   {
     area: "Operations",
     title: "Meetings to plan updates",
     body: "Weekly ERP meetings with the developers are recorded. AI drafts the notes and proposed plan updates; nothing goes out until I've checked it.",
+    example: "Three process meetings became one design document and workflow minutes, in English and Chinese.",
   },
   {
     area: "Operations",
     title: "Research for decisions",
     body: "AI organizes research and lays out options and cost assumptions side by side, as in the four-way ERP comparison, so management gets a clear choice.",
+    example: "Software license quotes from two vendors, subscription vs perpetual, in one table.",
   },
   {
     area: "Operations",
     title: "A faster ERP build",
     body: "AI helps the software developers move faster on the ERP integration and on gathering the migration documents.",
+    example: "The purchase data clean-up template went through five versions before migration.",
   },
   {
     area: "Administration",
@@ -162,6 +184,7 @@ function BelongAI() {
             <span className="bai-tag">{u.area}</span>
             <strong>{u.title}</strong>
             <p>{u.body}</p>
+            {u.example && <p className="bai-example">{u.example}</p>}
             {u.team && <TeamDots />}
           </Reveal>
         ))}
@@ -189,6 +212,85 @@ function TeamDots() {
           <i /> 14 engineers on site
         </span>
       </div>
+    </div>
+  );
+}
+
+// The five purchase types in the ERP design, and how each one moves from request to payment.
+type Step = { name: string; alt?: string };
+const flowSteps: Step[] = [{ name: "Request" }, { name: "Quote" }, { name: "PO" }, { name: "Receive" }, { name: "Bill" }, { name: "3-way match" }, { name: "Pay" }];
+const purchaseTypes: { name: string; rule: string; swap?: Record<number, string>; skip?: number[] }[] = [
+  { name: "Standard / material", rule: "Material arrives on site, the coordinator checks it against the packing list and the PO, and the system pays only when PO, receipt and bill agree." },
+  { name: "Labor", rule: "A blanket PO caps hours and travel per person. Each child PO is checked three ways: this person's hours, their travel, and the blanket total. Any failure blocks it.", swap: { 2: "Blanket PO", 3: "Timesheet" } },
+  { name: "Rental", rule: "A blanket PO per vendor. Each child PO must come from a real vendor invoice, and payment is locked to it.", swap: { 2: "Blanket PO", 3: "Invoice", 4: "Child PO" } },
+  { name: "Site emergency", rule: "Small, urgent buys skip the quote step; anything larger goes back to the standard flow. A receipt or photo is still required and still matched.", skip: [1] },
+  { name: "Office / other", rule: "Office supplies take a short path, but still roll up to a budget and get matched before payment." },
+];
+
+function ErpFlow() {
+  const [pick, setPick] = useState(0);
+  const [lit, setLit] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "-80px 0px -80px 0px" });
+  useEffect(() => {
+    if (!inView) return;
+    const t = setInterval(() => setLit((n) => (n + 1) % (flowSteps.length + 2)), 650);
+    return () => clearInterval(t);
+  }, [inView]);
+  const type = purchaseTypes[pick];
+  return (
+    <div className="eflow card" ref={ref}>
+      <div className="eflow-types" role="tablist" aria-label="Purchase types">
+        {purchaseTypes.map((t, n) => (
+          <button key={t.name} role="tab" aria-selected={n === pick} className={n === pick ? "on" : ""} onClick={() => { setPick(n); setLit(0); }}>
+            {t.name}
+          </button>
+        ))}
+      </div>
+      <ol className="eflow-steps">
+        {flowSteps.map((s, i) => {
+          const skipped = type.skip?.includes(i);
+          const label = type.swap?.[i] ?? s.name;
+          return (
+            <li key={i} className={`${skipped ? "skip" : ""} ${!skipped && lit > i ? "on" : ""} ${i === 5 ? "gate" : ""}`}>
+              <span className="eflow-dot">{i + 1}</span>
+              <AnimatePresence mode="wait">
+                <motion.span key={label + pick} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.25 }}>
+                  {label}
+                </motion.span>
+              </AnimatePresence>
+            </li>
+          );
+        })}
+      </ol>
+      <AnimatePresence mode="wait">
+        <motion.p key={pick} className="eflow-rule" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+          <strong>{type.name}:</strong> {type.rule}
+        </motion.p>
+      </AnimatePresence>
+      <p className="eflow-note">Every purchase rolls up to its project, so cost by project comes straight from the ERP. Today this runs on chat, spreadsheets and email.</p>
+    </div>
+  );
+}
+
+// What else lands on the Office Manager's desk, kept general.
+const ops = [
+  { icon: "🛡️", title: "Business insurance", body: "Annual renewal across liability, workers' comp and commercial auto, organized into one bilingual index; certificates for customers." },
+  { icon: "🦺", title: "Safety training", body: "OSHA 10 and 30-hour certificates tracked for the crew going on site." },
+  { icon: "🔧", title: "Facilities and vendors", body: "Cleaning, equipment rental, inspections and machine repair, quoted and compared before anyone is booked." },
+  { icon: "📄", title: "Legal and compliance paperwork", body: "I handle the company's legal paperwork and keep every document organized and easy to find." },
+];
+
+function OfficeOps() {
+  return (
+    <div className="ops">
+      {ops.map((o, n) => (
+        <Reveal key={o.title} delay={n * 0.08} className="ops-item card">
+          <span className="ops-icon" aria-hidden>{o.icon}</span>
+          <strong>{o.title}</strong>
+          <p>{o.body}</p>
+        </Reveal>
+      ))}
     </div>
   );
 }
