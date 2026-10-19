@@ -601,6 +601,54 @@ export function ArrivalTimeline() {
   );
 }
 
+// A 90-day lead time: wait for it, or bridge it and swap later.
+export function BridgeChart() {
+  const pad = { l: 12, r: 12, t: 16, b: 34 };
+  const H = 170;
+  const rows = [
+    { name: "Wait for the part", y: 0 },
+    { name: "Bridge, then swap", y: 1 },
+  ];
+  return (
+    <>
+      <Plot H={H} pad={pad} label="Timeline over 90 days. Waiting: the install is blocked for all 90 days. Bridging: a temporary unit is running within days, and the proper part is swapped in on day 90. The bridge day is sample.">
+        {(W) => {
+          const x = (d: number) => pad.l + (d / 90) * (W - pad.l - pad.r);
+          const rowY = (i: number) => pad.t + 18 + i * 52;
+          return (
+            <>
+              {[0, 30, 60, 90].map((d) => (
+                <g key={d}>
+                  <line x1={x(d)} x2={x(d)} y1={pad.t} y2={H - pad.b} className="lab-grid-line" />
+                  <text x={x(d)} y={H - 14} textAnchor="middle" className="lab-axis">
+                    day {d}
+                  </text>
+                </g>
+              ))}
+              {rows.map((r, i) => (
+                <text key={r.name} x={pad.l} y={rowY(i) - 8} className="lab-ref-label strong">
+                  {r.name}
+                </text>
+              ))}
+              <motion.rect x={x(0)} y={rowY(0)} height={14} rx={4} className="sc-bar" initial={{ width: 0 }} animate={{ width: x(90) - x(0) }} transition={{ duration: 1.2, delay: 0.2, ease }} />
+              <motion.rect x={x(0)} y={rowY(1)} height={14} rx={4} className="sc-bar good" initial={{ width: 0 }} animate={{ width: x(7) - x(0) }} transition={{ duration: 0.4, delay: 1.5, ease }} />
+              <motion.line x1={x(7)} x2={x(90)} y1={rowY(1) + 7} y2={rowY(1) + 7} className="sc-link" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} />
+              <motion.circle cx={x(90)} cy={rowY(1) + 7} r={5} className="sc-bar good" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.4 }} />
+            </>
+          );
+        }}
+      </Plot>
+      <Legend
+        items={[
+          ["s1 box", "Install blocked"],
+          ["good-box", "Temporary unit built"],
+          ["ref", "Running until the proper part arrives"],
+        ]}
+      />
+    </>
+  );
+}
+
 // ---------- Card previews ----------
 
 // A small sketch of each story's chart, shown on the closed card.
@@ -633,6 +681,13 @@ const sparks: Record<string, ReactNode> = {
       <rect x={29} width={18} y={2} height={4} rx={1} className="spk-soft" />
       <rect x={54} width={18} y={6} height={6} rx={1} className="spk-soft" />
       <rect x={79} width={18} y={12} height={30} rx={2} className="spk-fill" />
+    </>
+  ),
+  "ex-weldsaver": (
+    <>
+      <rect x={2} width={96} y={8} height={8} rx={2} className="spk-soft" />
+      <rect x={2} width={10} y={26} height={8} rx={2} className="spk-fill" />
+      <path d="M12,30 L96,30" className="spk-line" />
     </>
   ),
   "ex-timesheets": (

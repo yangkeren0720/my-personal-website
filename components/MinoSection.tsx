@@ -19,7 +19,7 @@ const mo = (y: number, m: number) => (y - START.y) * 12 + (m - START.m);
 const TOTAL = mo(END.y, END.m);
 
 const programs = [
-  { name: "Rivian", place: "Normal, IL", from: mo(2021, 6), to: mo(2022, 2), facts: "3,400+ PO lines · $10M · 372 robots · 300+ technicians" },
+  { name: "Rivian", place: "Normal, IL", from: mo(2021, 6), to: mo(2022, 2), facts: "900+ requisition lines · $10M · 372 robots · 300+ technicians" },
   { name: "Tesla Megapack", place: "Lathrop, CA", from: mo(2022, 2), to: mo(2022, 4), facts: "Spare parts, long-lead buys, turnkey commissioning" },
   { name: "Faraday Future FF91", place: "Hanford, CA", from: mo(2022, 4), to: mo(2023, 1), facts: "54 robots · 7 lines · 51 trades sourced" },
   { name: "Tesla Cybertruck", place: "Austin, TX", from: mo(2022, 9), to: mo(2023, 9), facts: "179 trades · 34+ equipment rentals · −20% labor cost" },
@@ -43,7 +43,7 @@ export default function MinoSection() {
           about="Builds automated production lines for car makers: robotic welding lines for car bodies (body-in-white) and EV battery and powertrain assembly lines."
           summary="Purchasing and capacity planning for automation lines built for Tesla, Rivian and Faraday Future."
           kpis={[
-            { value: 3400, suffix: "+", label: "PO lines placed for the Rivian build" },
+            { value: 900, suffix: "+", label: "material requisition lines for the Rivian build" },
             { value: 179, label: "skilled trades staffed for the Cybertruck build" },
             { value: 50, suffix: "%", label: "fewer missed invoices after my approval workflow" },
           ]}
@@ -232,7 +232,7 @@ function InvoiceFlow() {
 // EV program purchasing: where the spend went, by program.
 
 const spendByProgram = {
-  rivian: { label: "Rivian", lines: "3,400+ PO lines", total: "$10M", split: [["Robots & tooling", 46], ["Contract labor", 28], ["Equipment rental", 12], ["Spare parts", 9], ["Services", 5]] },
+  rivian: { label: "Rivian", lines: "900+ requisition lines", total: "$10M", split: [["Robots & tooling", 46], ["Contract labor", 28], ["Equipment rental", 12], ["Spare parts", 9], ["Services", 5]] },
   cyber: { label: "Cybertruck", lines: "179 trades staffed", total: "−20% labor cost", split: [["Contract labor", 52], ["Equipment rental", 21], ["Robots & tooling", 14], ["Services", 8], ["Spare parts", 5]] },
   ff: { label: "Faraday Future", lines: "54 robots, 7 lines", total: "51 trades sourced", split: [["Contract labor", 38], ["Services", 24], ["Robots & tooling", 20], ["Equipment rental", 11], ["Spare parts", 7]] },
   mega: { label: "Megapack", lines: "Long-lead parts", total: "Turnkey commissioning", split: [["Spare parts", 36], ["Services", 30], ["Equipment rental", 16], ["Contract labor", 12], ["Robots & tooling", 6]] },
