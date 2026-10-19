@@ -1521,3 +1521,50 @@ section[id] { scroll-margin-top: 0; }
 .zbs-val { text-align: right; font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
 @media (max-width: 900px) { .zbs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .zbs-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .zbs-grid { grid-template-columns: 1fr; } .zbs-tile strong { font-size: 22px; } }
+
+/* Belong: how Eva runs the ERP project */
+.pm { display: flex; flex-direction: column; gap: 16px; }
+.pm-loop { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; gap: 10px; align-items: stretch; }
+.pm-loop li { position: relative; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); font-size: 13.5px; line-height: 1.35; color: var(--text); }
+.pm-loop li:not(:nth-child(5))::after { content: "→"; position: absolute; right: -9px; top: 50%; transform: translateY(-50%); z-index: 1; font-size: 14px; color: var(--text-faint); }
+.pm-repeat { align-self: center; padding: 6px 12px; border-radius: 999px; background: var(--co); color: #1a1030; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.pm-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 14px; }
+.pm-col { display: flex; flex-direction: column; gap: 14px; }
+.pm-panel { padding: 18px 20px; border-top: 3px solid var(--co); height: 100%; }
+.pm-panel > strong { display: block; margin-bottom: 12px; font-size: 15px; }
+.pm-big { font-size: 26px; margin-right: 4px; }
+.pm-sub { margin-top: 18px; }
+.pm-actions, .pm-risks, .pm-facts, .pm-docs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pm-actions li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 8px; background: rgba(var(--fg-rgb), 0.04); font-size: 13px; }
+.pm-actions em { font-style: normal; font-size: 12px; color: var(--text-dim); }
+.pm-actions i { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+.pm-actions i.prep { background: color-mix(in srgb, var(--series-1) 18%, transparent); color: var(--text); }
+.pm-actions i.build { background: color-mix(in srgb, var(--co) 22%, transparent); color: var(--text); }
+.pm-actions li.pm-more { display: block; background: none; padding: 2px 10px; font-size: 12px; color: var(--text-faint); }
+.pm-risks li { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-left: 2px solid var(--warn); font-size: 13px; }
+.pm-risks em { font-style: normal; color: var(--text-dim); font-size: 12.5px; }
+.pm-prio { display: flex; height: 26px; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+.pm-prio span { display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; font-size: 11.5px; font-weight: 700; color: #fff; }
+.pm-prio .p0 { background: color-mix(in srgb, var(--co) 100%, #000 10%); color: #1a1030; }
+.pm-prio .p1 { background: color-mix(in srgb, var(--co) 70%, transparent); color: #1a1030; }
+.pm-prio .p2 { background: color-mix(in srgb, var(--co) 42%, transparent); color: var(--text); }
+.pm-prio .p3 { background: color-mix(in srgb, var(--co) 20%, transparent); color: var(--text); }
+.pm-facts li { font-size: 13.5px; color: var(--text-dim); }
+.pm-facts b { color: var(--text); }
+.pm-docs { position: relative; padding-left: 16px; gap: 10px; }
+.pm-docs::before { content: ""; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 2px; background: var(--border-strong); }
+.pm-docs li { position: relative; display: flex; flex-direction: column; font-size: 13px; color: var(--text-dim); }
+.pm-docs li::before { content: ""; position: absolute; left: -16px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--co); }
+.pm-docs li.future::before { background: var(--surface); border: 2px solid var(--border-strong); }
+.pm-docs b { color: var(--text); font-size: 13.5px; }
+@media (max-width: 900px) {
+  .pm-loop { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-loop li::after { display: none; }
+  .pm-repeat { justify-self: start; }
+  .pm-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .pm-loop { grid-template-columns: 1fr; }
+  .pm-actions li { grid-template-columns: minmax(0, 1fr) auto; }
+  .pm-actions em { grid-column: 1; grid-row: 2; }
+}

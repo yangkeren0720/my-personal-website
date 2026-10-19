@@ -62,6 +62,8 @@ export default function BelongSection() {
         <ErpFlow />
         <SubHead>The ERP I'm leading, in four phases</SubHead>
         <Roadmap />
+        <SubHead id="belong-pm">How I run the ERP project</SubHead>
+        <ProjectPM />
         <SubHead>Running the office</SubHead>
         <OfficeOps />
         <SubHead id="belong-ai" built="I rolled this out">AI in operations and administration</SubHead>
@@ -291,6 +293,120 @@ function OfficeOps() {
           <p>{o.body}</p>
         </Reveal>
       ))}
+    </div>
+  );
+}
+
+// How Eva runs the Odoo project week to week. Counts come from her design document, action list and Gantt.
+const pmLoop = ["Weekly meeting with the developers", "Notes and plan updates drafted, I check them", "Issue list: owner and phase for each item", "Gantt re-planned on what changed", "Design document versioned and shared"];
+
+const pmActions: { item: string; owner: string; phase: string }[] = [
+  { item: "Master-data owners and change approval", owner: "Me + data owners", phase: "Prep" },
+  { item: "Item master export and field mapping", owner: "China IT + purchasing", phase: "Prep" },
+  { item: "PR, RFQ and PO templates, legal review", owner: "Purchasing + legal", phase: "Build" },
+  { item: "Approval matrix and permission groups", owner: "ERP admin", phase: "Build" },
+  { item: "Blanket PO alerts at 70% and 80%", owner: "Backend lead", phase: "Build" },
+];
+
+const pmRisks: { risk: string; fix: string }[] = [
+  { risk: "Vendors ship early or send no tracking", fix: "A site logistics coordinator on every project, with ERP alerts" },
+  { risk: "Labor or rental runs over budget", fix: "70% / 80% alerts; going over forces a new request with a reason" },
+  { risk: "Small team, hard to separate duties", fix: "Dual review, spot checks after the fact, frequent audits" },
+];
+
+const pmPriority = [
+  { p: "P0", n: 28 },
+  { p: "P1", n: 35 },
+  { p: "P2", n: 32 },
+  { p: "P3", n: 19 },
+];
+
+const pmDocs: { when: string; what: string; future?: boolean }[] = [
+  { when: "May 6 · 8 · 11", what: "3 process meetings, minutes in English and Chinese" },
+  { when: "May 11", what: "Design v1.0 finalized from the three meetings" },
+  { when: "v1.1 → v1.3", what: "Three revisions, each kept as its own version" },
+  { when: "English edition", what: "Same design for the US team" },
+  { when: "v1.0 → v1.5", what: "Data clean-up template for migration" },
+  { when: "v2 (planned)", what: "Finance module, after CPA review", future: true },
+];
+
+function ProjectPM() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px 0px -80px 0px" });
+  const total = pmPriority.reduce((a, b) => a + b.n, 0);
+  return (
+    <div className="pm" ref={ref}>
+      <ol className="pm-loop">
+        {pmLoop.map((step, n) => (
+          <motion.li key={step} initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 + n * 0.22, duration: 0.45, ease }}>
+            <span className="bai-n">{n + 1}</span>
+            {step}
+          </motion.li>
+        ))}
+        <motion.span className="pm-repeat" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1.4 }}>
+          ↻ every week
+        </motion.span>
+      </ol>
+      <div className="pm-grid">
+        <Reveal className="pm-panel card">
+          <span className="bai-tag">Issue list</span>
+          <strong>
+            <b className="pm-big">27</b> action items, each with an owner and a phase
+          </strong>
+          <ul className="pm-actions">
+            {pmActions.map((a, n) => (
+              <motion.li key={a.item} initial={{ opacity: 0, x: -8 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.6 + n * 0.1, duration: 0.35 }}>
+                <span>{a.item}</span>
+                <em>{a.owner}</em>
+                <i className={a.phase === "Prep" ? "prep" : "build"}>{a.phase}</i>
+              </motion.li>
+            ))}
+            <li className="pm-more">+ 22 more</li>
+          </ul>
+          <strong className="pm-sub">
+            <b className="pm-big">9</b> risks, each with a fix
+          </strong>
+          <ul className="pm-risks">
+            {pmRisks.map((r) => (
+              <li key={r.risk}>
+                <span>{r.risk}</span>
+                <em>→ {r.fix}</em>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <div className="pm-col">
+          <Reveal delay={0.08} className="pm-panel card">
+            <span className="bai-tag">Plan</span>
+            <strong>
+              <b className="pm-big">114</b> tasks, ranked and linked
+            </strong>
+            <div className="pm-prio" role="img" aria-label="Task priorities: 28 P0, 35 P1, 32 P2, 19 P3.">
+              {pmPriority.map((p, n) => (
+                <motion.span key={p.p} className={`p${n}`} initial={{ width: 0 }} animate={inView ? { width: `${(p.n / total) * 100}%` } : {}} transition={{ delay: 0.5 + n * 0.15, duration: 0.6, ease }}>
+                  {p.p} · {p.n}
+                </motion.span>
+              ))}
+            </div>
+            <ul className="pm-facts">
+              <li><b>87</b> tasks wait on another task</li>
+              <li><b>4</b> integration tests between phases</li>
+              <li><b>81</b> days of work, planned as <b>114</b> with buffer</li>
+            </ul>
+          </Reveal>
+          <Reveal delay={0.16} className="pm-panel card">
+            <span className="bai-tag">Documentation</span>
+            <ol className="pm-docs">
+              {pmDocs.map((d) => (
+                <li key={d.when} className={d.future ? "future" : ""}>
+                  <b>{d.when}</b>
+                  <span>{d.what}</span>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </div>
     </div>
   );
 }
