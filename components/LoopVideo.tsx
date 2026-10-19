@@ -40,7 +40,11 @@ export default function LoopVideo({ src, poster, label, className, loop = true, 
     const v = ref.current;
     if (!v || reduce || !load) return;
     v.muted = true;
-    if (inView) v.play().catch(() => setBlocked(true));
+    // Only a browser that refuses autoplay gets the play button; a play()
+    // cut short by scrolling away is not a refusal.
+    if (inView) v.play().catch((e: unknown) => {
+      if (e instanceof DOMException && e.name === "NotAllowedError") setBlocked(true);
+    });
     else v.pause();
   }, [inView, reduce, load]);
 
