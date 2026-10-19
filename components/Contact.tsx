@@ -4,13 +4,14 @@ import { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { profile } from "@/content/site";
 import Reveal from "./Reveal";
+import { media } from "./LoopVideo";
 
 export default function Contact() {
   const links = [
     profile.email && { label: "Email", href: `mailto:${profile.email}` },
     profile.linkedin && { label: "LinkedIn", href: profile.linkedin },
     profile.github && { label: "GitHub", href: profile.github },
-    profile.resumeUrl && { label: "Résumé", href: profile.resumeUrl },
+    profile.resumeUrl && { label: "Résumé (PDF)", href: media(profile.resumeUrl) },
   ].filter(Boolean) as { label: string; href: string }[];
 
   const primary = links[0];

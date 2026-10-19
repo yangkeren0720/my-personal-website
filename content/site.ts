@@ -39,7 +39,7 @@ export const profile = {
   email: "eva@evayangscm.com",
   phone: "(309) 684-8387",
   phoneHref: "+13096848387",
-  resumeUrl: "", // e.g. "/resume.pdf" after adding the file to /public
+  resumeUrl: "/Eva_Yang_Resume.pdf", // general resume Eva sent 2026-10-19; replace the file in /public to update
 };
 
 export type Program = {

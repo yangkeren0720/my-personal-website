@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { profile } from "@/content/site";
 import PlaceholderBadge from "./PlaceholderBadge";
 import Counter from "./Counter";
+import { media } from "./LoopVideo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -147,6 +148,11 @@ export default function Hero() {
           <a href="#contact" className="btn">
             Get in touch
           </a>
+          {profile.resumeUrl && (
+            <a href={media(profile.resumeUrl)} className="btn" download>
+              Résumé (PDF) <span aria-hidden>↓</span>
+            </a>
+          )}
           <span className={`hero-loc ${profile.locationPlaceholder ? "placeholder" : ""}`}>
             ◎ {profile.location}
             <PlaceholderBadge show={profile.locationPlaceholder} />
