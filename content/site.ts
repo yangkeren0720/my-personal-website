@@ -157,7 +157,7 @@ export const experience: Experience[] = [
   },
   {
     period: "Feb 2026 — Present",
-    title: "Manager",
+    title: "Office Manager (part-time)",
     org: "Belong Automotive Technology",
     place: "Austin, TX · part-time",
     summary: "Oversee operations, purchasing, HR, IT and warehouse; report to the US CEO and work with US and China leadership.",

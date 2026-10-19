@@ -6,7 +6,7 @@ import Reveal from "./Reveal";
 import CompanyHead, { SubHead } from "./CompanyHead";
 import StoryCards from "./StoryCards";
 
-// Everything from the Belong Manager job, and nothing else: the departments
+// Everything from the Belong Office Manager job, and nothing else: the departments
 // Eva oversees, the ERP roadmap she is leading, and her Belong stories.
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -33,7 +33,7 @@ export default function BelongSection() {
         <CompanyHead
           co="belong"
           company="Belong Automotive Technology"
-          role="Manager, part-time"
+          role="Office Manager, part-time"
           period="Feb 2026 – now"
           title={
             <>
@@ -72,7 +72,7 @@ function DeptMap() {
       <motion.span className="dept-stem" initial={{ scaleY: 0 }} animate={inView ? { scaleY: 1 } : {}} transition={{ delay: 0.3, duration: 0.4 }} />
       <motion.div className="dept-me" initial={{ opacity: 0, scale: 0.8 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ delay: 0.55, type: "spring", stiffness: 260, damping: 18 }}>
         <strong>Me</strong>
-        <span>Manager · 5 direct reports</span>
+        <span>Office Manager · 5 direct reports</span>
       </motion.div>
       <motion.span className="dept-stem" initial={{ scaleY: 0 }} animate={inView ? { scaleY: 1 } : {}} transition={{ delay: 0.8, duration: 0.4 }} />
       <motion.span className="dept-rail" initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}} transition={{ delay: 1, duration: 0.6, ease }} />

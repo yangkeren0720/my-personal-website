@@ -15,7 +15,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 type RoleKey = "skywater" | "belong" | "rbr";
 const roles: { key: RoleKey; company: string; role: string; load: string; y: number }[] = [
   { key: "skywater", company: "SkyWater", role: "Material Planner", load: "Full-time · hands-on", y: 17 },
-  { key: "belong", company: "Belong", role: "Manager", load: "Part-time", y: 50 },
+  { key: "belong", company: "Belong", role: "Office Manager", load: "Part-time", y: 50 },
   { key: "rbr", company: "RBR", role: "Co-Owner", load: "Side business", y: 83 },
 ];
 const roleY = Object.fromEntries(roles.map((r) => [r.key, r.y])) as Record<RoleKey, number>;
@@ -207,7 +207,7 @@ const automations: { key: Exclude<RoleKey, "skywater">; company: string; role: s
   {
     key: "belong",
     company: "Belong",
-    role: "Manager · part-time",
+    role: "Office Manager · part-time",
     items: [
       { text: "Odoo ERP for purchasing, inventory and approvals", state: "In build" },
       { text: "Price-change alerts and clear approval paths", state: "In build" },
