@@ -298,7 +298,84 @@ function OfficeOps() {
 }
 
 // How Eva runs the Odoo project week to week. Counts come from her design document, action list and Gantt.
-const pmLoop = ["Weekly meeting with the developers", "Notes and plan updates drafted, I check them", "Issue list: owner and phase for each item", "Gantt re-planned on what changed", "Design document versioned and shared"];
+type PmDetail = { title: string; lead: string; table?: { head: string[]; rows: string[][] }; list?: string[]; note?: string };
+const pmLoop: { step: string; detail: PmDetail }[] = [
+  {
+    step: "Weekly meeting with developers",
+    detail: {
+      title: "Each meeting ends in decisions",
+      lead: "Three process meetings in May set the design, and the weekly meetings with the developers carry it forward. Every decision is written against the topic it changes, so later meetings refine it instead of starting over.",
+      table: {
+        head: ["Topic", "First decision", "Refined later"],
+        rows: [
+          ["Purchase requests", "Requests from China need no approval", "Routed automatically by category and project"],
+          ["Quotes", "Build an RFQ template", "Standard items need at least 2 quotes; past quotes can be reused"],
+          ["Labor blanket PO", "Cap on total hours or amount", "Alerts when running low; going over needs a new request"],
+          ["Site receiving", "Count, sign, upload the packing list", "A logistics coordinator on site 2–3 weeks early"],
+        ],
+      },
+    },
+  },
+  {
+    step: "Notes drafted, I check them",
+    detail: {
+      title: "Minutes with the same shape every time",
+      lead: "Meetings are recorded. AI drafts the minutes in English and Chinese; I check the decisions and the logic before anything goes out.",
+      list: ["Key points", "Process summary", "Purchase orders and approval", "Templates and master data", "Action items", "Detailed workflows: 6 flows, from request to payment"],
+      note: "Real key point from the May 6 minutes: labor and rental use blanket POs, with child POs created from actual use.",
+    },
+  },
+  {
+    step: "Issue list with owners",
+    detail: {
+      title: "Every item has an owner and a phase",
+      lead: "Action items and risks live in one list. When an item turns out bigger than expected, it is split, not left open.",
+      table: {
+        head: ["#", "Action item", "Owner", "When"],
+        rows: [
+          ["1", "Publish master-data owners and the change-approval flow", "Me + data owners", "Prep"],
+          ["6", "Rental blanket PO, child PO link, 70% / 80% alerts", "Backend lead", "Build"],
+          ["6a", "Labor blanket PO: watch the total and each person", "Backend lead", "Build"],
+          ["6b", "Attach on-site timesheets to labor child POs", "Backend lead", "Build"],
+        ],
+      },
+      note: "Item 6 grew, so it became 6, 6a and 6b, each with its own owner.",
+    },
+  },
+  {
+    step: "Gantt re-planned",
+    detail: {
+      title: "114 tasks, each sized, ranked and linked",
+      lead: "Every task has an estimate, a buffered estimate, a start and end week, what it waits on, and a priority. When something changes, the dependent tasks move with it.",
+      table: {
+        head: ["ID", "Task", "Days", "With buffer", "Waits on", "Priority"],
+        rows: [
+          ["M1-T01", "Define the purchase request fields", "1", "1.2", "–", "P0"],
+          ["M1-T02", "Auto-numbering for requests", "0.5", "0.8", "M1-T01", "P0"],
+          ["M1-T03", "Request status flow", "1", "1.2", "M1-T01", "P0"],
+          ["T5", "Merge duplicate project-number fields", "0.5", "0.8", "–", "P3"],
+        ],
+      },
+      note: "The last block is technical-debt clean-up found while reviewing the build, planned like any other work.",
+    },
+  },
+  {
+    step: "Design doc versioned",
+    detail: {
+      title: "One design document, with a version history",
+      lead: "Each version records its date, what changed and where the change came from, so anyone can trace a rule back to the meeting that decided it.",
+      table: {
+        head: ["Version", "Date", "What changed", "Source"],
+        rows: [
+          ["v1.0 (final)", "May 11", "Purchasing module finalized", "The three meetings' minutes"],
+          ["v1.1 → v1.3", "Later", "Revisions as the build moved", "Weekly meetings"],
+          ["v2 (planned)", "TBD", "Finance module", "After the finance lead starts and a CPA review"],
+        ],
+      },
+      list: ["10 design principles every rule traces back to: single source of truth, separated duties, 3-way match and more", "17 chapters plus a glossary, in English and Chinese"],
+    },
+  },
+];
 
 const pmActions: { item: string; owner: string; phase: string }[] = [
   { item: "Master-data owners and change approval", owner: "Me + data owners", phase: "Prep" },
@@ -334,19 +411,27 @@ function ProjectPM() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px 0px -80px 0px" });
   const total = pmPriority.reduce((a, b) => a + b.n, 0);
+  const [open, setOpen] = useState<number | null>(null);
   return (
     <div className="pm" ref={ref}>
       <ol className="pm-loop">
-        {pmLoop.map((step, n) => (
-          <motion.li key={step} initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 + n * 0.22, duration: 0.45, ease }}>
-            <span className="bai-n">{n + 1}</span>
-            {step}
+        {pmLoop.map((l, n) => (
+          <motion.li key={l.step} initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 + n * 0.22, duration: 0.45, ease }}>
+            <button className={open === n ? "on" : ""} aria-expanded={open === n} onClick={() => setOpen(open === n ? null : n)}>
+              <span className="bai-n">{n + 1}</span>
+              <span>{l.step}</span>
+              <span className="pm-plus" aria-hidden>{open === n ? "−" : "+"}</span>
+            </button>
           </motion.li>
         ))}
         <motion.span className="pm-repeat" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1.4 }}>
           ↻ every week
         </motion.span>
       </ol>
+      {open === null && <p className="pm-hint">Tap a step to see a real example.</p>}
+      <AnimatePresence mode="wait">
+        {open !== null && <PmDetailPanel key={open} n={open} d={pmLoop[open].detail} onClose={() => setOpen(null)} />}
+      </AnimatePresence>
       <div className="pm-grid">
         <Reveal className="pm-panel card">
           <span className="bai-tag">Issue list</span>
@@ -408,5 +493,38 @@ function ProjectPM() {
         </div>
       </div>
     </div>
+  );
+}
+
+function PmDetailPanel({ n, d, onClose }: { n: number; d: PmDetail; onClose: () => void }) {
+  return (
+    <motion.div className="pm-detail card" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3, ease }}>
+      <button className="pm-close" onClick={onClose} aria-label="Close">×</button>
+      <span className="bai-tag">Step {n + 1}</span>
+      <strong>{d.title}</strong>
+      <p>{d.lead}</p>
+      {d.table && (
+        <div className="pm-table-wrap">
+          <table className="pm-table">
+            <thead>
+              <tr>{d.table.head.map((h) => <th key={h}>{h}</th>)}</tr>
+            </thead>
+            <tbody>
+              {d.table.rows.map((r, i) => (
+                <motion.tr key={i} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.08 }}>
+                  {r.map((c, k) => <td key={k}>{c}</td>)}
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {d.list && (
+        <ul className="pm-dlist">
+          {d.list.map((x) => <li key={x}>{x}</li>)}
+        </ul>
+      )}
+      {d.note && <p className="pm-dnote">{d.note}</p>}
+    </motion.div>
   );
 }
