@@ -11,10 +11,13 @@ export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
   status: "Open to Senior Supply Chain, S&OP and Procurement roles", // small badge above your name; "" hides it
-  headline: "Senior Supply Chain & S&OP Planner who builds software",
-  title: "Senior Supply Chain & S&OP Planner", // big line under your name // used in the browser tab title
-  rolePrefix: "who also builds",
-  roles: ["software", "websites", "live dashboards"],
+  headline: "Senior Supply Chain & S&OP Planner + Builder",
+  title: "Senior Supply Chain & S&OP Planner", // big line under your name
+  titleTag: "+ Builder", // shown after the title in the accent color
+  promise: "I solve supply chain problems, then build the tools that make the fix stick.",
+  // Keyword row under the promise. No AI here on purpose: AI is how Eva
+  // builds, not what she is hired for.
+  focus: ["Semiconductor", "S&OP", "Procurement", "Sourcing", "Analytics"],
   // Proof chips under the tagline: each one jumps to the work that backs it.
   // All of it is RBR work (and this site), never SkyWater.
   builds: [
@@ -604,6 +607,36 @@ export const builds = {
     { value: 250, prefix: "~", label: "materials on the weekly shortage review", org: "SkyWater" },
     { value: 2, label: "acquisitions with supply kept running", org: "SkyWater" },
     { value: 5, label: "direct reports across five departments", org: "Belong" },
+  ],
+  // The section title, one beat at a time. Each beat names where it comes
+  // from; "build" is RBR and Belong only, never SkyWater.
+  beats: [
+    { text: "I plan the supply.", org: "SkyWater" },
+    { text: "I solve the constraint.", org: "Mino" },
+    { text: "I build the tools.", org: "RBR · Belong" },
+  ],
+  // Problem, then what was built, then the result. Mino's is self-taught and
+  // before AI; RBR's is built by directing Claude Code and Codex; Belong's is
+  // the AI rollout. SkyWater stays in the planning numbers only.
+  proof: [
+    {
+      org: "Mino", note: "Self-taught, before AI", href: "#invoice-flow",
+      problem: "Timesheets and invoices came in by email and WhatsApp",
+      built: "SharePoint + Power Automate request and approval flow",
+      result: { prefix: "~", value: 50, suffix: "%", label: "fewer missed invoices" },
+    },
+    {
+      org: "RBR", note: "Built by directing Claude Code + Codex", href: "#lease-to-rent",
+      problem: "Every new lease took about 97 minutes of hands-on work",
+      built: "Admin system, iPhone app and 3 robots",
+      result: { prefix: "97 → ", value: 14, suffix: " min", label: "hands-on time per new lease (about)" },
+    },
+    {
+      org: "Belong", note: "AI rollout", href: "#belong-ai",
+      problem: "Meeting notes, plan updates and paperwork took the admin team's time",
+      built: "Rolled out AI and taught the team to use it properly",
+      result: { prefix: "", value: 6, suffix: " of 20", label: "staff use AI: all of admin and operations" },
+    },
   ],
   method: ["Gather the signals", "Find the constraint", "Pick the trade-off", "Check against real records"],
   tiles: [

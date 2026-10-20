@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { profile } from "@/content/site";
 import PlaceholderBadge from "./PlaceholderBadge";
 import Counter from "./Counter";
@@ -15,12 +15,6 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 160]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const blobY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-
-  const [roleIndex, setRoleIndex] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setRoleIndex((i) => (i + 1) % profile.roles.length), 2600);
-    return () => clearInterval(t);
-  }, []);
 
   const words = profile.name.split(" ");
 
@@ -68,7 +62,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.95, duration: 0.7, ease }}
         >
-          {profile.title}
+          {profile.title} <span className="hero-title-tag">{profile.titleTag}</span>
         </motion.p>
         {profile.nativeName && (
           <motion.p className="hero-native" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
@@ -76,28 +70,26 @@ export default function Hero() {
           </motion.p>
         )}
 
-        <motion.div
-          className="hero-role"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
+        <motion.p
+          className="hero-promise"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, duration: 0.6, ease }}
         >
-          <span className="hero-role-prefix">{profile.rolePrefix}</span>
-          <span className="hero-role-slot">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={roleIndex}
-                className="grad-text"
-                initial={{ y: 28, opacity: 0, filter: "blur(6px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                exit={{ y: -28, opacity: 0, filter: "blur(6px)" }}
-                transition={{ duration: 0.45, ease }}
-              >
-                {profile.roles[roleIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>
-        </motion.div>
+          {profile.promise}
+        </motion.p>
+        <div className="hero-focus">
+          {profile.focus.map((f, i) => (
+            <motion.span
+              key={f}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 + i * 0.07, duration: 0.5, ease }}
+            >
+              {f}
+            </motion.span>
+          ))}
+        </div>
 
         <div className="hero-stats">
           {profile.heroStats.map((st, i) => (
@@ -174,7 +166,7 @@ export default function Hero() {
   );
 }
 
-// Small line icons for the "who also builds" chips.
+// Small line icons for the builder proof chips.
 function BuildIcon({ kind }: { kind: string }) {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
