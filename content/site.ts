@@ -17,7 +17,7 @@ export const profile = {
   promise: "I solve supply chain problems, then build the tools that make the fix stick.",
   // Keyword row under the promise. No AI here on purpose: AI is how Eva
   // builds, not what she is hired for.
-  focus: ["Semiconductor", "S&OP", "Procurement", "Sourcing", "Analytics"],
+  focus: ["Semiconductor", "Manufacturing", "Procurement", "S&OP", "Analytics"],
   // Proof chips under the tagline: each one jumps to the work that backs it.
   // All of it is RBR work (and this site), never SkyWater.
   builds: [
@@ -611,9 +611,9 @@ export const builds = {
   // The section title, one beat at a time. Each beat names where it comes
   // from; "build" is RBR and Belong only, never SkyWater.
   beats: [
-    { text: "I plan the supply.", org: "SkyWater" },
-    { text: "I solve the constraint.", org: "Mino" },
-    { text: "I build the tools.", org: "RBR · Belong" },
+    { text: "I plan the supply.", org: "SkyWater", what: "Forecasting · MRP · inventory" },
+    { text: "I solve the constraint.", org: "Mino", what: "Shortages · suppliers · capacity" },
+    { text: "I build the tools.", org: "RBR · Belong", what: "Dashboards · workflows · apps" },
   ],
   // Problem, then what was built, then the result. Mino's is self-taught and
   // before AI; RBR's is built by directing Claude Code and Codex; Belong's is

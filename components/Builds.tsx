@@ -166,7 +166,9 @@ function Beats() {
           transition={{ delay: 0.1 + i * 0.35, duration: 0.6, ease }}
         >
           <span className="beat-text">{b.text}</span>
-          <small className="beat-org">{b.org}</small>
+          <small className="beat-org">
+            {b.org} <span className="beat-what">{b.what}</span>
+          </small>
         </motion.span>
       ))}
     </h2>

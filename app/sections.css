@@ -1389,6 +1389,7 @@ section[id] { scroll-margin-top: 0; }
 .beat { display: inline-flex; flex-direction: column; }
 .beat.last .beat-text { font-style: italic; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .beat-org { margin-top: 4px; font-family: var(--font-sans); font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.beat-what { margin-left: 6px; font-weight: 400; letter-spacing: .02em; text-transform: none; color: var(--text-dim); }
 .proof { margin-top: 40px; }
 .proof-head { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); }
 .proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 12px; }
