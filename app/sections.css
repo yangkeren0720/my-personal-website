@@ -1441,11 +1441,71 @@ section[id] { scroll-margin-top: 0; }
 .sop-icon { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid currentColor; font-size: 12px; font-weight: 700; vertical-align: 2px; margin-right: 4px; }
 .lab-dot.sop-low { fill: var(--warning); }
 .lab-dot.sop-out { fill: var(--critical); }
-.sop-po { fill: var(--text-faint); }
-.sw.sop-po-sw { width: 0; height: 0; border-radius: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid var(--text-faint); }
+.lab-dot.sop-over { fill: var(--accent-3); }
+.sw.sop-po-sw { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.sw.sop-po-sw.exp { background: var(--critical); box-shadow: 0 0 0 3px color-mix(in srgb, var(--critical) 25%, transparent); }
 .sw.sop-low-sw { width: 10px; height: 10px; border-radius: 50%; background: var(--warning); }
-@media (max-width: 700px) {
-  .sop-controls { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.sw.ghost { background: repeating-linear-gradient(90deg, var(--text-faint) 0 2px, transparent 2px 4px); }
+.sop-top { display: flex; justify-content: space-between; align-items: center; gap: 10px 14px; flex-wrap: wrap; }
+.sop-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.sop-btn { border: 1px solid var(--border-strong); background: rgba(var(--fg-rgb), 0.03); color: var(--text-dim); font: inherit; font-size: 13px; padding: 6px 13px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s, transform .15s; }
+.sop-btn:hover { color: var(--text); border-color: var(--accent); }
+.sop-btn:active { transform: scale(.96); }
+.sop-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.sop-btn.primary.sop-glow { animation: sop-pulse 1.8s ease-out infinite; }
+@keyframes sop-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); } 100% { box-shadow: 0 0 0 12px transparent; } }
+.sop-controls { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.sop-chart { margin-top: 4px; user-select: none; -webkit-user-select: none; }
+.sop-chart svg.dragging { cursor: grabbing; }
+.sop-panel-label { fill: var(--text-dim); font-size: 11.5px; font-weight: 600; letter-spacing: .02em; }
+.sop-zone-label { fill: var(--text-faint); font-size: 10.5px; }
+.sop-frozen { opacity: 1; }
+.sop-hatch-line { stroke: rgba(var(--fg-rgb), 0.07); stroke-width: 3px; }
+.sop-over-band { fill: color-mix(in srgb, var(--accent-3) 9%, transparent); }
+.sop-safety { fill: none; stroke: var(--text-dim); stroke-width: 1.5px; stroke-dasharray: 5 5; }
+.sop-ghost { fill: none; stroke: var(--text-faint); stroke-width: 1.5px; stroke-dasharray: 2 3; opacity: .8; }
+.sop-area-top { stop-color: var(--series-1); stop-opacity: .22; }
+.sop-area-bot { stop-color: var(--series-1); stop-opacity: 0; }
+.sop-lost { fill: var(--critical); opacity: .85; }
+.sop-usage line { stroke: var(--text-faint); stroke-width: 1.5px; stroke-dasharray: 3 4; }
+.sop-usage.on line { stroke: var(--accent-2); }
+.sop-usage-pill { fill: var(--surface); stroke: var(--border-strong); }
+.sop-usage.on .sop-usage-pill { fill: var(--accent-2); stroke: var(--accent-2); }
+.sop-usage-text { fill: var(--text-dim); font-size: 11.5px; font-weight: 700; }
+.sop-usage.on .sop-usage-text { fill: #fff; }
+.sop-grab { cursor: grab; touch-action: none; outline: none; }
+.sop-usage-bar { fill: rgba(var(--fg-rgb), 0.13); }
+.sop-usage-bar.changed { fill: color-mix(in srgb, var(--accent-2) 45%, transparent); }
+.sop-stem { stroke: var(--accent); stroke-width: 2px; }
+.sop-po-ring { fill: color-mix(in srgb, var(--accent) 22%, transparent); }
+.sop-po-core { fill: var(--accent); stroke: var(--surface-1); stroke-width: 2px; }
+.sop-po-dot.exp .sop-stem { stroke: var(--critical); }
+.sop-po-dot.exp .sop-po-ring { fill: color-mix(in srgb, var(--critical) 22%, transparent); }
+.sop-po-dot.exp .sop-po-core { fill: var(--critical); }
+.sop-po-dot.sel .sop-po-ring { stroke: var(--text); stroke-width: 1.5px; }
+.sop-po-dot:not(.sel) .sop-po-ring { animation: sop-breathe 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes sop-breathe { 50% { transform: scale(1.35); opacity: .5; } }
+.sop-po-label { fill: var(--text); font-size: 11.5px; font-weight: 700; paint-order: stroke; stroke: var(--surface-1); stroke-width: 4px; }
+.lab-axis.sop-today { fill: var(--accent); font-weight: 700; }
+.sop-sel { min-height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap; font-size: 13px; color: var(--text-dim); }
+.sop-sel-name { display: inline-flex; align-items: center; gap: 8px; }
+.sop-sel-name b { color: var(--text); }
+.sop-sel-name em { font-style: normal; color: var(--critical); font-weight: 600; }
+.sop-steppers { display: inline-flex; gap: 6px; }
+.sop-steppers button { min-width: 34px; height: 32px; border-radius: 9px; border: 1px solid var(--border-strong); background: rgba(var(--fg-rgb), 0.04); color: var(--text); font: inherit; font-size: 13px; cursor: pointer; }
+.sop-steppers button:hover { border-color: var(--accent); }
+.sop-steppers button.del { padding: 0 10px; color: var(--critical); }
+.sop-hint { display: inline-flex; align-items: center; gap: 8px; color: var(--text-faint); }
+.sop-hint-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); animation: sop-nudge 2.2s ease-in-out infinite; }
+@keyframes sop-nudge { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(6px, 0); } 50% { transform: translate(6px, -5px); } 75% { transform: translate(0, -5px); } }
+@media (prefers-reduced-motion: reduce) { .sop-po-dot .sop-po-ring, .sop-hint-dot, .sop-btn.primary.sop-glow { animation: none; } }
+@media (max-width: 900px) {
+  .sop-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .sop-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
+  .sop-top .lab-toggle { width: 100%; }
+  .sop-kpis strong { font-size: 17px; }
 }
 
 /* Belong: purchase flow, plan chips, office strip, AI examples */
