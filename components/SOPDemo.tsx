@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Reveal from "./Reveal";
 import { Toggle, useWidth } from "./PlanningLab";
@@ -115,6 +115,13 @@ export default function SOPDemo() {
   const [ref, w] = useWidth<HTMLDivElement>();
   const svgRef = useRef<SVGSVGElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px 0px -80px 0px" });
+  // The walkthrough starts once most of the chart is on screen.
+  const tourIn = useInView(ref, { once: true, amount: 0.6 });
+  const reduce = useReducedMotion();
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const touched = useRef(false);
+  const [tour, setTour] = useState<"" | "surge" | "plan" | "you">("");
+  const [cursor, setCursor] = useState({ x: 0, y: 0, on: false, jump: true, tap: 0 });
 
   // Stop the page from scrolling while a finger drags a handle.
   useEffect(() => {
@@ -136,6 +143,65 @@ export default function SOPDemo() {
     d.setHours(0, 0, 0, 0);
     setToday(d);
   }, []);
+
+  // A short walkthrough for visitors who only scroll past: demand jumps, the
+  // plan dips below safety stock, Auto-plan fixes it, then "your turn". It
+  // plays once, and any tap, key, slider or drag in the card ends it at once.
+  // A pointer shows the clicks on wide screens; phones see the board change.
+  useEffect(() => {
+    const card = cursorRef.current?.parentElement;
+    if (!card) return;
+    const stop = (e: Event) => {
+      if (e.type === "pointerdown" && !(e.target as Element).closest?.(".sop-grab")) return;
+      touched.current = true;
+      setCursor((c) => ({ ...c, on: false }));
+      setTour("");
+    };
+    const evs = ["click", "input", "keydown", "pointerdown"];
+    evs.forEach((ev) => card.addEventListener(ev, stop, true));
+    return () => evs.forEach((ev) => card.removeEventListener(ev, stop, true));
+  }, []);
+
+  useEffect(() => {
+    const card = cursorRef.current?.parentElement;
+    if (!tourIn || reduce || touched.current || !card) return;
+    const pointer = matchMedia("(min-width: 900px) and (pointer: fine)").matches;
+    const at = (el: Element | null | undefined) => {
+      const c = card.getBoundingClientRect();
+      const r = el?.getBoundingClientRect();
+      return r ? { x: r.left + r.width / 2 - c.left, y: r.top + r.height / 2 - c.top } : null;
+    };
+    const moveTo = (el: Element | null | undefined, extra: Partial<typeof cursor> = {}) => {
+      const p = at(el);
+      if (pointer && p) setCursor((c) => ({ ...c, ...p, on: true, jump: false, ...extra }));
+    };
+    const tap = () => setCursor((c) => ({ ...c, tap: c.tap + 1 }));
+    const timers: number[] = [];
+    const later = (ms: number, fn: () => void) => timers.push(window.setTimeout(() => !touched.current && fn(), ms));
+
+    const start = at(card.querySelector(".sop-chart"));
+    if (pointer && start) setCursor((c) => ({ ...c, ...start, jump: true }));
+    later(200, () => moveTo(card.querySelectorAll(".lab-toggle button")[1]));
+    later(1100, () => {
+      tap();
+      pickScenario("surge");
+      setTour("surge");
+    });
+    later(3300, () => moveTo(card.querySelector(".sop-btn.primary")));
+    later(4200, () => {
+      tap();
+      setPos((ps) => autoPlan(ps, { ...DEFAULTS, ...SCENARIOS.surge.params }));
+      setTour("plan");
+    });
+    later(6400, () => {
+      moveTo(card.querySelectorAll(".sop-po-dot .sop-po-core")[3]);
+      setTour("you");
+    });
+    later(7600, () => setCursor((c) => ({ ...c, on: false })));
+    return () => timers.forEach(clearTimeout);
+    // pickScenario only sets state; the walkthrough runs once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tourIn, reduce]);
 
   const set = (patch: Partial<Params>) => setParams((p) => ({ ...p, ...patch }));
   const rows = useMemo(() => simulate(pos, params), [pos, params]);
@@ -497,6 +563,24 @@ export default function SOPDemo() {
                   </button>
                 </span>
               </>
+            ) : tour ? (
+              <motion.span key={tour} className={`sop-tour ${tour}`} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+                {tour === "surge" && (
+                  <>
+                    <b>1</b> Demand up 35%: stock drops below safety
+                  </>
+                )}
+                {tour === "plan" && (
+                  <>
+                    <b>2</b> Auto-plan re-orders: covered all 16 weeks
+                  </>
+                )}
+                {tour === "you" && (
+                  <>
+                    <span className="sop-hint-dot" /> Your turn: drag a delivery, ⇆ date, ⇅ quantity
+                  </>
+                )}
+              </motion.span>
             ) : (
               <span className="sop-hint">
                 <span className="sop-hint-dot" /> Drag a delivery: ⇆ date, ⇅ quantity
@@ -527,6 +611,20 @@ export default function SOPDemo() {
               <i className="sw stockout" /> Short
             </span>
           </div>
+
+          <motion.div
+            ref={cursorRef}
+            className="sop-cursor"
+            aria-hidden
+            initial={false}
+            animate={{ x: cursor.x, y: cursor.y, opacity: cursor.on ? 1 : 0 }}
+            transition={cursor.jump ? { duration: 0 } : { duration: 0.8, ease: [0.22, 1, 0.36, 1], opacity: { duration: 0.3 } }}
+          >
+            {cursor.tap > 0 && <motion.span key={cursor.tap} className="sop-cursor-tap" initial={{ scale: 0.3, opacity: 0.8 }} animate={{ scale: 2.4, opacity: 0 }} transition={{ duration: 0.6 }} />}
+            <svg width="22" height="26" viewBox="0 0 22 26">
+              <path d="M2 2 L2 20 L7 15.5 L10.5 23.5 L14 22 L10.6 14.2 L17.5 14 Z" />
+            </svg>
+          </motion.div>
         </Reveal>
         <p className="lab-note">
           Sample data and sample costs for one made-up material: holding ${COST.hold}, overflow ${COST.overflow}, expedite ${COST.expedite}, lost sale ${COST.lost} per unit. Orders in lots of {LOT}. Built by me with Claude Code and Codex; not from any employer.
