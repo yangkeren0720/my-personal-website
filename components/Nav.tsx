@@ -14,7 +14,6 @@ const links = [
   { id: "mino", label: "Mino" },
   { id: "belong", label: "Belong" },
   { id: "rbr", label: "RBR" },
-  { id: "multitask", label: "Multitask" },
   { id: "contact", label: "Contact" },
 ];
 

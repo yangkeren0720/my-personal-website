@@ -7,7 +7,6 @@ import SkyWaterSection from "@/components/SkyWaterSection";
 import MinoSection from "@/components/MinoSection";
 import BelongSection from "@/components/BelongSection";
 import RBRSection from "@/components/RBRSection";
-import Multitask from "@/components/Multitask";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -30,7 +29,6 @@ export default function Home() {
         <MinoSection />
         <BelongSection />
         <RBRSection />
-        <Multitask />
         <Contact />
       </main>
       <Footer />
