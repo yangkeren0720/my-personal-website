@@ -14,7 +14,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import CursorGlow from "@/components/CursorGlow";
 
 // One structure: who I am, both skills side by side, a dashboard to try, the resume, then one section per employer holding
-// only that job's stories and charts, how I run the roles at once, contact.
+// only that job's stories and charts (full-time supply chain work first, the side business last), contact.
 export default function Home() {
   return (
     <>
@@ -27,9 +27,9 @@ export default function Home() {
         <SOPDemo />
         <Experience />
         <SkyWaterSection />
-        <RBRSection />
-        <BelongSection />
         <MinoSection />
+        <BelongSection />
+        <RBRSection />
         <Multitask />
         <Contact />
       </main>

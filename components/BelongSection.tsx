@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useInView } from "framer-motion";
 import Reveal from "./Reveal";
 import CompanyHead, { SubHead } from "./CompanyHead";
 import StoryCards from "./StoryCards";
+import Fold from "./Fold";
 
 // Everything from the Belong Office Manager job, and nothing else: the departments
 // Eva oversees, the ERP roadmap she is leading, and her Belong stories.
@@ -58,18 +59,30 @@ export default function BelongSection() {
         />
         <SubHead>What I oversee</SubHead>
         <DeptMap />
-        <SubHead>How a purchase will move through the ERP</SubHead>
+        <Fold
+          name="Belong"
+          parts={[
+            { label: "ERP purchase flow", id: "belong-erp" },
+            { label: "ERP roadmap", id: "belong-roadmap" },
+            { label: "Running the ERP project", id: "belong-pm" },
+            { label: "Running the office", id: "belong-office" },
+            { label: "AI rollout", id: "belong-ai" },
+            { label: "Stories", id: "belong-stories" },
+          ]}
+        >
+        <SubHead id="belong-erp">How a purchase will move through the ERP</SubHead>
         <ErpFlow />
-        <SubHead>The ERP I'm leading, in four phases</SubHead>
+        <SubHead id="belong-roadmap">The ERP I'm leading, in four phases</SubHead>
         <Roadmap />
         <SubHead id="belong-pm">How I run the ERP project</SubHead>
         <ProjectPM />
-        <SubHead>Running the office</SubHead>
+        <SubHead id="belong-office">Running the office</SubHead>
         <OfficeOps />
         <SubHead id="belong-ai" built="I rolled this out">AI in operations and administration</SubHead>
         <BelongAI />
         <SubHead id="belong-stories">Belong stories</SubHead>
         <StoryCards company="Belong" />
+        </Fold>
       </div>
     </section>
   );

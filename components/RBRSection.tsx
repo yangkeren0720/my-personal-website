@@ -9,6 +9,7 @@ import LeaseToRent from "./LeaseToRent";
 import RBRDevices from "./RBRDevices";
 import RBRBuild from "./RBRBuild";
 import RBRWorkflow from "./RBRWorkflow";
+import Fold from "./Fold";
 
 // Everything from RBR Property Management, the side business Eva co-owns.
 export default function RBRSection() {
@@ -28,6 +29,18 @@ export default function RBRSection() {
           summary={ai.builtWith}
           kpis={rbrPlatform.kpis}
         />
+        <Fold
+          name="RBR"
+          parts={[
+            { label: "From lease to rent", id: "lease-to-rent" },
+            { label: "The platform", id: "work" },
+            { label: "Application to move-in", id: "rbr-flow" },
+            { label: "On the phone", id: "rbr-phone" },
+            { label: "How it's built", id: "rbr-build" },
+            { label: "AI at work", id: "ai" },
+            { label: "Stories", id: "rbr-stories" },
+          ]}
+        >
         <SubHead id="lease-to-rent">From lease to rent</SubHead>
         <LeaseToRent />
         <SubHead id="work" built="I built this">The platform</SubHead>
@@ -42,6 +55,7 @@ export default function RBRSection() {
         <AISection />
         <SubHead id="rbr-stories">RBR stories</SubHead>
         <StoryCards company="RBR" />
+        </Fold>
       </div>
     </section>
   );

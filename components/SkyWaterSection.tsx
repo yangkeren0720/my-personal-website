@@ -5,6 +5,7 @@ import SkyWaterTimeline from "./SkyWaterStories";
 import PlanningCharts from "./PlanningLab";
 import StoryCards from "./StoryCards";
 import SkyWaterExtras, { SupplierChanges } from "./SkyWaterExtras";
+import Fold from "./Fold";
 
 // Everything from the SkyWater (Infineon) Material Planner job, and nothing else.
 export default function SkyWaterSection() {
@@ -15,7 +16,7 @@ export default function SkyWaterSection() {
           co="skywater"
           company="SkyWater Technology"
           role="Material Planner"
-          period="Dec 2023 – now · began under Infineon"
+          period="Dec 2023 – now · full-time · Infineon → SkyWater → IonQ"
           title={
             <>
               Keeping a wafer fab <em>running</em>.
@@ -30,7 +31,16 @@ export default function SkyWaterSection() {
         />
         <SubHead>Story timeline</SubHead>
         <SkyWaterTimeline />
-        <SubHead>The planning, as charts</SubHead>
+        <Fold
+          name="SkyWater"
+          parts={[
+            { label: "Planning charts", id: "skywater-charts" },
+            { label: "Zero-bin review", id: "zero-bin-review" },
+            { label: "Supplier changes", id: "supplier-changes" },
+            { label: "More stories", id: "skywater-stories" },
+          ]}
+        >
+        <SubHead id="skywater-charts">The planning, as charts</SubHead>
         <PlanningCharts />
         <SubHead id="zero-bin-review">Weekly zero-bin review</SubHead>
         <SkyWaterExtras />
@@ -38,6 +48,7 @@ export default function SkyWaterSection() {
         <SupplierChanges />
         <SubHead id="skywater-stories">More SkyWater stories</SubHead>
         <StoryCards company="SkyWater" />
+        </Fold>
       </div>
     </section>
   );

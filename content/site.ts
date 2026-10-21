@@ -10,7 +10,7 @@ export type Placeholder = { placeholder?: boolean };
 export const profile = {
   name: "Eva Yang",
   nativeName: "", // optional: your Chinese name, shown under the headline
-  status: "Open to Senior Supply Chain, S&OP and Procurement roles", // small badge above your name; "" hides it
+  status: "Open to Senior Supply Chain, S&OP and Procurement roles · Austin or remote", // small badge above your name; "" hides it
   headline: "Senior Supply Chain & S&OP Planner + Builder",
   title: "Senior Supply Chain & S&OP Planner", // big line under your name
   titleTag: "+ Builder", // shown after the title in the accent color
@@ -33,9 +33,11 @@ export const profile = {
     { value: 0, label: "production stops at the wafer fab (SkyWater)" },
     { value: 5, label: "direct reports (Belong)" },
   ],
+  // The page description search engines and link previews show.
   tagline:
-    "Material Planner at SkyWater, keeping a wafer fab supplied with critical materials. Before that, purchasing and capacity planning for EV line build-outs at Mino Automation. Outside SkyWater, I manage five departments at Belong and co-own a property business whose software, website and dashboards I built by directing AI.",
-  location: "Austin, TX",
+    "Senior Supply Chain & S&OP Planner in Austin, TX, open to remote roles. Wafer-fab material planning at SkyWater, $10M of EV line-build purchasing at Mino, and the software behind my own property business.",
+  // Austin area or remote (Eva 2026-10-21).
+  location: "Austin, TX · open to Austin-area or remote roles",
   locationPlaceholder: false,
   github: "https://github.com/yangkeren0720",
   linkedin: "https://www.linkedin.com/in/eva-yang-637993116/",
@@ -43,7 +45,25 @@ export const profile = {
   phone: "(309) 684-8387",
   phoneHref: "+13096848387",
   resumeUrl: "/Eva_Yang_Resume.pdf", // general resume Eva sent 2026-10-19; replace the file in /public to update
+  // Strip under the hero numbers: the filters recruiters search by. The
+  // certificate name is from Eva's certificate (Sep 28, 2023).
+  credentials: [
+    { label: "M.S. Mathematics", detail: "Illinois State", href: "#education" },
+    { label: "ASCM Supply Chain Planning Certificate", detail: "2023", href: "#education" },
+    { label: "English / Mandarin", detail: "native Mandarin", href: "#education" },
+  ],
 };
+
+// One row at the top of the resume for the people-manager reader. Each chip
+// names its employer and jumps to the proof. No AI wording here: the SkyWater
+// chip sits in this row.
+export const leadership = [
+  { value: "5", label: "direct reports across operations, purchasing, HR, IT and warehouse", org: "Belong", href: "#belong" },
+  { value: "Full-cycle", label: "hiring and onboarding for the team", org: "Belong", href: "#belong" },
+  { value: "US + China", label: "leadership approved my ERP choice and 114-task plan", org: "Belong", href: "#ex-odoo" },
+  { value: "Daily", label: "recovery with engineering, warehouse, procurement and the supplier", org: "SkyWater", href: "#skywater" },
+  { value: "300+", label: "technicians sourced and coordinated across 7 lines", org: "Mino", href: "#mino" },
+];
 
 export type Program = {
   name: string;
@@ -74,15 +94,23 @@ export type Experience = {
   // Buttons that jump to the demos for this role.
   links?: { label: string; href: string }[];
   kind?: "work" | "education";
+  // Full-time, part-time or side business, shown as a pill by the dates.
+  load?: string;
+  // One bold line of scope under the title.
+  scope?: string;
+  // A small label shown above this card in the timeline.
+  groupLabel?: string;
+  id?: string;
 } & Placeholder;
 
 export const experience: Experience[] = [
   {
     period: "Dec 2023 — Present",
     title: "Material Planner",
-    org: "SkyWater Technology (began under Infineon Technologies)",
+    org: "SkyWater Technology · Infineon → SkyWater → IonQ, through acquisitions",
     section: { label: "See the full SkyWater section", href: "#skywater" },
     place: "Austin, TX",
+    load: "Full-time",
     summary: "Plan demand and supply for critical wafer-fab materials: specialty gases, CMP slurry, photoresist and process chemicals.",
     highlights: [
       "Built a weekly weeks-of-supply risk dashboard that feeds S&OP and MPS decisions.",
@@ -94,7 +122,7 @@ export const experience: Experience[] = [
     programs: [
       {
         name: "Took over CMP planning",
-        place: "Ownership",
+        place: "No handover",
         period: "MRP reset",
         job: "Inherited CMP materials after a layoff, with no handover or documentation.",
         did: ["Worked backward from ERP history, lead times and usage.", "Reset min/max and lead times item by item.", "Moved the items onto MRP planning; planning stabilized."],
@@ -106,7 +134,7 @@ export const experience: Experience[] = [
       },
       {
         name: "Shortage-risk report",
-        place: "Dive Deep",
+        place: "Root cause",
         period: "~100 → ~250",
         job: "The zero-bin report relied on past usage, so new materials never showed up.",
         did: ["Found the gap: items with no history were invisible.", "Rebuilt the logic to include new and low-history items.", "Made the report the weekly shortage review."],
@@ -118,7 +146,7 @@ export const experience: Experience[] = [
       },
       {
         name: "A run-out the ERP hid",
-        place: "Dive Deep",
+        place: "Early warning",
         period: "Single-source",
         job: "A single-source delivery slipped, but the ERP still showed enough supply.",
         did: ["Rebuilt the run-out date from daily use, open POs and confirmed dates.", "Set daily control with engineering, warehouse, procurement and the supplier.", "Inventory hit about one bottle; the shipment arrived in time."],
@@ -130,7 +158,7 @@ export const experience: Experience[] = [
       },
       {
         name: "Packaging change",
-        place: "Bias for Action",
+        place: "Fast recovery",
         period: "4 paths",
         job: "A supplier packaging change failed its first qualification.",
         did: ["Started four recovery paths at the same time.", "Pulled stock from the supplier, other sites and an alternate batch.", "Pushed re-qualification through; production kept running."],
@@ -142,7 +170,7 @@ export const experience: Experience[] = [
       },
       {
         name: "End-of-life buy",
-        place: "Are Right, A Lot",
+        place: "Judgment call",
         period: "In progress",
         job: "A chemical is reaching end of life, and its shelf life is only six months.",
         did: ["Weighed actual usage swings and qualification risk.", "Proposed a 100-bottle shared buffer on the 200-bottle baseline.", "Aligned the team on 300 bottles for the final batch."],
@@ -165,14 +193,128 @@ export const experience: Experience[] = [
     ],
   },
   {
+    period: "Jun 2021 — Oct 2023",
+    title: "Purchasing Analyst",
+    org: "Mino Automation USA",
+    section: { label: "See the full Mino section", href: "#mino" },
+    place: "Supplier partner to Tesla, Rivian and Faraday Future",
+    summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
+    highlights: [
+      "Rivian: 900+ material requisition lines and ~$10M in POs for 372 robots across 7 lines.",
+      "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
+      "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
+      "Also bought and staffed for Nissan, Lucid, Linamar and follow-on Tesla and Rivian jobs (2022–2023).",
+    ],
+    programsLabel: "Tap a program to see what I did",
+    programs: [
+      {
+        name: "Tesla Cybertruck",
+        place: "Austin, TX",
+        period: "Sep 2022 – Sep 2023",
+        job: "Supply and labor capacity planning for the body-in-white line ramp.",
+        did: ["Sourced and onboarded 179 contract trades, all through the customer's safety onboarding.", "Negotiated labor rates down 20% and ran 34+ equipment rentals: welders, lifts, cranes.", "Built the cost-tracking template and managed time-and-materials and turnkey contracts."],
+        kpis: [
+          { value: "179", label: "trades staffed" },
+          { value: "−20%", label: "labor cost" },
+          { value: "34+", label: "equipment rentals" },
+        ],
+        crew: [
+          { label: "Millwrights", n: 80 },
+          { label: "Electricians", n: 70 },
+          { label: "Robot programmers", n: 15 },
+          { label: "PLC programmers", n: 6 },
+          { label: "Riggers", n: 4 },
+          { label: "Crane operators", n: 4 },
+        ],
+      },
+      {
+        name: "Faraday Future FF91",
+        place: "Hanford, CA",
+        period: "Apr 2022 – Jan 2023",
+        job: "Purchasing and crew sourcing to install and commission 54 robots across 7 lines.",
+        did: ["Sourced 51 trades: mechanical installers, electricians and a PLC programmer.", "Lined up 10+ pieces of mobile equipment and service from 8+ equipment makers.", "Audited the process equipment for completeness before commissioning."],
+        kpis: [
+          { value: "54", label: "robots" },
+          { value: "7", label: "lines" },
+          { value: "51", label: "trades sourced" },
+        ],
+        crew: [
+          { label: "Mechanical installers", n: 30 },
+          { label: "Electricians", n: 20 },
+          { label: "PLC programmer", n: 1 },
+        ],
+      },
+      {
+        name: "Tesla Megapack",
+        place: "Lathrop, CA",
+        period: "Feb – Apr 2022",
+        job: "Spare parts and long-lead buys for line installation and commissioning.",
+        did: ["Planned the spare parts the install and commissioning would need.", "Expedited long-lead items and handled supplier escalations.", "Negotiated a turnkey commissioning project."],
+        kpis: [
+          { value: "Turnkey", label: "commissioning deal" },
+          { value: "3 mo", label: "install window" },
+        ],
+        flow: ["Spare-parts plan", "Long-lead buys", "Escalations", "Turnkey commissioning"],
+      },
+      {
+        name: "Rivian",
+        place: "Normal, IL",
+        period: "Jun 2021 – Feb 2022",
+        job: "Purchasing and crew sourcing for a 7-line body-in-white build with 372 robots.",
+        did: ["Ran 900+ material requisition lines (500+ part numbers, 53 brands) and ~800 manpower PO lines, ~$10M in all.", "Sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
+        kpis: [
+          { value: "900+", label: "requisition lines" },
+          { value: "$10M", label: "purchased" },
+          { value: "372", label: "robots" },
+        ],
+        crew: [
+          { label: "Mechanical installers", n: 120 },
+          { label: "Electricians", n: 100 },
+          { label: "Robot programmers", n: 60 },
+          { label: "PLC programmers", n: 30 },
+        ],
+      },
+    ],
+    links: [
+      { label: "Program timeline", href: "#mino" },
+      { label: "Capacity story", href: "#capacity" },
+      { label: "Invoice workflow", href: "#invoice-flow" },
+      { label: "EV program spend", href: "#ev-programs" },
+      { label: "More Mino stories", href: "#mino-stories" },
+    ],
+  },
+  {
+    period: "Feb 2026 — Present",
+    title: "Office Manager (part-time)",
+    org: "Belong Automotive Technology",
+    section: { label: "See the full Belong section", href: "#belong" },
+    place: "Austin, TX",
+    load: "Part-time",
+    groupLabel: "Part-time and side roles",
+    scope: "Operations, purchasing, HR, IT & warehouse · 5 direct reports · reports to the US CEO",
+    summary: "Work with US and China leadership on operations, the ERP rollout and hiring.",
+    highlights: [
+      "Led the ERP choice (Odoo vs. NetSuite, SAP, custom) and a 160-page design with a 114-task plan.",
+      "Fixed under-licensed engineering software: ~$100K over 3 years, ~40% below the top quote.",
+      "Run procurement, import/export, customs and freight, plus full-cycle hiring.",
+    ],
+    links: [
+      { label: "ERP story", href: "#ex-odoo" },
+      { label: "Licensing story", href: "#ex-cad" },
+      { label: "Departments & ERP", href: "#belong" },
+    ],
+  },
+  {
     period: "2023 — Present",
     title: "Co-Owner",
     org: "RBR Property Management",
     section: { label: "See the full RBR section", href: "#rbr" },
-    place: "Austin area · side business",
+    place: "Austin area",
+    load: "Side business",
     summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing Claude Code and Codex, each cross-checking the other, with every output checked against real records.",
     highlights: [
       "Built operations dashboards for 41 rooms: a live inventory of every room's status, a semester-by-semester capacity plan, an occupancy calendar and vacancy by house and quarter.",
+      "Occupancy ~93% in 2026, up from 86% in 2024, across 187 leases since 2023: the fill rate of a 41-room inventory.",
       "Launched the platform behind them (public website, 35-screen admin system and an iPhone/iPad app) and shipped 364 live updates in 7 months.",
       "Automated the path from application to signed lease to move-in, cutting hands-on time per new lease from about 1 hour 40 minutes to about 15 minutes.",
       "Put 19 AI features into production, including 3 robots that do TenantCloud data entry, saving about 180 hours of office work a year.",
@@ -289,122 +431,14 @@ export const experience: Experience[] = [
     ],
   },
   {
-    period: "Feb 2026 — Present",
-    title: "Office Manager (part-time)",
-    org: "Belong Automotive Technology",
-    section: { label: "See the full Belong section", href: "#belong" },
-    place: "Austin, TX · part-time",
-    summary: "Oversee operations, purchasing, HR, IT and warehouse; report to the US CEO and work with US and China leadership.",
-    highlights: [
-      "Led the ERP choice (Odoo vs. NetSuite, SAP, custom) and a 160-page design with a 114-task plan.",
-      "Fixed under-licensed engineering software: ~$100K over 3 years, ~40% below the top quote.",
-      "Run procurement, import/export, customs and freight, plus full-cycle hiring.",
-    ],
-    links: [
-      { label: "ERP story", href: "#ex-odoo" },
-      { label: "Licensing story", href: "#ex-cad" },
-      { label: "Departments & ERP", href: "#belong" },
-    ],
-  },
-  {
-    period: "Jun 2021 — Oct 2023",
-    title: "Purchasing Analyst",
-    org: "Mino Automation USA",
-    section: { label: "See the full Mino section", href: "#mino" },
-    place: "Supplier partner to Tesla, Rivian and Faraday Future",
-    summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
-    highlights: [
-      "Rivian: 900+ material requisition lines and ~$10M in POs for 372 robots across 7 lines.",
-      "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
-      "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
-      "Also bought and staffed for Nissan, Lucid, Linamar and follow-on Tesla and Rivian jobs (2022–2023).",
-    ],
-    programsLabel: "Tap a program to see what I did",
-    programs: [
-      {
-        name: "Tesla Cybertruck",
-        place: "Austin, TX",
-        period: "Sep 2022 – Sep 2023",
-        job: "Supply and labor capacity planning for the body-in-white line ramp.",
-        did: ["Sourced and onboarded 179 contract trades, all through the customer's safety onboarding.", "Negotiated labor rates down 20% and ran 34+ equipment rentals: welders, lifts, cranes.", "Built the cost-tracking template and managed time-and-materials and turnkey contracts."],
-        kpis: [
-          { value: "179", label: "trades staffed" },
-          { value: "−20%", label: "labor cost" },
-          { value: "34+", label: "equipment rentals" },
-        ],
-        crew: [
-          { label: "Millwrights", n: 80 },
-          { label: "Electricians", n: 70 },
-          { label: "Robot programmers", n: 15 },
-          { label: "PLC programmers", n: 6 },
-          { label: "Riggers", n: 4 },
-          { label: "Crane operators", n: 4 },
-        ],
-      },
-      {
-        name: "Faraday Future FF91",
-        place: "Hanford, CA",
-        period: "Apr 2022 – Jan 2023",
-        job: "Purchasing and crew sourcing to install and commission 54 robots across 7 lines.",
-        did: ["Sourced 51 trades: mechanical installers, electricians and a PLC programmer.", "Lined up 10+ pieces of mobile equipment and service from 8+ equipment makers.", "Audited the process equipment for completeness before commissioning."],
-        kpis: [
-          { value: "54", label: "robots" },
-          { value: "7", label: "lines" },
-          { value: "51", label: "trades sourced" },
-        ],
-        crew: [
-          { label: "Mechanical installers", n: 30 },
-          { label: "Electricians", n: 20 },
-          { label: "PLC programmer", n: 1 },
-        ],
-      },
-      {
-        name: "Tesla Megapack",
-        place: "Lathrop, CA",
-        period: "Feb – Apr 2022",
-        job: "Spare parts and long-lead buys for line installation and commissioning.",
-        did: ["Planned the spare parts the install and commissioning would need.", "Expedited long-lead items and handled supplier escalations.", "Negotiated a turnkey commissioning project."],
-        kpis: [
-          { value: "Turnkey", label: "commissioning deal" },
-          { value: "3 mo", label: "install window" },
-        ],
-        flow: ["Spare-parts plan", "Long-lead buys", "Escalations", "Turnkey commissioning"],
-      },
-      {
-        name: "Rivian",
-        place: "Normal, IL",
-        period: "Jun 2021 – Feb 2022",
-        job: "Purchasing and crew sourcing for a 7-line body-in-white build with 372 robots.",
-        did: ["Ran 900+ material requisition lines (500+ part numbers, 53 brands) and ~800 manpower PO lines, ~$10M in all.", "Sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
-        kpis: [
-          { value: "900+", label: "requisition lines" },
-          { value: "$10M", label: "purchased" },
-          { value: "372", label: "robots" },
-        ],
-        crew: [
-          { label: "Mechanical installers", n: 120 },
-          { label: "Electricians", n: 100 },
-          { label: "Robot programmers", n: 60 },
-          { label: "PLC programmers", n: 30 },
-        ],
-      },
-    ],
-    links: [
-      { label: "Program timeline", href: "#mino" },
-      { label: "Capacity story", href: "#capacity" },
-      { label: "Invoice workflow", href: "#invoice-flow" },
-      { label: "EV program spend", href: "#ev-programs" },
-      { label: "More Mino stories", href: "#mino-stories" },
-    ],
-  },
-  {
     period: "2015 — Dec 2021",
     title: "Mathematics",
     org: "Illinois State University · Illinois Wesleyan University",
     place: "Illinois",
-    summary: "M.S. and B.S. Mathematics (Illinois State, Dec 2021); B.A. Mathematics & Music (Illinois Wesleyan); minor in Computer Science. ASCM planning certificate.",
+    summary: "M.S. and B.S. Mathematics (Illinois State, Dec 2021); B.A. Mathematics & Music (Illinois Wesleyan); minor in Computer Science. ASCM Supply Chain Planning Certificate (Sep 2023). Mandarin (native) and English.",
     highlights: [],
     kind: "education",
+    id: "education",
   },
 ];
 
@@ -532,10 +566,12 @@ export const featured = {
 // The RBR platform's own numbers, its phone views and how it is built.
 // Counts are from the platform's code and release history (Oct 2026).
 export const rbrPlatform = {
+  // Planner words first: occupancy is the fill rate of a 41-room inventory
+  // (from Eva's resume: ~93% in 2026, 86% in 2024, 187 leases since 2023).
   kpis: [
+    { value: 93, prefix: "~", suffix: "%", label: "occupancy in 2026, up from 86% in 2024: the fill rate" },
+    { value: 187, label: "leases since 2023, all run through the system" },
     { value: 41, label: "rooms in 8 houses run on the platform" },
-    { value: 364, label: "live updates shipped in 7 months" },
-    { value: 19, label: "AI features in production, each with its own model and budget" },
   ],
   devices: [
     {
@@ -588,11 +624,39 @@ export const rbrPlatform = {
   ],
 };
 
-export const skills = [
-  "Material Planning", "S&OP / SIOP", "MRP & ERP", "Safety Stock & Min/Max", "Demand Forecasting",
-  "Supplier Management", "Strategic Sourcing", "Capacity Planning", "Purchasing & POs",
-  "Shortage Risk Dashboards", "Data Visualization", "Power Automate & SharePoint",
-  "SQL", "Advanced Excel", "AI Integration", "Lean / Six Sigma", "English & 中文",
+// Each chip links to the work that backs it; chips with no link are on the
+// resume but have no story on the site yet.
+export const skills: { label: string; href?: string }[] = [
+  { label: "Material Planning", href: "#skywater" },
+  { label: "S&OP / SIOP", href: "#skywater" },
+  { label: "MRP & ERP", href: "#skywater" },
+  { label: "Safety Stock & Min/Max", href: "#safety-stock" },
+  { label: "Demand Forecasting", href: "#early-warning" },
+  { label: "Supplier Management", href: "#supplier-changes" },
+  { label: "Strategic Sourcing", href: "#ex-cad" },
+  { label: "Capacity Planning", href: "#capacity" },
+  { label: "Purchasing & POs", href: "#ev-programs" },
+  { label: "Shortage Risk Dashboards", href: "#zero-bin-summary" },
+  { label: "Data Visualization", href: "#sop-demo" },
+  { label: "Power Automate & SharePoint", href: "#invoice-flow" },
+  { label: "SQL", href: "#rbr-build" },
+  { label: "Advanced Excel" },
+  { label: "AI Integration", href: "#belong-ai" },
+  { label: "Lean / Six Sigma" },
+  { label: "English & 中文" },
+];
+
+// Tools by name, for recruiters who search for them. No AI tools here.
+export const systems: { label: string; href?: string }[] = [
+  { label: "ERP / MRP" },
+  { label: "Odoo (chosen over NetSuite and SAP)", href: "#ex-odoo" },
+  { label: "SharePoint", href: "#invoice-flow" },
+  { label: "Power Automate", href: "#invoice-flow" },
+  { label: "Advanced Excel" },
+  { label: "SQL" },
+  { label: "R" },
+  { label: "Python" },
+  { label: "PostgreSQL", href: "#rbr-build" },
 ];
 
 // "Two skills, one method" band right after the hero. Planning numbers name

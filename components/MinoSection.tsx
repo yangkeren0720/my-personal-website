@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Reveal from "./Reveal";
 import CompanyHead, { SubHead } from "./CompanyHead";
 import StoryCards from "./StoryCards";
+import Fold from "./Fold";
 import { CardHead, Toggle } from "./PlanningLab";
 
 // Everything from the Mino Automation Purchasing Analyst job, and nothing else:
@@ -52,7 +53,15 @@ export default function MinoSection() {
         <Reveal>
           <Gantt />
         </Reveal>
-        <SubHead built="I built the workflow, before AI">Capacity and workflow</SubHead>
+        <Fold
+          name="Mino"
+          parts={[
+            { label: "Capacity and workflow", id: "mino-workflow" },
+            { label: "Where the spend went", id: "mino-spend" },
+            { label: "More stories", id: "mino-stories" },
+          ]}
+        >
+        <SubHead id="mino-workflow" built="I built the workflow, before AI">Capacity and workflow</SubHead>
         <div className="mino-grid">
           <Reveal className="card mino-card lab-anchor">
             <span id="capacity" className="anchor-offset" />
@@ -63,13 +72,14 @@ export default function MinoSection() {
             <InvoiceFlow />
           </Reveal>
         </div>
-        <SubHead>Where the spend went</SubHead>
+        <SubHead id="mino-spend">Where the spend went</SubHead>
         <Reveal className="card mino-card mino-spend lab-anchor">
           <span id="ev-programs" className="anchor-offset" />
           <ProgramSpend />
         </Reveal>
         <SubHead id="mino-stories">More Mino stories</SubHead>
         <StoryCards company="Mino" />
+        </Fold>
       </div>
     </section>
   );

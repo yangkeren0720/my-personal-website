@@ -13,10 +13,22 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
+const title = `${profile.name} · ${profile.headline}`;
+
+// The share card (public/og.jpg) is what LinkedIn, email and chat show for a pasted link.
 export const metadata: Metadata = {
-  title: `${profile.name} · ${profile.headline}`,
+  metadataBase: new URL("https://evayangscm.com"),
+  title,
   description: profile.tagline,
-  openGraph: { title: profile.name, description: profile.tagline, type: "website" },
+  openGraph: {
+    title,
+    description: profile.tagline,
+    type: "website",
+    url: "/",
+    siteName: profile.name,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${profile.name}, ${profile.headline}` }],
+  },
+  twitter: { card: "summary_large_image", title, description: profile.tagline, images: ["/og.jpg"] },
 };
 
 // Runs before paint: a saved choice wins, otherwise bright from 6am to 6pm

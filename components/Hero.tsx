@@ -60,7 +60,7 @@ export default function Hero() {
           className="hero-title"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.95, duration: 0.7, ease }}
+          transition={{ delay: 0.75, duration: 0.7, ease }}
         >
           {profile.title} <span className="hero-title-tag">{profile.titleTag}</span>
         </motion.p>
@@ -74,17 +74,43 @@ export default function Hero() {
           className="hero-promise"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.6, ease }}
+          transition={{ delay: 0.85, duration: 0.6, ease }}
         >
           {profile.promise}
         </motion.p>
+        {/* What a recruiter came for, right under the headline: the résumé, LinkedIn, email and where. */}
+        <motion.div
+          className="hero-ctas"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.6, ease }}
+        >
+          {profile.resumeUrl && (
+            <a href={media(profile.resumeUrl)} className="btn btn-primary" download>
+              Résumé (PDF) <span aria-hidden>↓</span>
+            </a>
+          )}
+          {profile.linkedin && (
+            <a href={profile.linkedin} className="btn" target="_blank" rel="noreferrer">
+              LinkedIn <span aria-hidden>↗</span>
+            </a>
+          )}
+          <a href={`mailto:${profile.email}`} className="btn">
+            Email me
+          </a>
+          <span className={`hero-loc ${profile.locationPlaceholder ? "placeholder" : ""}`}>
+            ◎ {profile.location}
+            <PlaceholderBadge show={profile.locationPlaceholder} />
+          </span>
+        </motion.div>
+
         <div className="hero-focus">
           {profile.focus.map((f, i) => (
             <motion.span
               key={f}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 + i * 0.07, duration: 0.5, ease }}
+              transition={{ delay: 1.0 + i * 0.07, duration: 0.5, ease }}
             >
               {f}
             </motion.span>
@@ -98,7 +124,7 @@ export default function Hero() {
               className="hero-stat"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 + i * 0.1, duration: 0.7, ease }}
+              transition={{ delay: 1.1 + i * 0.1, duration: 0.7, ease }}
             >
               <strong>
                 {st.prefix}
@@ -109,6 +135,21 @@ export default function Hero() {
           ))}
         </div>
 
+        {/* The filters recruiters search by, each one opening the education card. */}
+        <motion.div
+          className="hero-creds"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.35, duration: 0.6, ease }}
+        >
+          {profile.credentials.map((c) => (
+            <a key={c.label} href={c.href} className="hero-cred">
+              <strong>{c.label}</strong>
+              <span>{c.detail}</span>
+            </a>
+          ))}
+        </motion.div>
+
         <div className="hero-builds">
           {profile.builds.map((b, i) => (
             <motion.a
@@ -117,7 +158,7 @@ export default function Hero() {
               className="hero-build"
               initial={{ opacity: 0, y: 18, scale: 0.94 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 1.45 + i * 0.12, duration: 0.6, ease }}
+              transition={{ delay: 1.5 + i * 0.12, duration: 0.6, ease }}
             >
               <BuildIcon kind={b.label} />
               <span>
@@ -128,28 +169,6 @@ export default function Hero() {
           ))}
         </div>
 
-        <motion.div
-          className="hero-ctas"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.8, ease }}
-        >
-          <a href="#experience" className="btn btn-primary">
-            See my work <span aria-hidden>→</span>
-          </a>
-          <a href="#contact" className="btn">
-            Get in touch
-          </a>
-          {profile.resumeUrl && (
-            <a href={media(profile.resumeUrl)} className="btn" download>
-              Résumé (PDF) <span aria-hidden>↓</span>
-            </a>
-          )}
-          <span className={`hero-loc ${profile.locationPlaceholder ? "placeholder" : ""}`}>
-            ◎ {profile.location}
-            <PlaceholderBadge show={profile.locationPlaceholder} />
-          </span>
-        </motion.div>
       </motion.div>
 
       <motion.a

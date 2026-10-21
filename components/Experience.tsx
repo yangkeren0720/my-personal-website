@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { experience, skills } from "@/content/site";
+import { experience, leadership, skills, systems } from "@/content/site";
 import Collapse from "./Collapse";
 import Reveal from "./Reveal";
 import PlaceholderBadge from "./PlaceholderBadge";
@@ -35,14 +35,30 @@ export default function Experience() {
           </h2>
         </Reveal>
 
+        {/* For the people-manager reader: one row, each chip tagged and linked to its proof. */}
+        <Reveal className="lead-strip">
+          <span className="lead-label">How I lead</span>
+          <div className="lead-row">
+            {leadership.map((l) => (
+              <a key={l.label} href={l.href} className={`lead-chip co-${l.org.toLowerCase()}`}>
+                <strong>{l.value}</strong>
+                <span>{l.label}</span>
+                <em>{l.org}</em>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+
         <div className="timeline" ref={ref}>
           <div className="timeline-track" aria-hidden>
             <motion.div className="timeline-fill" style={{ scaleY: scrollYProgress }} />
           </div>
 
           {experience.map((job, i) => (
+            <Fragment key={i}>
+            {job.groupLabel && <div className="timeline-group">{job.groupLabel}</div>}
             <motion.article
-              key={i}
+              id={job.id}
               className="timeline-item"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -62,9 +78,11 @@ export default function Experience() {
               >
                 <div className="timeline-head">
                   <span className="timeline-period">{job.period}</span>
+                  {job.load && <span className={`timeline-load ${job.load === "Full-time" ? "full" : ""}`}>{job.load}</span>}
                   <PlaceholderBadge show={job.placeholder} />
                 </div>
                 <h3>{job.title}</h3>
+                {job.scope && <p className="timeline-scope">{job.scope}</p>}
                 <p className="timeline-org">
                   {job.org}
                   {job.place && <span className="timeline-place"> · {job.place}</span>}
@@ -134,18 +152,30 @@ export default function Experience() {
                 )}
               </div>
             </motion.article>
+            </Fragment>
           ))}
         </div>
 
         <Reveal className="skills-row">
           <span className="skills-label">Skills</span>
-          {skills.map((sk) => (
-            <span key={sk} className="skill-chip">
-              {sk}
-            </span>
-          ))}
+          {skills.map((sk) => <Chip key={sk.label} {...sk} />)}
+        </Reveal>
+        <Reveal className="skills-row systems-row">
+          <span className="skills-label">Systems</span>
+          {systems.map((sk) => <Chip key={sk.label} {...sk} />)}
         </Reveal>
       </div>
     </section>
+  );
+}
+
+// A skill or tool; with a link it jumps to the work that backs it.
+function Chip({ label, href }: { label: string; href?: string }) {
+  return href ? (
+    <a href={href} className="skill-chip linked">
+      {label} <span aria-hidden>→</span>
+    </a>
+  ) : (
+    <span className="skill-chip">{label}</span>
   );
 }
