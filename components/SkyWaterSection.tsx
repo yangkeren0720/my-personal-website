@@ -25,8 +25,8 @@ export default function SkyWaterSection() {
           }
           summary="Demand and supply for critical wafer-fab materials (specialty gases, CMP slurry, photoresist and process chemicals), plus a weekly zero-bin review of the fab's spare parts and consumables."
           kpis={[
-            { value: 250, prefix: "~", label: "materials in the shortage-risk report I rebuilt (from ~100)" },
-            { value: 4.8, suffix: "%", decimals: 1, label: "zero-bin rate, down from 6.8% and under the 5% target" },
+            { value: 250, from: 100, prefix: "~", label: "materials in the shortage-risk report I rebuilt (from ~100)" },
+            { value: 4.8, from: 6.8, suffix: "%", decimals: 1, label: "zero-bin rate, down from 6.8% and under the 5% target" },
             { value: 0, label: "production stops from a material shortage" },
           ]}
         />

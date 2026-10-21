@@ -215,7 +215,7 @@ function ProofCards() {
             <span className="proof-result">
               <strong>
                 {p.result.prefix}
-                <Counter to={p.result.value} suffix={p.result.suffix} />
+                <Counter to={p.result.value} from={p.result.from} suffix={p.result.suffix} />
               </strong>
               <small>{p.result.label}</small>
             </span>

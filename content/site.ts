@@ -200,7 +200,7 @@ export const experience: Experience[] = [
     place: "Supplier partner to Tesla, Rivian and Faraday Future",
     summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
     highlights: [
-      "Rivian: 900+ material requisition lines and ~$10M in POs for 372 robots across 7 lines.",
+      "Rivian: 945 PO lines with 57 suppliers, ~$10M, for 372 robots across 7 lines.",
       "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
       "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
       "Also bought and staffed for Nissan, Lucid, Linamar and follow-on Tesla and Rivian jobs (2022–2023).",
@@ -261,7 +261,7 @@ export const experience: Experience[] = [
         place: "Normal, IL",
         period: "Jun 2021 – Feb 2022",
         job: "Purchasing and crew sourcing for a 7-line body-in-white build with 372 robots.",
-        did: ["Ran 900+ material requisition lines (500+ part numbers, 53 brands) and ~800 manpower PO lines, ~$10M in all.", "Sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
+        did: ["Managed 945 PO lines with 57 suppliers, ~$10M, from 900+ requisition lines (500+ part numbers, 53 brands).", "Ran ~800 manpower PO lines and sourced 300+ technicians across mechanical, electrical, robot and PLC work.", "Escalated long-lead items to keep installation on schedule."],
         kpis: [
           { value: "900+", label: "requisition lines" },
           { value: "$10M", label: "purchased" },
@@ -571,7 +571,7 @@ export const rbrPlatform = {
   // Planner words first: occupancy is the fill rate of a 41-room inventory
   // (from Eva's resume: ~93% in 2026, 86% in 2024, 187 leases since 2023).
   kpis: [
-    { value: 93, prefix: "~", suffix: "%", label: "occupancy in 2026, up from 86% in 2024: the fill rate" },
+    { value: 93, from: 86, prefix: "~", suffix: "%", label: "occupancy in 2026, up from 86% in 2024: the fill rate" },
     { value: 187, label: "leases since 2023, all run through the system" },
     { value: 41, label: "rooms in 8 houses run on the platform" },
   ],
@@ -641,10 +641,7 @@ export const skills: { label: string; href?: string }[] = [
   { label: "Shortage Risk Dashboards", href: "#zero-bin-summary" },
   { label: "Data Visualization", href: "#sop-demo" },
   { label: "Power Automate & SharePoint", href: "#invoice-flow" },
-  { label: "SQL", href: "#rbr-build" },
-  { label: "Advanced Excel" },
   { label: "AI Integration", href: "#belong-ai" },
-  { label: "Lean / Six Sigma" },
   { label: "English & 中文" },
 ];
 
@@ -655,7 +652,7 @@ export const systems: { label: string; href?: string }[] = [
   { label: "SharePoint", href: "#invoice-flow" },
   { label: "Power Automate", href: "#invoice-flow" },
   { label: "Advanced Excel" },
-  { label: "SQL" },
+  { label: "SQL", href: "#rbr-build" },
   { label: "R" },
   { label: "Python" },
   { label: "PostgreSQL", href: "#rbr-build" },
@@ -695,7 +692,7 @@ export const builds = {
       org: "RBR", note: "Built by directing Claude Code + Codex", href: "#lease-to-rent",
       problem: "Every new lease took about 97 minutes of hands-on work",
       built: "Admin system, iPhone app and 3 robots",
-      result: { prefix: "97 → ", value: 14, suffix: " min", label: "hands-on time per new lease (about)" },
+      result: { prefix: "97 → ", value: 14, from: 97, suffix: " min", label: "hands-on time per new lease (about)" },
     },
     {
       org: "Belong", note: "AI rollout", href: "#belong-ai",

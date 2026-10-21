@@ -7,7 +7,7 @@ import Counter from "./Counter";
 // The opening of each employer section: who, what role and when, what the
 // company does, then the headline numbers for that job only.
 
-type Kpi = { value: number; prefix?: string; suffix?: string; decimals?: number; label: string };
+type Kpi = { value: number; from?: number; prefix?: string; suffix?: string; decimals?: number; label: string };
 
 export default function CompanyHead({
   co,
@@ -52,7 +52,7 @@ export default function CompanyHead({
             <Reveal key={k.label} delay={i * 0.08} className="co-kpi">
               <strong>
                 {k.prefix}
-                <Counter to={k.value} suffix={k.suffix} decimals={k.decimals} />
+                <Counter to={k.value} from={k.from} suffix={k.suffix} decimals={k.decimals} />
               </strong>
               <span>{k.label}</span>
             </Reveal>
