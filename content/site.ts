@@ -114,10 +114,10 @@ export const experience: Experience[] = [
     load: "Full-time",
     summary: "Plan demand and supply for critical wafer-fab materials (specialty gases, CMP slurry, photoresist and process chemicals) in NetSuite ERP/MRP, and in Oracle before the acquisition.",
     highlights: [
-      "Built a weekly weeks-of-supply risk dashboard that feeds S&OP and MPS decisions.",
-      "Rebuilt reorder points, min/max and safety stock from 12 months of usage, then moved materials onto MRP planning.",
-      "Spotted a single-source chemical stockout weeks ahead with a depletion model; production never stopped.",
-      "Grew the shortage-risk report from ~100 to ~250 material lines (Dec 2025 to Jan 2026), then cut the weekly zero-bin rate from 6.8% to 4.8%, under the 5% target. Kept supply running through two acquisitions and the move from Oracle to NetSuite.",
+      "Built a weekly **weeks-of-supply risk dashboard** that feeds **S&OP and MPS** decisions.",
+      "Rebuilt **reorder points, min/max and safety stock** from 12 months of usage, then moved materials onto **MRP planning**.",
+      "Spotted a **single-source chemical stockout** weeks ahead with a **depletion model**; production never stopped.",
+      "Grew the **shortage-risk report from ~100 to ~250** material lines (Dec 2025 to Jan 2026), then cut the weekly **zero-bin rate from 6.8% to 4.8%**, under the 5% target. Kept supply running through two acquisitions and the move from **Oracle to NetSuite**.",
     ],
     programsLabel: "Tap a story to see what I did",
     programs: [
@@ -201,9 +201,9 @@ export const experience: Experience[] = [
     place: "Supplier partner to Tesla, Rivian and Faraday Future",
     summary: "Purchasing and capacity planning for automotive body-in-white and battery line build-outs.",
     highlights: [
-      "Rivian: 945 PO lines with 57 suppliers, ~$10M, for 372 robots across 7 lines.",
-      "Tesla Cybertruck: staffed 179 contract trades for the ramp and cut labor cost 20%.",
-      "Taught myself Power Automate and built an approval workflow that cut missed invoices 50%.",
+      "Rivian: **945 PO lines with 57 suppliers, ~$10M**, for 372 robots across 7 lines.",
+      "Tesla Cybertruck: staffed **179 contract trades** for the ramp and **cut labor cost 20%**.",
+      "Taught myself **Power Automate** and built an approval workflow that **cut missed invoices 50%**.",
       "Also bought and staffed for Nissan, Lucid, Linamar and follow-on Tesla and Rivian jobs (2022–2023).",
     ],
     programsLabel: "Tap a program to see what I did",
@@ -295,9 +295,9 @@ export const experience: Experience[] = [
     scope: "Operations, purchasing, HR, IT & warehouse · 5 direct reports · reports to the US CEO",
     summary: "Work with US and China leadership on operations, the ERP rollout and hiring.",
     highlights: [
-      "Led the ERP choice (Odoo vs. NetSuite, SAP, custom) and a 160-page design with a 114-task plan.",
-      "Fixed under-licensed engineering software: ~$100K over 3 years, ~40% below the top quote.",
-      "Run procurement, import/export, customs and freight, plus full-cycle hiring.",
+      "Led the **ERP choice** (Odoo vs. NetSuite, SAP, custom) and a 160-page design with a **114-task plan**.",
+      "Fixed under-licensed engineering software: ~$100K over 3 years, **~40% below the top quote**.",
+      "Run **procurement, import/export, customs and freight**, plus **full-cycle hiring**.",
     ],
     links: [
       { label: "ERP story", href: "#ex-odoo" },
@@ -316,11 +316,11 @@ export const experience: Experience[] = [
     scope: "Runs on the system I built: about 1–2 hours a week of my time",
     summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing Claude Code and Codex, each cross-checking the other, with every output checked against real records.",
     highlights: [
-      "Built operations dashboards for 41 rooms: a live inventory of every room's status, a semester-by-semester capacity plan, an occupancy calendar and vacancy by house and quarter.",
-      "Occupancy ~93% in 2026, up from 86% in 2024, across 187 leases since 2023: the fill rate of a 41-room inventory.",
-      "Launched the platform behind them (public website, 35-screen admin system and an iPhone/iPad app) and shipped 364 live updates in 7 months.",
-      "Automated the path from application to signed lease to move-in, cutting hands-on time per new lease from about 1 hour 40 minutes to about 15 minutes.",
-      "Put 19 AI features into production, including 3 robots that do TenantCloud data entry, saving about 180 hours of office work a year.",
+      "Built **operations dashboards** for 41 rooms: a live inventory of every room's status, a semester-by-semester **capacity plan**, an occupancy calendar and vacancy by house and quarter.",
+      "**Occupancy ~93%** in 2026, up from 86% in 2024, across 187 leases since 2023: the **fill rate** of a 41-room inventory.",
+      "Launched the platform behind them (public website, 35-screen admin system and an iPhone/iPad app) and shipped **364 live updates** in 7 months.",
+      "**Automated** the path from application to signed lease to move-in, cutting hands-on time per new lease from about **1 hour 40 minutes to about 15 minutes**.",
+      "Put **19 AI features** into production, including 3 robots that do TenantCloud data entry, saving about **180 hours** of office work a year.",
     ],
     programsLabel: "Tap a project to see what I did",
     programs: [

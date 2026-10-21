@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useRef, useState } from "react";
-import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { AnimatePresence, motion, useInView, useScroll } from "framer-motion";
 import { experience, leadership, skills, systems } from "@/content/site";
 import Collapse from "./Collapse";
 import Reveal from "./Reveal";
@@ -135,11 +135,7 @@ export default function Experience() {
                   </>
                 )}
                 {job.highlights.length > 0 && (
-                  <ul>
-                    {job.highlights.map((h, hi) => (
-                      <li key={hi}>{h}</li>
-                    ))}
-                  </ul>
+                  <Highlights items={job.highlights} co={job.section?.href.slice(1)} />
                 )}
                 {job.links && (
                   <div className="timeline-links">
@@ -166,6 +162,31 @@ export default function Experience() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+// Resume bullets. Each **phrase** becomes a bold keyword with a highlighter band
+// in the employer's color that draws in, one after another, once the list is in view.
+function Highlights({ items, co }: { items: string[]; co?: string }) {
+  const ref = useRef<HTMLUListElement>(null);
+  const seen = useInView(ref, { once: true, margin: "-80px 0px -80px 0px" });
+  let n = 0;
+  return (
+    <ul ref={ref} className={`hi-list ${co ? `co-${co}` : ""} ${seen ? "drawn" : ""}`}>
+      {items.map((h, i) => (
+        <li key={i}>
+          {h.split(/\*\*(.+?)\*\*/).map((part, k) =>
+            k % 2 ? (
+              <strong key={k} className="hi" style={{ "--d": `${n++ * 80}ms` } as React.CSSProperties}>
+                {part}
+              </strong>
+            ) : (
+              part
+            )
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }
 

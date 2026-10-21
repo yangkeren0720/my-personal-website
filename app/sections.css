@@ -1690,3 +1690,26 @@ section[id] { scroll-margin-top: 0; }
 .sop-cursor-tap { position: absolute; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--accent); }
 .sop-tour { display: inline-flex; align-items: center; gap: 8px; color: var(--text); font-weight: 500; }
 .sop-tour b { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11.5px; }
+
+/* Resume keywords: bold text with a soft highlighter band in the employer's color
+   (--co from .co-*). The band draws in left to right when the list scrolls into view;
+   reduced motion gets it static through the global transition override. */
+.hi-list { --hi-alpha: 35%; }
+:root[data-theme="light"] .hi-list { --hi-alpha: 22%; }
+.hi-list .hi {
+  font-weight: 650;
+  color: var(--text);
+  padding: 0 .15em;
+  border-radius: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(90deg,
+    color-mix(in srgb, var(--co, var(--accent)) calc(var(--hi-alpha) + 10%), transparent),
+    color-mix(in srgb, var(--co, var(--accent)) var(--hi-alpha), transparent));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size .45s ease-out;
+  transition-delay: calc(250ms + var(--d, 0ms));
+}
+.hi-list.drawn .hi { background-size: 100% 100%; }
+@media (prefers-reduced-motion: reduce) { .hi-list .hi { background-size: 100% 100%; transition: none; } }
