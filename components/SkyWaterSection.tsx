@@ -6,6 +6,7 @@ import PlanningCharts from "./PlanningLab";
 import StoryCards from "./StoryCards";
 import SkyWaterExtras, { SupplierChanges } from "./SkyWaterExtras";
 import Fold from "./Fold";
+import SkyWaterCadence from "./SkyWaterCadence";
 
 // Everything from the SkyWater (Infineon) Material Planner job, and nothing else.
 export default function SkyWaterSection() {
@@ -29,6 +30,8 @@ export default function SkyWaterSection() {
             { value: 0, label: "production stops from a material shortage" },
           ]}
         />
+        <SubHead id="skywater-cadence">My planning rhythm</SubHead>
+        <SkyWaterCadence />
         <SubHead>Story timeline</SubHead>
         <SkyWaterTimeline />
         <Fold

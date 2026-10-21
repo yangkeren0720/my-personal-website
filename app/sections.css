@@ -1728,3 +1728,28 @@ section[id] { scroll-margin-top: 0; }
 .fold-parts a { padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); font-size: 12.5px; color: var(--text-dim); transition: color .2s, border-color .2s; }
 .fold-parts a:hover { color: var(--text); border-color: var(--accent); }
 @media (max-width: 600px) { .fold-btn { width: 100%; justify-content: center; } }
+
+/* SkyWater planning rhythm: signals in, reviews on a cadence, decisions out */
+.cad { display: grid; grid-template-columns: minmax(0, 0.8fr) 28px minmax(0, 2fr) 28px minmax(0, 0.9fr); align-items: center; gap: 10px; }
+.cad-col { display: flex; flex-direction: column; gap: 8px; }
+.cad-label { font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 2px; }
+.cad-chip { padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); font-size: 13.5px; color: var(--text); }
+.cad-chip.out { border-color: color-mix(in srgb, var(--co) 45%, var(--border)); background: color-mix(in srgb, var(--co) 8%, var(--surface)); font-weight: 500; }
+.cad-mid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.cad-mid .cad-label { grid-column: 1 / -1; }
+.cad-card { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border); border-top: 3px solid var(--co); background: var(--surface); }
+.cad-when { align-self: flex-start; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 600; color: var(--co); background: color-mix(in srgb, var(--co) 12%, transparent); }
+.cad-card b { font-size: 15px; }
+.cad-card p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-dim); }
+.cad-proof { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+.cad-proof span { padding: 3px 8px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--text); background: rgba(var(--fg-rgb), 0.05); }
+.cad-arrow { position: relative; height: 2px; background: linear-gradient(90deg, transparent, var(--co)); }
+.cad-arrow::after { content: ""; position: absolute; right: -2px; top: -5px; border: 6px solid transparent; border-left: 8px solid var(--co); border-right: 0; }
+@media (max-width: 1000px) {
+  .cad { grid-template-columns: 1fr; }
+  .cad-in, .cad-out { flex-direction: row; flex-wrap: wrap; }
+  .cad-in .cad-label, .cad-out .cad-label { width: 100%; }
+  .cad-arrow { justify-self: center; width: 2px; height: 26px; background: linear-gradient(180deg, transparent, var(--co)); }
+  .cad-arrow::after { right: auto; left: -5px; top: auto; bottom: -4px; border: 6px solid transparent; border-top: 8px solid var(--co); border-bottom: 0; }
+}
+@media (max-width: 600px) { .cad-mid { grid-template-columns: 1fr; } .cad-chip { font-size: 13px; padding: 7px 10px; } }

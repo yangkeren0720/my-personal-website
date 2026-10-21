@@ -19,7 +19,7 @@ export default function RBRSection() {
         <CompanyHead
           co="rbr"
           company="RBR Property Management"
-          role="Co-Owner, side business"
+          role="Co-Owner, side business · about 1–2 hours a week"
           period="2023 – now"
           title={
             <>

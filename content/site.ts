@@ -311,6 +311,8 @@ export const experience: Experience[] = [
     section: { label: "See the full RBR section", href: "#rbr" },
     place: "Austin area",
     load: "Side business",
+    // Eva 2026-10-21: once automated, RBR takes about 1-2 hours a week.
+    scope: "Runs on the system I built: about 1–2 hours a week of my time",
     summary: "Co-own a student-housing business with 8 houses and 41 rooms, and designed the system it runs on: room inventory, demand, leases and move-ins in one place, with dashboards to plan each semester. Built by directing Claude Code and Codex, each cross-checking the other, with every output checked against real records.",
     highlights: [
       "Built operations dashboards for 41 rooms: a live inventory of every room's status, a semester-by-semester capacity plan, an occupancy calendar and vacancy by house and quarter.",
@@ -628,7 +630,7 @@ export const rbrPlatform = {
 // resume but have no story on the site yet.
 export const skills: { label: string; href?: string }[] = [
   { label: "Material Planning", href: "#skywater" },
-  { label: "S&OP / SIOP", href: "#skywater" },
+  { label: "S&OP / SIOP", href: "#skywater-cadence" },
   { label: "MRP & ERP", href: "#skywater" },
   { label: "Safety Stock & Min/Max", href: "#safety-stock" },
   { label: "Demand Forecasting", href: "#early-warning" },
