@@ -177,7 +177,7 @@ function Highlights({ items, co }: { items: string[]; co?: string }) {
         <li key={i}>
           {h.split(/\*\*(.+?)\*\*/).map((part, k) =>
             k % 2 ? (
-              <strong key={k} className="hi" style={{ "--d": `${n++ * 80}ms` } as React.CSSProperties}>
+              <strong key={k} className="hi" style={{ "--d": `${n++ * 120}ms` } as React.CSSProperties}>
                 {part}
               </strong>
             ) : (
