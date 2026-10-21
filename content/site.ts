@@ -54,15 +54,16 @@ export const profile = {
   ],
 };
 
-// One row at the top of the resume for the people-manager reader. Each chip
+// One row at the top of the resume for the people-manager reader (Eva 2026-10-21:
+// 2 SkyWater, 1 Belong, 1 Mino, 1 RBR; RBR framed as running a business). Each chip
 // names its employer and jumps to the proof. No AI wording here: the SkyWater
 // chip sits in this row.
 export const leadership = [
-  { value: "5", label: "direct reports across operations, purchasing, HR, IT and warehouse", org: "Belong", href: "#belong" },
-  { value: "Full-cycle", label: "hiring and onboarding for the team", org: "Belong", href: "#belong" },
-  { value: "US + China", label: "leadership approved my ERP choice and 114-task plan", org: "Belong", href: "#ex-odoo" },
-  { value: "Daily", label: "recovery with engineering, warehouse, procurement and the supplier", org: "SkyWater", href: "#skywater" },
+  { value: "Daily", label: "recovery control with engineering, warehouse, procurement and the supplier", org: "SkyWater", href: "#skywater" },
+  { value: "Weekly", label: "zero-bin and chemical risk reviews, risk status reported to leadership", org: "SkyWater", href: "#skywater-cadence" },
+  { value: "5", label: "direct reports across operations, purchasing, HR, IT and warehouse · full-cycle hiring", org: "Belong", href: "#belong" },
   { value: "300+", label: "technicians sourced and coordinated across 7 lines", org: "Mino", href: "#mino" },
+  { value: "Co-owner", label: "8 houses, 41 rooms, ~93% occupancy, 187 leases", org: "RBR", href: "#rbr" },
 ];
 
 export type Program = {
