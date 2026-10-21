@@ -8,7 +8,7 @@ import Reveal from "./Reveal";
 // percentages only: no material, supplier or people names, no dollars, and no
 // AI or automation wording anywhere near SkyWater.
 
-const signals = ["ERP demand", "Open POs", "Supplier confirmations", "On-hand inventory", "Deliveries, twice a week"];
+const signals = ["NetSuite MRP demand", "Open POs", "Supplier confirmations", "On-hand inventory", "Deliveries, twice a week"];
 
 const reviews: { when: string; title: string; body: string; proof: string[] }[] = [
   {

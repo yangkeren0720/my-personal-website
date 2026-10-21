@@ -111,12 +111,12 @@ export const experience: Experience[] = [
     section: { label: "See the full SkyWater section", href: "#skywater" },
     place: "Austin, TX",
     load: "Full-time",
-    summary: "Plan demand and supply for critical wafer-fab materials: specialty gases, CMP slurry, photoresist and process chemicals.",
+    summary: "Plan demand and supply for critical wafer-fab materials (specialty gases, CMP slurry, photoresist and process chemicals) in NetSuite ERP/MRP, and in Oracle before the acquisition.",
     highlights: [
       "Built a weekly weeks-of-supply risk dashboard that feeds S&OP and MPS decisions.",
       "Rebuilt reorder points, min/max and safety stock from 12 months of usage, then moved materials onto MRP planning.",
       "Spotted a single-source chemical stockout weeks ahead with a depletion model; production never stopped.",
-      "Grew the shortage-risk report from ~100 to ~250 material lines (Dec 2025 to Jan 2026), then cut the weekly zero-bin rate from 6.8% to 4.8%, under the 5% target. Kept supply running through two acquisitions.",
+      "Grew the shortage-risk report from ~100 to ~250 material lines (Dec 2025 to Jan 2026), then cut the weekly zero-bin rate from 6.8% to 4.8%, under the 5% target. Kept supply running through two acquisitions and the move from Oracle to NetSuite.",
     ],
     programsLabel: "Tap a story to see what I did",
     programs: [
@@ -647,10 +647,11 @@ export const skills: { label: string; href?: string }[] = [
 
 // Tools by name, for recruiters who search for them. No AI tools here.
 export const systems: { label: string; href?: string }[] = [
-  { label: "ERP / MRP" },
-  { label: "Odoo (chosen over NetSuite and SAP)", href: "#ex-odoo" },
-  { label: "SharePoint", href: "#invoice-flow" },
-  { label: "Power Automate", href: "#invoice-flow" },
+  { label: "NetSuite ERP/MRP · SkyWater", href: "#skywater-cadence" },
+  { label: "Oracle ERP · Infineon", href: "#skywater" },
+  { label: "Odoo · Belong, chosen over NetSuite and SAP", href: "#ex-odoo" },
+  { label: "QuickBooks · Mino", href: "#mino" },
+  { label: "SharePoint + Power Automate · built at Mino", href: "#invoice-flow" },
   { label: "Advanced Excel" },
   { label: "SQL", href: "#rbr-build" },
   { label: "R" },
