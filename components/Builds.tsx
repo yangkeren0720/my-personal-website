@@ -186,7 +186,7 @@ function ProofCards() {
       <div className="proof-grid">
         {builds.proof.map((p, ci) => (
           <motion.a
-            key={p.org}
+            key={p.org + p.note}
             href={p.href}
             className="card proof-card"
             initial={{ opacity: 0, y: 20 }}
@@ -214,8 +214,12 @@ function ProofCards() {
             </ol>
             <span className="proof-result">
               <strong>
-                {p.result.prefix}
-                <Counter to={p.result.value} from={p.result.from} suffix={p.result.suffix} />
+                {p.result.text ?? (
+                  <>
+                    {p.result.prefix}
+                    <Counter to={p.result.value ?? 0} from={p.result.from} suffix={p.result.suffix} />
+                  </>
+                )}
               </strong>
               <small>{p.result.label}</small>
             </span>

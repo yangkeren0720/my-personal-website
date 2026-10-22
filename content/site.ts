@@ -681,7 +681,8 @@ export const builds = {
     { text: "I build the tools.", org: "RBR · Belong", what: "Dashboards · workflows · apps" },
   ],
   // Problem, then what was built, then the result. Mino's is self-taught and
-  // before AI; RBR's is built by directing Claude Code and Codex; Belong's is
+  // before AI; the Mino timekeeping app was designed by Eva with IT (Eva
+// 2026-10-22: live and still used); RBR's is built by directing Claude Code and Codex; Belong's is
   // the AI rollout. SkyWater stays in the planning numbers only.
   proof: [
     {
@@ -689,6 +690,12 @@ export const builds = {
       problem: "Timesheets and invoices came in by email and WhatsApp",
       built: "SharePoint + Power Automate request and approval flow",
       result: { prefix: "~", value: 50, suffix: "%", label: "fewer missed invoices" },
+    },
+    {
+      org: "Mino", note: "Developed with IT", href: "#mino",
+      problem: "Contractor suppliers were paid from paper timesheets checked by hand",
+      built: "Clock-in and approval app: project, hours, break rules, two-level approval",
+      result: { text: "Still in use", label: "went live; purchasing checks supplier invoices against it" },
     },
     {
       org: "RBR", note: "Built by directing Claude Code + Codex", href: "#lease-to-rent",

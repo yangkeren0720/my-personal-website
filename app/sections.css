@@ -1320,7 +1320,7 @@ section[id] { scroll-margin-top: 0; }
 .beat-what { margin-left: 6px; font-weight: 400; letter-spacing: .02em; text-transform: none; color: var(--text-dim); }
 .proof { margin-top: 40px; }
 .proof-head { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); }
-.proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 12px; }
+.proof-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 12px; }
 .proof-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; color: var(--text); text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
 .proof-card:hover { border-color: var(--accent); transform: translateY(-2px); }
 .proof-org { font-size: 12.5px; color: var(--text-dim); }
@@ -1331,6 +1331,7 @@ section[id] { scroll-margin-top: 0; }
 .proof-result { display: flex; flex-direction: column; gap: 2px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); }
 .proof-result strong { font-family: var(--font-display); font-size: 34px; line-height: 1.05; font-weight: 500; }
 .proof-result small { font-size: 12.5px; color: var(--text-dim); }
+@media (max-width: 1200px) { .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .how-build { margin-top: 40px; }
 .how-build ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: hb; }
 .how-build li { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-card); counter-increment: hb; }
