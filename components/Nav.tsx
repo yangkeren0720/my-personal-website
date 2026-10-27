@@ -8,8 +8,8 @@ import ThemeToggle from "./ThemeToggle";
 import { media } from "./LoopVideo";
 
 const links = [
-  { id: "builds", label: "Builds" },
   { id: "experience", label: "Resume" },
+  { id: "builds", label: "Builds" },
   { id: "skywater", label: "SkyWater" },
   { id: "mino", label: "Mino" },
   { id: "belong", label: "Belong" },

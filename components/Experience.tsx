@@ -7,6 +7,7 @@ import Collapse from "./Collapse";
 import Reveal from "./Reveal";
 import PlaceholderBadge from "./PlaceholderBadge";
 import ProgramPanel from "./ProgramPanel";
+import CareerGlance from "./CareerGlance";
 
 // A click on a linked card's empty space (not a chip, link or selected text)
 // goes to that employer's section, same as its main button.
@@ -33,6 +34,10 @@ export default function Experience() {
           <h2 className="section-title">
             Where I&apos;ve <em>worked</em>.
           </h2>
+        </Reveal>
+
+        <Reveal>
+          <CareerGlance />
         </Reveal>
 
         {/* For the people-manager reader: one row, each chip tagged and linked to its proof. */}

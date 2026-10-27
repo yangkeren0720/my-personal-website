@@ -12,7 +12,8 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorGlow from "@/components/CursorGlow";
 
-// One structure: who I am, both skills side by side, a dashboard to try, the resume, then one section per employer holding
+// One structure: who I am, the resume timeline right away (recruiters asked to see the background first), both skills
+// side by side, a dashboard to try, then one section per employer holding
 // only that job's stories and charts (full-time supply chain work first, the side business last), contact.
 export default function Home() {
   return (
@@ -22,9 +23,9 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Experience />
         <Builds />
         <SOPDemo />
-        <Experience />
         <SkyWaterSection />
         <MinoSection />
         <BelongSection />

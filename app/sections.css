@@ -1720,3 +1720,30 @@ section[id] { scroll-margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   .hi-list .hi { background-position: 0 0; transition: none; }
 }
+
+/* ---------- Career at a glance (top of the résumé) ---------- */
+.glance { --label-w: 280px; margin: 8px 0 44px; padding: 22px 24px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
+.glance-row, .glance-axis, .glance-now { display: grid; grid-template-columns: var(--label-w) 1fr; gap: 18px; align-items: center; }
+.glance-row { padding: 9px 0; color: inherit; text-decoration: none; border-radius: 10px; transition: background .2s; }
+.glance-row:hover { background: color-mix(in srgb, var(--co) 8%, transparent); }
+.co-education { --co: #8a8199; }
+.glance-label { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-left: 10px; border-left: 3px solid var(--co); }
+.glance-label strong { font-size: 15px; font-weight: 650; }
+.glance-label small { font-size: 12.5px; color: var(--text-dim); }
+.glance-track { position: relative; height: 26px; }
+.glance-grid { position: absolute; top: -9px; bottom: -9px; width: 1px; background: var(--border); }
+.glance-bar { position: absolute; top: 4px; height: 18px; border-radius: 999px; background: var(--co); transform-origin: left center; box-shadow: 0 6px 18px -8px var(--co); }
+.glance-period { position: absolute; top: 4px; font-style: normal; font-size: 12px; line-height: 18px; color: var(--text-dim); white-space: nowrap; }
+.glance-axis .glance-track { height: 20px; }
+.glance-tick { position: absolute; transform: translateX(-50%); font-size: 11.5px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+.glance-now .glance-track { height: 18px; }
+.glance-now .glance-track span { position: absolute; transform: translateX(-50%); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.glance-now .glance-track span::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 6px; background: var(--accent); }
+@media (max-width: 700px) {
+  .glance { --label-w: 1fr; padding: 16px 14px 10px; }
+  .glance-row, .glance-axis, .glance-now { grid-template-columns: 1fr; gap: 6px; }
+  .glance-axis > span:first-child, .glance-now > span:first-child { display: none; }
+  .glance-axis { order: 0; }
+  .glance-tick.odd { display: none; }
+  .glance-row { padding: 8px 0; }
+}
